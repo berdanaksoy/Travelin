@@ -1,4 +1,24 @@
+using Microsoft.Extensions.Options;
+using System.Reflection;
+using Travelin.Services.CategoryServices;
+using Travelin.Services.CommentServices;
+using Travelin.Services.TourServices;
+using Travelin.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ITourService, TourService>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+
+builder.Services.AddScoped<IDatabaseSettings>(sp =>
+{
+    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+}));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
