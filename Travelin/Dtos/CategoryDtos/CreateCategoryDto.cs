@@ -4,6 +4,6 @@
     {
         public string CategoryName { get; set; }
         public string IconUrl { get; set; }
-        public string IsStatus { get; set; }
+        public bool IsStatus { get; set; }
     }
 }
