@@ -9,6 +9,7 @@
         public string Description { get; set; }
         public int Capacity { get; set; }
         public DateTime TourDate { get; set; }
-        public string DateNight { get; set; }
+        public string DayNight { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
