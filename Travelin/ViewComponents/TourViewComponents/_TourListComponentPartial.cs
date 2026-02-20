@@ -12,11 +12,23 @@ namespace Travelin.ViewComponents.TourViewComponents
             _tourService = tourService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int page = 1)
         {
-            var tours = await _tourService.GetAllTourAsync();
+            int pageSize = 3;
+            var allValues = await _tourService.GetAllTourAsync();
 
-            return View(tours);
+            var totalCount = allValues.Count();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            var pagedValues = allValues
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(pagedValues);
         }
     }
 }
