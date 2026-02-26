@@ -37,16 +37,24 @@ namespace Travelin.Services.CommentServices
             return _mapper.Map<List<ResultCommentDto>>(values);
         }
 
-        public Task<GetCommentByIdDto> GetCommentByIdAsync(string id)
+        public async Task<GetCommentByIdDto> GetCommentByIdAsync(string id)
         {
-            var values = _commentCollection.Find<Comment>(c => c.CommentId == id).FirstOrDefaultAsync();
-            return _mapper.Map<Task<GetCommentByIdDto>>(values);
+            var values = await _commentCollection.Find<Comment>(c => c.CommentId == id).FirstOrDefaultAsync();
+            return await _mapper.Map<Task<GetCommentByIdDto>>(values);
         }
 
-        public Task UpdateCommentAsync(UpdateCommentDto updateCommentDto)
+        public async Task<List<ResultCommentListByTourIdDto>> GetCommentsByTourIdAsync(string id)
+        {
+            var values = await _commentCollection.Find<Comment>(c => c.TourId == id).ToListAsync();
+            return _mapper.Map<List<ResultCommentListByTourIdDto>>(values);
+        }
+
+        public async Task UpdateCommentAsync(UpdateCommentDto updateCommentDto)
         {
             var values = _mapper.Map<Comment>(updateCommentDto);
-            return _commentCollection.FindOneAndReplaceAsync(c => c.CommentId == updateCommentDto.CommentId, values);
+            await _commentCollection.FindOneAndReplaceAsync(c => c.CommentId == updateCommentDto.CommentId, values);
         }
+
+
     }
 }

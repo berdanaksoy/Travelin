@@ -1,7 +1,8 @@
 ﻿namespace Travelin.Dtos.CommentDtos
 {
-    public class CreateCommentDto
+    public class ResultCommentListByTourIdDto
     {
+        public string CommentId { get; set; }
         public string Headline { get; set; }
         public string CommentDetail { get; set; }
         public int Score { get; set; }
