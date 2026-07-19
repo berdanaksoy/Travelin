@@ -3,11 +3,11 @@ using Travelin.Services.TourServices;
 
 namespace Travelin.ViewComponents.TourViewComponents
 {
-    public class _TourListComponentPartial : ViewComponent
+    public class TourListViewComponent : ViewComponent
     {
         private readonly ITourService _tourService;
 
-        public _TourListComponentPartial(ITourService tourService)
+        public TourListViewComponent(ITourService tourService)
         {
             _tourService = tourService;
         }
@@ -15,15 +15,11 @@ namespace Travelin.ViewComponents.TourViewComponents
         public async Task<IViewComponentResult> InvokeAsync(int page = 1)
         {
             int pageSize = 3;
-            var allValues = await _tourService.GetAllTourAsync();
 
-            var totalCount = allValues.Count();
+            var totalCount = await _tourService.GetTotalTourCountAsync();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
-            var pagedValues = allValues
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            var pagedValues = await _tourService.GetToursByPageAsync(page, pageSize);
 
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;

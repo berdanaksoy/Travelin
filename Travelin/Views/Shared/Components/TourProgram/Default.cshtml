@@ -1,0 +1,26 @@
+﻿@model List<Travelin.Dtos.TourProgramDtos.ResultTourProgramDto>
+
+@if (Model.Any())
+{
+    <div class="description mb-4">
+        <h4>@Localizer["TourProgram"]</h4>
+    </div>
+
+    <div class="accrodion-grp faq-accrodion mb-4" data-grp-name="faq-accrodion">
+        @foreach (var item in Model)
+        {
+            <div class="accrodion @(item.DayNumber == 1 ? "active" : "")">
+                <div class="accrodion-title rounded">
+                    <h5 class="mb-0">
+                        <span>@Localizer["Day"] @item.DayNumber</span> - @item.Title
+                    </h5>
+                </div>
+                <div class="accrodion-content" style="display: @(item.DayNumber == 1 ? "block" : "none");">
+                    <div class="inner">
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

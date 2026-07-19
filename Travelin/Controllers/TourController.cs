@@ -13,24 +13,24 @@ namespace Travelin.Controllers
             _tourService = tourService;
         }
 
-        public IActionResult CreateTour()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateTour(CreateTourDto createTourDto)
-        {
-            await _tourService.CreateTourAsync(createTourDto);
-
-            return RedirectToAction("TourList");
-        }
-
         public async Task<IActionResult> TourList()
         {
             var values = await _tourService.GetAllTourAsync();
 
             return View(values);
+        }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TourList");
+
+            var value = await _tourService.GetTourByIdAsync(id);
+
+            if (value == null)
+                return RedirectToAction("TourList");
+
+            return View(value);
         }
     }
 }

@@ -28,14 +28,14 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-3">
                             <div class="trend-item2 rounded">
-                                <a href="tour-single.html" style="background-image: url(@item.ImageUrl);"></a>
+                                <a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId" style="background-image: url(@item.ImageUrl);"></a>
                                 <div class="color-overlay"></div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-6">
                             <div class="trend-content position-relative text-md-start text-center">
                                 <small>@item.DayNight</small>
-                                <h3 class="mb-1"><a href="tour-single.html">@item.Title</a></h3>
+                                <h3 class="mb-1"><a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId">@item.Title</a></h3>
                                 <h6 class="theme mb-0"><i class="icon-location-pin"></i> @item.Country</h6>
                                 <p class="mt-4 mb-0">@item.Description<br><a href="#"><span class="theme"> Ücretsiz İptal</span></a></p>
                             </div>
@@ -55,7 +55,7 @@
                                     <h3 class="mb-0">$125</h3>
                                     <small>Per Adult</small>
                                 </div>
-                                <a href="tour-single.html" class="nir-btn">View Detail</a>
+                                <a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId" class="nir-btn">@Localizer["ViewDetail"]</a>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                 @if (ViewBag.CurrentPage > 1)
                 {
                     <a href="?page=@(ViewBag.CurrentPage - 1)" class="nir-btn me-2">
-                        <i class="fa fa-long-arrow-alt-left"></i> Önceki
+                        <i class="fa fa-long-arrow-alt-left"></i> @Localizer["Previous"]
                     </a>
                 }
 
@@ -80,7 +80,7 @@
                 @if (ViewBag.CurrentPage < ViewBag.TotalPages)
                 {
                     <a href="?page=@(ViewBag.CurrentPage + 1)" class="nir-btn ms-2">
-                        Sonraki <i class="fa fa-long-arrow-alt-right"></i>
+                        @Localizer["Next"] <i class="fa fa-long-arrow-alt-right"></i>
                     </a>
                 }
             </div>

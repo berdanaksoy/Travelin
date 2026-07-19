@@ -1,0 +1,108 @@
+﻿@model GetTourByIdDto
+
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["BreadcrumbTitle"] = Model.Title;
+    ViewData["BreadcrumbSubtitle"] = Model.Title;
+}
+
+<partial name="_Breadcrumb" />
+
+<section class="trending pt-6 pb-0 bg-lgrey">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single-content">
+                    <div class="single-full-title border-b mb-2 pb-2">
+                        <div class="single-title">
+                            <h2 class="mb-1">@Model.Title</h2>
+                            <div class="rating-main d-lg-flex align-items-center text-lg-start text-center">
+                                <p class="mb-0 me-2"><i class="icon-location-pin"></i> @Model.Country, @Model.City</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="description-images mb-4 overflow-hidden">
+                        <img src="@Model.ImageUrl" class="rounded w-100" alt="@Model.Title">
+                    </div>
+
+                    <div class="description mb-2">
+                        <h4>@Localizer["Description"]</h4>
+                        <p class="mb-0">@Model.Description</p>
+                    </div>
+
+                    <div class="tour-includes mb-4">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fa fa-clock-o pink mr-1"></i> @Model.DayNight</td>
+                                    <td><i class="fa fa-group pink mr-1"></i> @Localizer["MaxPeople"] : @Model.Capacity</td>
+                                    <td><i class="fa fa-tag pink mr-1"></i> @Localizer["Price"] : @Model.Price.ToString("N2") ₺</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="description mb-2">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 mb-2">
+                                <div class="desc-box bg-grey p-4 rounded">
+                                    <h5 class="mb-2">@Localizer["Location"]</h5>
+                                    <p class="mb-0">@Model.Country, @Model.City</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mb-2">
+                                <div class="desc-box bg-grey p-4 rounded">
+                                    <h5 class="mb-2">@Localizer["Duration"]</h5>
+                                    <p class="mb-0">@Model.DayNight</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mb-2">
+                                <div class="desc-box bg-grey p-4 rounded">
+                                    <h5 class="mb-2">@Localizer["Capacity"]</h5>
+                                    <p class="mb-0">@Model.Capacity @Localizer["People"]</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mb-2">
+                                <div class="desc-box bg-grey p-4 rounded">
+                                    <h5 class="mb-2">@Localizer["TourDate"]</h5>
+                                    <p class="mb-0">@Model.TourDate.ToString("dd MMMM yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @await Component.InvokeAsync("TourProgram", new { tourId = Model.TourId })
+
+                    @* === Gemini görseli (harita yerine) buraya gelecek === *@
+
+                    @* === Yorum listesi + yorum ekleme formu buraya gelecek === *@
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 ps-lg-4">
+                <div class="sidebar-sticky">
+                    <div class="list-sidebar">
+                        <div class="sidebar-item">
+                            <div class="form-content rounded overflow-hidden bg-title p-4">
+                                <h4 class="white text-center border-b pb-2">@Localizer["MakeBooking"]</h4>
+
+                                <div class="form-group text-center my-3">
+                                    <span class="white">@Localizer["PricePerPerson"]</span>
+                                    <h3 class="white mb-0">@Model.Price.ToString("N2") ₺</h3>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <a href="#" class="nir-btn w-100">@Localizer["BookNow"]</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* === YouTube video butonu/popup buraya gelecek === *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -6,3 +6,11 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<h3>@Localizer["HomePage"]</h3>
+
+<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="tr" asp-route-returnUrl="@Context.Request.Path">TR</a> |
+<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en" asp-route-returnUrl="@Context.Request.Path">EN</a> |
+<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="de" asp-route-returnUrl="@Context.Request.Path">DE</a> |
+<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="fr" asp-route-returnUrl="@Context.Request.Path">FR</a> |
+<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="es" asp-route-returnUrl="@Context.Request.Path">SP</a>

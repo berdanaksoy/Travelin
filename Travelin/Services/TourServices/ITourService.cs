@@ -8,6 +8,8 @@ namespace Travelin.Services.TourServices
         Task CreateTourAsync(CreateTourDto createTourDto);
         Task UpdateTourAsync(UpdateTourDto updateTourDto);
         Task DeleteTourAsync(string id);
-         Task<GetTourByIdDto> GetTourByIdAsync(string id);
+        Task<GetTourByIdDto> GetTourByIdAsync(string id);
+        Task<List<ResultTourDto>> GetToursByPageAsync(int page, int pageSize);
+        Task<long> GetTotalTourCountAsync();
     }
 }

@@ -48,5 +48,21 @@ namespace Travelin.Services.TourServices
             var values = _mapper.Map<Tour>(updateTourDto);
             return _tourCollection.FindOneAndReplaceAsync(t => t.TourId == updateTourDto.TourId, values);
         }
+
+        public async Task<List<ResultTourDto>> GetToursByPageAsync(int page, int pageSize)
+        {
+            var values = await _tourCollection
+                .Find(t => true)
+                .Skip((page - 1) * pageSize)
+                .Limit(pageSize)
+                .ToListAsync();
+
+            return _mapper.Map<List<ResultTourDto>>(values);
+        }
+
+        public async Task<long> GetTotalTourCountAsync()
+        {
+            return await _tourCollection.CountDocumentsAsync(t => true);
+        }
     }
 }

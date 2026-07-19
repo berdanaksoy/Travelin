@@ -2,6 +2,8 @@ using Microsoft.Extensions.Options;
 using System.Reflection;
 using Travelin.Services.CategoryServices;
 using Travelin.Services.CommentServices;
+using Travelin.Services.ReservationServices;
+using Travelin.Services.TourProgramServices;
 using Travelin.Services.TourServices;
 using Travelin.Settings;
 
@@ -10,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITourService, TourService>();
+builder.Services.AddScoped<ITourProgramService, TourProgramService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -21,7 +27,9 @@ builder.Services.AddScoped<IDatabaseSettings>(sp =>
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
 var app = builder.Build();
 
@@ -34,6 +42,16 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+var supportedCultures = new[] { "tr", "en", "de", "fr", "es" };
+
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
+
 app.UseRouting();
 
 app.UseAuthorization();

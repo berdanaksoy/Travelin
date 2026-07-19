@@ -7,5 +7,7 @@
         public string TourCollectionName { get; set; }
         public string CommentCollectionName { get; set; }
         public string CategoryCollectionName { get; set; }
+        public string TourProgramCollectionName { get; set; }
+        public string ReservationCollectionName { get; set; }
     }
 }
