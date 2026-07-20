@@ -11,5 +11,6 @@
         public string DayNight { get; set; }
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
+        public string LocationImageUrl { get; set; }
     }
 }

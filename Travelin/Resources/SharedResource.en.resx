@@ -177,4 +177,37 @@
   <data name="TourDate" xml:space="preserve">
     <value>Tour Date</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="NoCommentsYet" xml:space="preserve">
+    <value>No comments yet.</value>
+  </data>
+  <data name="WriteReview" xml:space="preserve">
+    <value>Write a Review</value>
+  </data>
+  <data name="NameSurname" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Headline</value>
+  </data>
+  <data name="YourComment" xml:space="preserve">
+    <value>Your Comment</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Submit Review</value>
+  </data>
+  <data name="PricePerPerson" xml:space="preserve">
+    <value>Per Person</value>
+  </data>
+  <data name="TourMap" xml:space="preserve">
+    <value>Tour Map</value>
+  </data>
+  <data name="WatchVideo" xml:space="preserve">
+    <value>Watch Video</value>
+  </data>
 </root>

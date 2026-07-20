@@ -9,5 +9,6 @@
         public string CategoryCollectionName { get; set; }
         public string TourProgramCollectionName { get; set; }
         public string ReservationCollectionName { get; set; }
+        public string SiteSettingCollectionName { get; set; }
     }
 }

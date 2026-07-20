@@ -1,0 +1,47 @@
+﻿@model string
+
+<div class="single-add-review mb-4">
+    <h4>@Localizer["WriteReview"]</h4>
+    <form method="post" asp-controller="Comment" asp-action="CreateComment">
+        <input type="hidden" name="TourId" value="@Model" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <input type="text" name="NameSurname" placeholder="@Localizer["NameSurname"]" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <input type="email" name="Email" placeholder="@Localizer["Email"]" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <input type="text" name="Headline" placeholder="@Localizer["Headline"]" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <select name="Score" class="form-control">
+                        <option value="5">5 ★</option>
+                        <option value="4">4 ★</option>
+                        <option value="3">3 ★</option>
+                        <option value="2">2 ★</option>
+                        <option value="1">1 ★</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group mb-2">
+                    <textarea name="CommentDetail" placeholder="@Localizer["YourComment"]" required></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-btn">
+                    <button type="submit" class="nir-btn">@Localizer["SubmitReview"]</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

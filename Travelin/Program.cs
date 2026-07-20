@@ -3,6 +3,7 @@ using System.Reflection;
 using Travelin.Services.CategoryServices;
 using Travelin.Services.CommentServices;
 using Travelin.Services.ReservationServices;
+using Travelin.Services.SiteSettingServices;
 using Travelin.Services.TourProgramServices;
 using Travelin.Services.TourServices;
 using Travelin.Settings;
@@ -14,6 +15,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<ITourProgramService, TourProgramService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<ISiteSettingService, SiteSettingService>();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 

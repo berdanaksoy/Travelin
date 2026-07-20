@@ -13,6 +13,9 @@ namespace Travelin.Entities
         public int Score { get; set; }
         public DateTime CommentDate { get; set; }
         public bool IsStatus { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         public string TourId { get; set; }
+        public string NameSurname { get; set; }
+        public string Email { get; set; }
     }
 }

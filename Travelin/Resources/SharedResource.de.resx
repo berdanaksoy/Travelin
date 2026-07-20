@@ -177,4 +177,37 @@
   <data name="TourDate" xml:space="preserve">
     <value>Reisedatum</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Kommentare</value>
+  </data>
+  <data name="NoCommentsYet" xml:space="preserve">
+    <value>Noch keine Kommentare.</value>
+  </data>
+  <data name="WriteReview" xml:space="preserve">
+    <value> ReviewBewertung schreiben</value>
+  </data>
+  <data name="NameSurname" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="YourComment" xml:space="preserve">
+    <value>Ihr Kommentar</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Absenden</value>
+  </data>
+  <data name="PricePerPerson" xml:space="preserve">
+    <value>Pro Person</value>
+  </data>
+  <data name="TourMap" xml:space="preserve">
+    <value>Karte</value>
+  </data>
+  <data name="WatchVideo" xml:space="preserve">
+    <value>Video ansehen</value>
+  </data>
 </root>

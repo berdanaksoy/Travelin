@@ -177,4 +177,37 @@
   <data name="TourDate" xml:space="preserve">
     <value>Tur Tarihi</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Yorum</value>
+  </data>
+  <data name="NoCommentsYet" xml:space="preserve">
+    <value>Henüz yorum yapılmamış.</value>
+  </data>
+  <data name="WriteReview" xml:space="preserve">
+    <value>Yorum Yaz</value>
+  </data>
+  <data name="NameSurname" xml:space="preserve">
+    <value>Ad Soyad</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="YourComment" xml:space="preserve">
+    <value>Yorumunuz</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="PricePerPerson" xml:space="preserve">
+    <value>Kişi Başı</value>
+  </data>
+  <data name="TourMap" xml:space="preserve">
+    <value>Tur Haritası</value>
+  </data>
+  <data name="WatchVideo" xml:space="preserve">
+    <value>Videoyu İzle</value>
+  </data>
 </root>

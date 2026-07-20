@@ -13,25 +13,15 @@ namespace Travelin.Controllers
             _commentService = commentService;
         }
 
-        public IActionResult CreateComment()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateComment(CreateCommentDto createCommentDto)
         {
             createCommentDto.CommentDate = DateTime.Now;
             createCommentDto.IsStatus = false;
+
             await _commentService.CreateCommentAsync(createCommentDto);
 
-            return RedirectToAction("CommentList");
-        }
-
-        public async Task<IActionResult> CommentListByTourId(string id)
-        {
-            var values = await _commentService.GetCommentsByTourIdAsync(id);
-            return View(values);
+            return RedirectToAction("Detail", "Tour", new { id = createCommentDto.TourId });
         }
     }
 }

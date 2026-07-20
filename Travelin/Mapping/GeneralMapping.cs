@@ -2,6 +2,7 @@
 using Travelin.Dtos.CategoryDtos;
 using Travelin.Dtos.CommentDtos;
 using Travelin.Dtos.ReservationDtos;
+using Travelin.Dtos.SiteSettingDtos;
 using Travelin.Dtos.TourDtos;
 using Travelin.Dtos.TourProgramDtos;
 using Travelin.Entities;
@@ -37,6 +38,9 @@ namespace Travelin.Mapping
             CreateMap<Reservation, ResultReservationDto>().ReverseMap();
             CreateMap<Reservation, UpdateReservationDto>().ReverseMap();
             CreateMap<Reservation, GetReservationByIdDto>().ReverseMap();
+
+            CreateMap<SiteSetting, ResultSiteSettingDto>().ReverseMap();
+            CreateMap<SiteSetting, UpdateSiteSettingDto>().ReverseMap();
         }
     }
 }

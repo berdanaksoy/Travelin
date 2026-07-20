@@ -1,0 +1,52 @@
+﻿@model ResultSiteSettingDto
+
+@if (Model != null && !string.IsNullOrEmpty(Model.VideoUrl))
+{
+    <section class="discount-action pt-0" style="background-position:center;">
+        <div class="container">
+            <div class="call-banner rounded pt-10 pb-14">
+                <div class="call-banner-inner w-75 mx-auto text-center px-5">
+                    <div class="trend-content mb-5 pb-2 px-5">
+                        <h2 class="mb-1">@Localizer["WatchVideo"]</h2>
+                    </div>
+                    <div class="video-button text-center position-relative">
+                        <div class="call-button text-center">
+                            <button type="button" class="play-btn border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#siteVideoModal">
+                                <i class="fa fa-play bg-blue"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="white-overlay"></div>
+    </section>
+
+    <div class="modal fade" id="siteVideoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body p-0 position-relative">
+                    <button type="button" class="btn-close btn-close-white position-absolute"
+                            style="top:-35px; right:0; z-index:10;"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="ratio ratio-16x9">
+                        <iframe src="@Model.VideoUrl" title="Travelin" allowfullscreen
+                                class="rounded"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('siteVideoModal');
+            var iframe = modal.querySelector('iframe');
+            var src = iframe.getAttribute('src');
+
+            modal.addEventListener('hidden.bs.modal', function() {
+                iframe.setAttribute('src', src);
+            });
+        });
+    </script>
+}

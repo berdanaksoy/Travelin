@@ -19,5 +19,6 @@ namespace Travelin.Entities
 
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal Price { get; set; }
+        public string LocationImageUrl { get; set; }
     }
 }

@@ -74,9 +74,19 @@
 
                     @await Component.InvokeAsync("TourProgram", new { tourId = Model.TourId })
 
-                    @* === Gemini görseli (harita yerine) buraya gelecek === *@
+                    @if (!string.IsNullOrEmpty(Model.LocationImageUrl))
+                    {
+                        <div class="single-map mb-4">
+                            <h4>@Localizer["TourMap"]</h4>
+                            <div class="map rounded overflow-hidden">
+                                <img src="@Model.LocationImageUrl" class="rounded w-100" alt="@Model.Title" />
+                            </div>
+                        </div>
+                    }
 
-                    @* === Yorum listesi + yorum ekleme formu buraya gelecek === *@
+                    @await Component.InvokeAsync("CommentList", new { tourId = Model.TourId })
+
+                    <partial name="_AddComment" model="Model.TourId" />
 
                 </div>
             </div>
@@ -99,7 +109,6 @@
                             </div>
                         </div>
 
-                        @* === YouTube video butonu/popup buraya gelecek === *@
                     </div>
                 </div>
             </div>
