@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <a href="#" class="nir-btn w-100">@Localizer["BookNow"]</a>
+                                    <a asp-controller="Reservation" asp-action="CreateReservation" asp-route-id="@Model.TourId" class="nir-btn w-100">@Localizer["BookNow"]</a>
                                 </div>
                             </div>
                         </div>
@@ -115,3 +115,26 @@
         </div>
     </div>
 </section>
+
+@if (TempData["ReservationSuccess"] != null)
+{
+    <div class="modal fade" id="reservationSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <i class="fa fa-check-circle theme" style="font-size:56px;"></i>
+                    <h4 class="mt-3 mb-2">@Localizer["ReservationReceived"]</h4>
+                    <p class="mb-4">@Localizer["ReservationPendingNote"]</p>
+                    <button type="button" class="nir-btn" data-bs-dismiss="modal">@Localizer["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var el = document.getElementById('reservationSuccessModal');
+            if (el) new bootstrap.Modal(el).show();
+        });
+    </script>
+}

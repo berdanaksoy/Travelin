@@ -17,11 +17,13 @@ namespace Travelin.Mapping
             CreateMap<Category, ResultCategoryDto>().ReverseMap();
             CreateMap<Category, UpdateCategoryDto>().ReverseMap();
             CreateMap<Category, GetCategoryByIdDto>().ReverseMap();
+            CreateMap<GetCategoryByIdDto, UpdateCategoryDto>().ReverseMap();
 
             CreateMap<Tour, CreateTourDto>().ReverseMap();
             CreateMap<Tour, ResultTourDto>().ReverseMap();
             CreateMap<Tour, UpdateTourDto>().ReverseMap();
             CreateMap<Tour, GetTourByIdDto>().ReverseMap();
+            CreateMap<GetTourByIdDto, UpdateTourDto>().ReverseMap();
 
             CreateMap<Comment, CreateCommentDto>().ReverseMap();
             CreateMap<Comment, ResultCommentDto>().ReverseMap();

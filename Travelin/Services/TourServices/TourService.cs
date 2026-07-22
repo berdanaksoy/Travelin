@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Travelin.Dtos.TourDtos;
 using Travelin.Entities;
@@ -52,7 +53,7 @@ namespace Travelin.Services.TourServices
         public async Task<List<ResultTourDto>> GetToursByPageAsync(int page, int pageSize)
         {
             var values = await _tourCollection
-                .Find(t => true)
+                .Find(t => t.IsStatus)
                 .Skip((page - 1) * pageSize)
                 .Limit(pageSize)
                 .ToListAsync();
@@ -62,7 +63,67 @@ namespace Travelin.Services.TourServices
 
         public async Task<long> GetTotalTourCountAsync()
         {
-            return await _tourCollection.CountDocumentsAsync(t => true);
+            return await _tourCollection.CountDocumentsAsync(t => t.IsStatus);
+        }
+
+        public async Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter)
+        {
+            var builder = Builders<Tour>.Filter;
+            var conditions = new List<FilterDefinition<Tour>>();
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                var searchFilter = builder.Or(
+                    builder.Regex(t => t.Title, new BsonRegularExpression(filter.Search, "i")),
+                    builder.Regex(t => t.City, new BsonRegularExpression(filter.Search, "i"))
+                );
+                conditions.Add(searchFilter);
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Country))
+                conditions.Add(builder.Eq(t => t.Country, filter.Country));
+
+            if (filter.FromDate.HasValue)
+                conditions.Add(builder.Gte(t => t.TourDate, filter.FromDate.Value));
+
+            if (filter.ToDate.HasValue)
+                conditions.Add(builder.Lte(t => t.TourDate, filter.ToDate.Value));
+
+            if (!string.IsNullOrWhiteSpace(filter.CategoryId))
+                conditions.Add(builder.Eq(t => t.CategoryId, filter.CategoryId));
+
+            var finalFilter = conditions.Any() ? builder.And(conditions) : builder.Empty;
+
+            var totalCount = await _tourCollection.CountDocumentsAsync(finalFilter);
+
+            var sortDefinition = filter.SortBy switch
+            {
+                "oldest" => Builders<Tour>.Sort.Ascending(t => t.TourDate),
+                "titleAsc" => Builders<Tour>.Sort.Ascending(t => t.Title),
+                "capacity" => Builders<Tour>.Sort.Descending(t => t.Capacity),
+                "priceAsc" => Builders<Tour>.Sort.Ascending(t => t.Price),
+                "priceDesc" => Builders<Tour>.Sort.Descending(t => t.Price),
+                _ => Builders<Tour>.Sort.Descending(t => t.TourDate)
+            };
+
+            var values = await _tourCollection
+                .Find(finalFilter)
+                .Sort(sortDefinition)
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Limit(filter.PageSize)
+                .ToListAsync();
+
+            return new TourListResultDto
+            {
+                Tours = _mapper.Map<List<ResultTourDto>>(values),
+                TotalCount = totalCount
+            };
+        }
+
+        public async Task<List<string>> GetDistinctCountriesAsync()
+        {
+            var values = await _tourCollection.Distinct(t => t.Country, Builders<Tour>.Filter.Empty).ToListAsync();
+            return values.Where(c => !string.IsNullOrWhiteSpace(c)).OrderBy(c => c).ToList();
         }
     }
 }

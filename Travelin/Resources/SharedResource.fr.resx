@@ -210,4 +210,40 @@
   <data name="WatchVideo" xml:space="preserve">
     <value>Voir la vidéo</value>
   </data>
+  <data name="TravellerInformation" xml:space="preserve">
+    <value>Informations voyageur</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="PersonCount" xml:space="preserve">
+    <value>Nombre de personnes</value>
+  </data>
+  <data name="SelectedTour" xml:space="preserve">
+    <value>Circuit sélectionné</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="CompleteReservation" xml:space="preserve">
+    <value>Confirmer la réservation</value>
+  </data>
+  <data name="ReservationInfoNote" xml:space="preserve">
+    <value>Vous serez informé par e-mail après confirmation.</value>
+  </data>
+  <data name="ReservationReceived" xml:space="preserve">
+    <value>Votre réservation a été reçue !</value>
+  </data>
+  <data name="ReservationPendingNote" xml:space="preserve">
+    <value>Votre réservation est en attente de validation.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
 </root>

@@ -1,0 +1,121 @@
+﻿@model CreateReservationViewModel
+
+@{
+    ViewData["Title"] = Localizer["MakeBooking"].Value;
+    ViewData["BreadcrumbTitle"] = Localizer["MakeBooking"].Value;
+    ViewData["BreadcrumbSubtitle"] = Model.Tour.Title;
+}
+
+<partial name="_Breadcrumb" />
+
+<section class="trending pt-6 pb-6 bg-lgrey">
+    <div class="container">
+        <form asp-controller="Reservation" asp-action="CreateReservation" method="post">
+            <input type="hidden" name="TourId" value="@Model.Tour.TourId" />
+            <input type="hidden" name="ReservationDate" value="@Model.Tour.TourDate.ToString("yyyy-MM-dd")" />
+
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="booking-box bg-white rounded box-shadow p-4">
+                        <h3 class="border-b pb-2 mb-3">@Localizer["TravellerInformation"]</h3>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label>@Localizer["FirstName"]</label>
+                                    <input type="text" name="Name" placeholder="@Localizer["FirstName"]" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label>@Localizer["LastName"]</label>
+                                    <input type="text" name="Surname" placeholder="@Localizer["LastName"]" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label>@Localizer["Email"]</label>
+                                    <input type="email" name="Email" placeholder="@Localizer["Email"]" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label>@Localizer["Phone"]</label>
+                                    <input type="text" name="Phone" placeholder="@Localizer["Phone"]" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label>@Localizer["PersonCount"]</label>
+                                    <input type="number" name="PersonCount" id="personCount"
+                                           value="1" min="1" max="@Model.Tour.Capacity" required />
+                                    <small class="d-block mt-1">@Localizer["MaxPeople"]: @Model.Tour.Capacity</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label>@Localizer["TourDate"]</label>
+                                    <input type="text" value="@Model.Tour.TourDate.ToString("dd MMMM yyyy")" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t pt-3 mt-2">
+                            <button type="submit" class="nir-btn w-100">@Localizer["CompleteReservation"]</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4 ps-lg-4">
+                    <div class="sidebar-sticky">
+                        <div class="sidebar-item bg-white rounded box-shadow overflow-hidden p-3 mb-4">
+                            <h4 class="border-b pb-2 mb-3">@Localizer["SelectedTour"]</h4>
+
+                            <img src="@Model.Tour.ImageUrl" class="rounded w-100 mb-3" alt="@Model.Tour.Title" />
+
+                            <h5 class="mb-1">@Model.Tour.Title</h5>
+                            <p class="mb-2"><i class="icon-location-pin"></i> @Model.Tour.Country, @Model.Tour.City</p>
+                            <p class="mb-3"><i class="fa fa-clock-o"></i> @Model.Tour.DayNight</p>
+
+                            <ul class="border-t pt-3">
+                                <li class="d-block pb-2">
+                                    @Localizer["PricePerPerson"]
+                                    <span class="float-end fw-bold">@Model.Tour.Price.ToString("N2") ₺</span>
+                                </li>
+                                <li class="d-block pb-2">
+                                    @Localizer["PersonCount"]
+                                    <span class="float-end fw-bold" id="summaryPersonCount">1</span>
+                                </li>
+                                <li class="d-block border-t pt-2">
+                                    <span class="fw-bold">@Localizer["Total"]</span>
+                                    <span class="float-end fw-bold theme" id="summaryTotal">@Model.Tour.Price.ToString("N2") ₺</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-item bg-white rounded box-shadow p-3">
+                            <p class="mb-0"><i class="fa fa-info-circle theme me-2"></i>@Localizer["ReservationInfoNote"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var price = @Model.Tour.Price.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        var input = document.getElementById('personCount');
+        var countLabel = document.getElementById('summaryPersonCount');
+        var totalLabel = document.getElementById('summaryTotal');
+
+        function updateTotal() {
+            var count = parseInt(input.value) || 1;
+            countLabel.textContent = count;
+            totalLabel.textContent = (price * count).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ₺';
+        }
+
+        input.addEventListener('input', updateTotal);
+    });
+</script>

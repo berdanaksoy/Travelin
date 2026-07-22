@@ -48,5 +48,11 @@ namespace Travelin.Services.CategoryServices
             var values = _mapper.Map<Category>(updateCategoryDto);
             await _categoryCollection.FindOneAndReplaceAsync(c => c.CategoryId == updateCategoryDto.CategoryId, values);
         }
+
+        public async Task<List<ResultCategoryDto>> GetActiveCategoriesAsync()
+        {
+            var values = await _categoryCollection.Find(c => c.IsStatus).ToListAsync();
+            return _mapper.Map<List<ResultCategoryDto>>(values);
+        }
     }
 }
