@@ -17,10 +17,17 @@
             </ol>
         </nav>
     </div>
-    <a asp-action="TourList" class="btn btn-outline-secondary d-flex align-items-center gap-2"
-       style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
-        <i class="bi bi-arrow-left"></i> Listeye Dön
-    </a>
+    <div class="d-flex gap-2">
+        <a asp-controller="AdminTourProgram" asp-action="ManageProgram" asp-route-id="@Model.TourId"
+           class="btn btn-primary d-flex align-items-center gap-2"
+           style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
+            <i class="bi bi-list-check"></i> Programı Yönet
+        </a>
+        <a asp-action="TourList" class="btn btn-outline-secondary d-flex align-items-center gap-2"
+           style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
+            <i class="bi bi-arrow-left"></i> Listeye Dön
+        </a>
+    </div>
 </div>
 
 <form method="post" id="tourForm">

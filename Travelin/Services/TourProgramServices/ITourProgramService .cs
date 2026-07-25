@@ -10,5 +10,6 @@ namespace Travelin.Services.TourProgramServices
         Task DeleteTourProgramAsync(string id);
         Task<GetTourProgramByIdDto> GetTourProgramByIdAsync(string id);
         Task<List<ResultTourProgramDto>> GetTourProgramsByTourIdAsync(string tourId);
+        Task DeleteTourProgramsByTourIdAsync(string tourId);
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Travelin.Dtos.TourDtos;
 using Travelin.Services.CategoryServices;
+using Travelin.Services.CommentServices;
+using Travelin.Services.TourProgramServices;
 using Travelin.Services.TourServices;
 
 namespace Travelin.Controllers
@@ -10,12 +12,16 @@ namespace Travelin.Controllers
     {
         private readonly ITourService _tourService;
         private readonly ICategoryService _categoryService;
+        private readonly ITourProgramService _tourProgramService;
+        private readonly ICommentService _commentService;
         private readonly IMapper _mapper;
 
-        public AdminTourController(ITourService tourService, ICategoryService categoryService, IMapper mapper)
+        public AdminTourController(ITourService tourService, ICategoryService categoryService, ITourProgramService tourProgramService, ICommentService commentService, IMapper mapper)
         {
             _tourService = tourService;
             _categoryService = categoryService;
+            _tourProgramService = tourProgramService;
+            _commentService = commentService;
             _mapper = mapper;
         }
 
@@ -71,6 +77,8 @@ namespace Travelin.Controllers
 
         public async Task<IActionResult> DeleteTour(string id)
         {
+            await _commentService.DeleteCommentsByTourIdAsync(id);
+            await _tourProgramService.DeleteTourProgramsByTourIdAsync(id);
             await _tourService.DeleteTourAsync(id);
 
             return RedirectToAction("TourList");

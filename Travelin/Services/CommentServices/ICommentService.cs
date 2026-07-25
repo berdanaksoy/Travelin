@@ -11,5 +11,7 @@ namespace Travelin.Services.CommentServices
         Task<GetCommentByIdDto> GetCommentByIdAsync(string id);
         Task<List<ResultCommentListByTourIdDto>> GetCommentsByTourIdAsync(string id);
         Task<List<ResultCommentListByTourIdDto>> GetApprovedCommentsByTourIdAsync(string id);
+        Task ChangeCommentStatusAsync(string id, bool status);
+        Task DeleteCommentsByTourIdAsync(string tourId);
     }
 }

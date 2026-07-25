@@ -122,15 +122,11 @@
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>Görsel</th>
-                        <th>Tur Başlığı</th>
-                        <th>Konum</th>
+                        <th>Tur</th>
                         <th>Tarih</th>
-                        <th>Süre</th>
-                        <th>Kapasite</th>
+                        <th>Süre / Kapasite</th>
                         <th>Fiyat</th>
-                        <th>Kategori</th>
-                        <th>Durum</th>
+                        <th>Kategori / Durum</th>
                         <th>İşlemler</th>
                     </tr>
                 </thead>
@@ -138,49 +134,51 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="td-image" data-label="">
-                                @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
-                                {
-                                    <img src="@item.ImageUrl" alt="@item.Title" class="row-thumb" loading="lazy" />
-                                }
-                                else
-                                {
-                                    <div class="thumb-placeholder"><i class="bi bi-image"></i></div>
-                                }
-                            </td>
-                            <td data-label="Başlık">
-                                <span class="cell-title" title="@item.Title">@item.Title</span>
-                            </td>
-                            <td data-label="Konum">
-                                <span class="loc-badge"><i class="bi bi-geo-alt"></i>@item.Country / @item.City</span>
+                            <td data-label="Tur">
+                                <div class="d-flex align-items-center gap-3">
+                                    @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" alt="@item.Title" class="row-thumb" loading="lazy" />
+                                    }
+                                    else
+                                    {
+                                        <div class="thumb-placeholder"><i class="bi bi-image"></i></div>
+                                    }
+                                    <div>
+                                        <div class="cell-title" title="@item.Title">@item.Title</div>
+                                        <div class="loc-badge mt-1"><i class="bi bi-geo-alt"></i>@item.Country / @item.City</div>
+                                    </div>
+                                </div>
                             </td>
                             <td data-label="Tarih">
                                 <span class="date-cell">@item.TourDate.ToString("dd.MM.yyyy")</span>
                             </td>
-                            <td data-label="Süre">
+                            <td data-label="Süre / Kapasite">
                                 <span class="pill pill-amber">@item.DayNight</span>
-                            </td>
-                            <td data-label="Kapasite">
-                                <span class="cap-cell"><i class="bi bi-people"></i>@item.Capacity</span>
+                                <div class="cap-cell mt-1"><i class="bi bi-people"></i>@item.Capacity kişi</div>
                             </td>
                             <td data-label="Fiyat">
                                 <span class="date-cell">@item.Price.ToString("N2") ₺</span>
                             </td>
-                            <td data-label="Kategori">
+                            <td data-label="Kategori / Durum">
                                 <span class="pill pill-blue">@item.CategoryName</span>
-                            </td>
-                            <td data-label="Durum">
-                                @if (item.IsStatus)
-                                {
-                                    <span class="pill pill-green">Aktif</span>
-                                }
-                                else
-                                {
-                                    <span class="pill pill-gray">Pasif</span>
-                                }
+                                <div class="mt-1">
+                                    @if (item.IsStatus)
+                                    {
+                                        <span class="pill pill-green">Aktif</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="pill pill-gray">Pasif</span>
+                                    }
+                                </div>
                             </td>
                             <td data-label="İşlemler">
                                 <div class="action-group">
+                                    <a asp-controller="AdminTourProgram" asp-action="ManageProgram" asp-route-id="@item.TourId"
+                                       class="btn-action btn-detail" title="Programı Yönet">
+                                        <i class="bi bi-list-check"></i>
+                                    </a>
                                     <a asp-action="UpdateTour" asp-route-id="@item.TourId"
                                        class="btn-action btn-edit" title="Düzenle">
                                         <i class="bi bi-pencil"></i>

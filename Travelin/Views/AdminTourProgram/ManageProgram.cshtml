@@ -1,0 +1,179 @@
+﻿@model List<ResultTourProgramDto>
+
+@{
+    var tour = ViewBag.Tour as GetTourByIdDto;
+
+    ViewData["Title"] = "Program Yönetimi";
+    ViewData["ActiveMenu"] = "programs";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">@tour.Title</h1>
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Admin</li>
+                <li class="breadcrumb-item"><a asp-action="ProgramTourList">Tur Programları</a></li>
+                <li class="breadcrumb-item active">@tour.Title</li>
+            </ol>
+        </nav>
+    </div>
+    <a asp-action="ProgramTourList" class="btn btn-outline-secondary d-flex align-items-center gap-2"
+       style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
+        <i class="bi bi-arrow-left"></i> Listeye Dön
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="table-card mb-4">
+            <div class="table-card-header">
+                <div class="title">
+                    <i class="bi bi-calendar-check" style="color:#a0aec0;"></i>
+                    Program Günleri
+                    <span class="record-count">@Model.Count gün</span>
+                </div>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="empty-state">
+                    <i class="bi bi-calendar-x"></i>
+                    <p>Bu tur için henüz program tanımlanmamış.</p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Gün</th>
+                                <th>Başlık</th>
+                                <th>Açıklama</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td data-label="Gün">
+                                        <span class="pill pill-blue">Gün @item.DayNumber</span>
+                                    </td>
+                                    <td data-label="Başlık">
+                                        <span class="cell-title">@item.Title</span>
+                                    </td>
+                                    <td data-label="Açıklama">
+                                        <span class="cell-muted">
+                                            @(item.Description?.Length > 60 ? item.Description.Substring(0, 60) + "…" : item.Description)
+                                        </span>
+                                    </td>
+                                    <td data-label="İşlemler">
+                                        <div class="action-group">
+                                            <button type="button" class="btn-action btn-edit" title="Düzenle"
+                                                    onclick="editProgram('@item.TourProgramId', @item.DayNumber, '@item.Title', '@item.Description')">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <a asp-action="DeleteProgram" asp-route-id="@item.TourProgramId" asp-route-tourId="@tour.TourId"
+                                               class="btn-action btn-delete" title="Sil"
+                                               onclick="return confirm('Bu program günü silinecek. Emin misiniz?');">
+                                                <i class="bi bi-trash3"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon blue"><i class="bi bi-plus-circle"></i></div>
+                <div>
+                    <div class="section-title" id="formTitle">Yeni Gün Ekle</div>
+                    <div class="section-subtitle">Programa bir gün ekleyin</div>
+                </div>
+            </div>
+            <div class="section-body">
+                <form method="post" asp-action="CreateProgram" id="programForm">
+                    @if (TempData["ProgramError"] != null)
+                    {
+                        <div class="alert alert-danger" style="border-radius:10px;font-size:.875rem;">
+                            <i class="bi bi-exclamation-triangle me-2"></i>@TempData["ProgramError"]
+                        </div>
+                    }
+                    <input type="hidden" name="TourId" value="@tour.TourId" />
+                    <input type="hidden" name="TourProgramId" id="programIdInput" />
+
+                    <div class="field-group">
+                        <label class="field-label">Gün Numarası <span class="required">*</span></label>
+                        <input type="number" name="DayNumber" min="1" max="30" value="@(Model.Count + 1)"
+                               class="form-control" id="dayNumberInput" />
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">Başlık <span class="required">*</span></label>
+                        <input type="text" name="Title" class="form-control" id="titleInput"
+                               placeholder="Örn: Gün 1 – Barcelona'nın İkonik Yapıları" />
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">Açıklama <span class="required">*</span></label>
+                        <textarea name="Description" rows="5" class="form-control" id="descInput"
+                                  placeholder="O günün detaylı programı..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <i class="bi bi-plus-circle-fill"></i> Günü Ekle
+                        </button>
+                        <button type="button" class="btn-cancel" id="cancelEditBtn" style="display:none;"
+                                onclick="resetForm()">
+                            Düzenlemeyi iptal et
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var form = document.getElementById('programForm');
+        var formTitle = document.getElementById('formTitle');
+        var submitBtn = document.getElementById('submitBtn');
+        var cancelBtn = document.getElementById('cancelEditBtn');
+        var programIdInput = document.getElementById('programIdInput');
+
+        function editProgram(id, dayNumber, title, description) {
+            programIdInput.value = id;
+            document.getElementById('dayNumberInput').value = dayNumber;
+            document.getElementById('titleInput').value = title;
+            document.getElementById('descInput').value = description;
+
+            form.action = '/AdminTourProgram/UpdateProgram';
+            formTitle.textContent = 'Günü Düzenle';
+            submitBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Güncelle';
+            cancelBtn.style.display = 'block';
+
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            form.reset();
+            programIdInput.value = '';
+            form.action = '/AdminTourProgram/CreateProgram';
+            formTitle.textContent = 'Yeni Gün Ekle';
+            submitBtn.innerHTML = '<i class="bi bi-plus-circle-fill"></i> Günü Ekle';
+            cancelBtn.style.display = 'none';
+        }
+    </script>
+}

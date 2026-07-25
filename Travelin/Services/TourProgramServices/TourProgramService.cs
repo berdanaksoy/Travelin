@@ -58,5 +58,10 @@ namespace Travelin.Services.TourProgramServices
             var value = _mapper.Map<TourProgram>(updateTourProgramDto);
             return _tourProgramCollection.FindOneAndReplaceAsync(x => x.TourProgramId == updateTourProgramDto.TourProgramId, value);
         }
+
+        public async Task DeleteTourProgramsByTourIdAsync(string tourId)
+        {
+            await _tourProgramCollection.DeleteManyAsync(x => x.TourId == tourId);
+        }
     }
 }

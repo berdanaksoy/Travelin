@@ -64,5 +64,16 @@ namespace Travelin.Services.CommentServices
 
             return _mapper.Map<List<ResultCommentListByTourIdDto>>(values);
         }
+
+        public async Task ChangeCommentStatusAsync(string id, bool status)
+        {
+            var update = Builders<Comment>.Update.Set(c => c.IsStatus, status);
+            await _commentCollection.UpdateOneAsync(c => c.CommentId == id, update);
+        }
+
+        public async Task DeleteCommentsByTourIdAsync(string tourId)
+        {
+            await _commentCollection.DeleteManyAsync(c => c.TourId == tourId);
+        }
     }
 }

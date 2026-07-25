@@ -1,0 +1,123 @@
+﻿@model List<ResultTourDto>
+
+@{
+    ViewData["Title"] = "Tur Programları";
+    ViewData["ActiveMenu"] = "programs";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var counts = ViewBag.ProgramCounts as Dictionary<string, int>;
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Tur Programları</h1>
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Admin</li>
+                <li class="breadcrumb-item active">Tur Programları</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="form-section">
+    <div class="section-body">
+        <form method="get" asp-action="ProgramTourList">
+            <div class="row g-2 align-items-end">
+                <div class="col-md-10">
+                    <label class="field-label">Tur Ara</label>
+                    <input type="text" name="search" value="@ViewBag.Search" class="form-control"
+                           placeholder="Tur adı, şehir veya ülke..." />
+                </div>
+                <div class="col-md-2 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary flex-fill" style="border-radius:8px;">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <a asp-action="ProgramTourList" class="btn btn-outline-secondary" style="border-radius:8px;">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-card-header">
+        <div class="title">
+            <i class="bi bi-list-check" style="color:#a0aec0;"></i>
+            Program Yönetimi
+            <span class="record-count">@Model.Count tur</span>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-map"></i>
+            <p>Henüz tur eklenmemiş.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Görsel</th>
+                        <th>Tur</th>
+                        <th>Tarih</th>
+                        <th>Süre</th>
+                        <th>Program Durumu</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        int programCount = counts != null && counts.ContainsKey(item.TourId) ? counts[item.TourId] : 0;
+
+                        <tr>
+                            <td class="td-image" data-label="">
+                                @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                                {
+                                    <img src="@item.ImageUrl" alt="@item.Title" class="row-thumb" loading="lazy" />
+                                }
+                                else
+                                {
+                                    <div class="thumb-placeholder"><i class="bi bi-image"></i></div>
+                                }
+                            </td>
+                            <td data-label="Tur">
+                                <span class="cell-title">@item.Title</span>
+                                <div class="loc-badge mt-1"><i class="bi bi-geo-alt"></i>@item.Country / @item.City</div>
+                            </td>
+                            <td data-label="Tarih">
+                                <span class="date-cell">@item.TourDate.ToString("dd.MM.yyyy")</span>
+                            </td>
+                            <td data-label="Süre">
+                                <span class="pill pill-amber">@item.DayNight</span>
+                            </td>
+                            <td data-label="Program">
+                                @if (programCount > 0)
+                                {
+                                    <span class="pill pill-green">@programCount gün tanımlı</span>
+                                }
+                                else
+                                {
+                                    <span class="pill pill-red">Program yok</span>
+                                }
+                            </td>
+                            <td data-label="İşlem">
+                                <a asp-action="ManageProgram" asp-route-id="@item.TourId"
+                                   class="btn btn-primary btn-sm" style="border-radius:8px;font-size:.8rem;">
+                                    <i class="bi bi-pencil-square me-1"></i> Programı Yönet
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
