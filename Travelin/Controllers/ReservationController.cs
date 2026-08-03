@@ -28,6 +28,19 @@ namespace Travelin.Controllers
             if (tour == null)
                 return RedirectToAction("TourList", "Tour");
 
+            if (tour.TourDate < DateTime.Now)
+            {
+                TempData["ReservationError"] = "Bu turun tarihi geçmiş, rezervasyon yapılamaz.";
+                return RedirectToAction("Detail", "Tour", new { id });
+            }
+
+            var approvedCount = await _reservationService.GetApprovedPersonCountByTourIdAsync(id);
+            if (approvedCount >= tour.Capacity)
+            {
+                TempData["ReservationError"] = "Bu tur dolu, rezervasyon yapılamaz.";
+                return RedirectToAction("Detail", "Tour", new { id });
+            }
+
             var model = new CreateReservationViewModel
             {
                 Tour = tour,

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Travelin.Dtos.TourDtos;
+using Travelin.Entities;
 using Travelin.Services.CategoryServices;
 using Travelin.Services.CommentServices;
+using Travelin.Services.ReservationServices;
 using Travelin.Services.TourProgramServices;
 using Travelin.Services.TourServices;
 
@@ -14,15 +16,17 @@ namespace Travelin.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ITourProgramService _tourProgramService;
         private readonly ICommentService _commentService;
+        private readonly IReservationService _reservationService;
         private readonly IMapper _mapper;
 
-        public AdminTourController(ITourService tourService, ICategoryService categoryService, ITourProgramService tourProgramService, ICommentService commentService, IMapper mapper)
+        public AdminTourController(ITourService tourService, ICategoryService categoryService, ITourProgramService tourProgramService, ICommentService commentService, IMapper mapper, IReservationService reservationService)
         {
             _tourService = tourService;
             _categoryService = categoryService;
             _tourProgramService = tourProgramService;
             _commentService = commentService;
             _mapper = mapper;
+            _reservationService = reservationService;
         }
 
         public async Task<IActionResult> TourList(string search, string country, string categoryId, DateTime? fromDate, DateTime? toDate, string sortBy, int page = 1)
@@ -77,6 +81,17 @@ namespace Travelin.Controllers
 
         public async Task<IActionResult> DeleteTour(string id)
         {
+            var reservations = await _reservationService.GetReservationsByTourIdAsync(id);
+
+            bool hasActive = reservations.Any(r =>
+                r.Status == ReservationStatuses.Pending || r.Status == ReservationStatuses.Approved);
+
+            if (hasActive)
+            {
+                TempData["TourDeleteError"] = "Bu tura ait aktif rezervasyonlar var. Önce onları iptal edin.";
+                return RedirectToAction("TourList");
+            }
+
             await _commentService.DeleteCommentsByTourIdAsync(id);
             await _tourProgramService.DeleteTourProgramsByTourIdAsync(id);
             await _tourService.DeleteTourAsync(id);

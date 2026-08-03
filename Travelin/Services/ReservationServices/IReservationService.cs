@@ -12,5 +12,7 @@ namespace Travelin.Services.ReservationServices
 
         Task<List<ResultReservationDto>> GetReservationsByTourIdAsync(string tourId);
         Task ChangeReservationStatusAsync(string id, string status);
+        Task<int> GetApprovedPersonCountByTourIdAsync(string tourId);
+        Task<List<ResultReservationDto>> GetApprovedReservationsByTourIdAsync(string tourId);
     }
 }

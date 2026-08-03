@@ -47,9 +47,8 @@
 </div>
 
 <script>
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            document.querySelector('.single-add-review form').reset();
-        }
+    window.addEventListener('pageshow', function() {
+        var f = document.querySelector('.single-add-review form');
+        if (f) f.reset();
     });
 </script>

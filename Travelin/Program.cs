@@ -2,11 +2,14 @@ using Microsoft.Extensions.Options;
 using System.Reflection;
 using Travelin.Services.CategoryServices;
 using Travelin.Services.CommentServices;
+using Travelin.Services.EmailServices;
 using Travelin.Services.ReservationServices;
 using Travelin.Services.SiteSettingServices;
 using Travelin.Services.TourProgramServices;
 using Travelin.Services.TourServices;
 using Travelin.Settings;
+
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<ITourProgramService, TourProgramService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<ISiteSettingService, SiteSettingService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 

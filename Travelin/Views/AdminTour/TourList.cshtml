@@ -17,6 +17,13 @@
     int endPage = Math.Min(totalPages, currentPage + windowSize);
 }
 
+@if (TempData["TourDeleteError"] != null)
+{
+    <div class="alert alert-danger" style="border-radius:10px;font-size:.875rem;">
+        <i class="bi bi-exclamation-triangle me-2"></i>@TempData["TourDeleteError"]
+    </div>
+}
+
 <div class="page-header">
     <div>
         <h1 class="page-title">Tur Listesi</h1>
@@ -178,6 +185,10 @@
                                     <a asp-controller="AdminTourProgram" asp-action="ManageProgram" asp-route-id="@item.TourId"
                                        class="btn-action btn-detail" title="Programı Yönet">
                                         <i class="bi bi-list-check"></i>
+                                    </a>
+                                    <a asp-controller="AdminCustomer" asp-action="TourCustomers" asp-route-id="@item.TourId"
+                                       class="btn-action btn-detail" title="Tura Kayıtlı Müşteriler">
+                                        <i class="bi bi-people"></i>
                                     </a>
                                     <a asp-action="UpdateTour" asp-route-id="@item.TourId"
                                        class="btn-action btn-edit" title="Düzenle">

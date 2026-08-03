@@ -53,7 +53,8 @@ namespace Travelin.Services.TourServices
         public async Task<List<ResultTourDto>> GetToursByPageAsync(int page, int pageSize)
         {
             var values = await _tourCollection
-                .Find(t => t.IsStatus)
+                .Find(t => t.IsStatus && t.TourDate >= DateTime.Now)
+                .SortBy(t => t.TourDate)
                 .Skip((page - 1) * pageSize)
                 .Limit(pageSize)
                 .ToListAsync();
@@ -63,7 +64,7 @@ namespace Travelin.Services.TourServices
 
         public async Task<long> GetTotalTourCountAsync()
         {
-            return await _tourCollection.CountDocumentsAsync(t => t.IsStatus);
+            return await _tourCollection.CountDocumentsAsync(t => t.IsStatus && t.TourDate >= DateTime.Now);
         }
 
         public async Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter)

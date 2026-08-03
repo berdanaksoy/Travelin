@@ -23,7 +23,7 @@ namespace Travelin.Services.ReservationServices
         public async Task CreateReservationAsync(CreateReservationDto createReservationDto)
         {
             var value = _mapper.Map<Reservation>(createReservationDto);
-            value.Status = "Beklemede";
+            value.Status = ReservationStatuses.Pending;
             value.CreatedDate = DateTime.Now;
             await _reservationCollection.InsertOneAsync(value);
         }
@@ -69,6 +69,24 @@ namespace Travelin.Services.ReservationServices
         {
             var value = _mapper.Map<Reservation>(updateReservationDto);
             return _reservationCollection.FindOneAndReplaceAsync(x => x.ReservationId == updateReservationDto.ReservationId, value);
+        }
+
+        public async Task<int> GetApprovedPersonCountByTourIdAsync(string tourId)
+        {
+            var approved = await _reservationCollection
+                .Find(r => r.TourId == tourId && r.Status == ReservationStatuses.Approved)
+                .ToListAsync();
+
+            return approved.Sum(r => r.PersonCount);
+        }
+
+        public async Task<List<ResultReservationDto>> GetApprovedReservationsByTourIdAsync(string tourId)
+        {
+            var values = await _reservationCollection
+                .Find(r => r.TourId == tourId && r.Status == ReservationStatuses.Approved)
+                .ToListAsync();
+
+            return _mapper.Map<List<ResultReservationDto>>(values);
         }
     }
 }

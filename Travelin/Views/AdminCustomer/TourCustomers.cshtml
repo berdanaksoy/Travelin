@@ -1,0 +1,85 @@
+﻿@model List<ResultReservationDto>
+
+@{
+    var tour = ViewBag.Tour as GetTourByIdDto;
+
+    ViewData["Title"] = "Tura Kayıtlı Müşteriler";
+    ViewData["ActiveMenu"] = "reservations";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">@tour.Title — Müşteriler</h1>
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Admin</li>
+                <li class="breadcrumb-item"><a asp-controller="AdminTour" asp-action="TourList">Turlar</a></li>
+                <li class="breadcrumb-item active">Müşteriler</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="ExportExcel" asp-route-id="@tour.TourId"
+           class="btn btn-success d-flex align-items-center gap-2"
+           style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
+            <i class="bi bi-file-earmark-excel"></i> Excel İndir
+        </a>
+        <a asp-action="ExportPdf" asp-route-id="@tour.TourId"
+           class="btn btn-danger d-flex align-items-center gap-2"
+           style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
+            <i class="bi bi-file-earmark-pdf"></i> PDF İndir
+        </a>
+        <a asp-controller="AdminTour" asp-action="TourList" class="btn btn-outline-secondary d-flex align-items-center gap-2"
+           style="border-radius:10px;font-size:.875rem;padding:.55rem 1.1rem;">
+            <i class="bi bi-arrow-left"></i> Turlar
+        </a>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-card-header">
+        <div class="title">
+            <i class="bi bi-people" style="color:#a0aec0;"></i>
+            Kayıtlı Müşteriler
+            <span class="record-count">@Model.Count kayıt / @Model.Sum(r => r.PersonCount) kişi</span>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-person-x"></i>
+            <p>Bu tura henüz kayıtlı müşteri yok.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>İletişim</th>
+                        <th>Kişi Sayısı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-label="Ad Soyad"><span class="cell-title">@item.Name @item.Surname</span></td>
+                            <td data-label="İletişim">
+                                <div class="cell-muted">
+                                    <i class="bi bi-envelope"></i> @item.Email<br />
+                                    <i class="bi bi-telephone"></i> @item.Phone
+                                </div>
+                            </td>
+                            <td data-label="Kişi"><span class="cap-cell"><i class="bi bi-people"></i>@item.PersonCount</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

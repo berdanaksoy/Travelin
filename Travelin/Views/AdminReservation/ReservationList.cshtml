@@ -1,0 +1,183 @@
+﻿@model List<ResultReservationDto>
+@using Travelin.Entities
+
+@{
+    ViewData["Title"] = "Rezervasyonlar";
+    ViewData["ActiveMenu"] = "reservations";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    string status = ViewBag.Status as string;
+    int pendingCount = ViewBag.PendingCount;
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Rezervasyonlar</h1>
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Admin</li>
+                <li class="breadcrumb-item active">Rezervasyonlar</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+@if (pendingCount > 0)
+{
+    <div class="alert alert-warning d-flex align-items-center gap-2" style="border-radius:10px;font-size:.875rem;">
+        <i class="bi bi-clock-history"></i>
+        <span><strong>@pendingCount</strong> rezervasyon onay bekliyor.</span>
+    </div>
+}
+
+@if (TempData["ReservationError"] != null)
+{
+    <div id="errorToast" style="position:fixed; top:20px; right:20px; z-index:9999; max-width:400px;">
+        <div class="alert alert-danger d-flex align-items-center gap-2 shadow" style="border-radius:10px;font-size:.875rem;">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span>@TempData["ReservationError"]</span>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            var t = document.getElementById('errorToast');
+            if (t) t.style.display = 'none';
+        }, 5000);
+    </script>
+}
+
+@if (TempData["ReservationSuccess"] != null)
+{
+    <div id="successToast" style="position:fixed; top:20px; right:20px; z-index:9999; max-width:400px;">
+        <div class="alert alert-success d-flex align-items-center gap-2 shadow" style="border-radius:10px;font-size:.875rem;">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>@TempData["ReservationSuccess"]</span>
+        </div>
+    </div>
+    <script>
+            setTimeout(function () {
+            var t = document.getElementById('successToast');
+            if (t) t.style.display = 'none';
+        }, 5000);
+    </script>
+}
+
+<div class="form-section">
+    <div class="section-body py-3">
+        <div class="d-flex gap-2 flex-wrap">
+            <a asp-action="ReservationList"
+               class="btn btn-sm @(string.IsNullOrEmpty(status) ? "btn-primary" : "btn-outline-secondary")"
+               style="border-radius:8px;">Tümü</a>
+            <a asp-action="ReservationList" asp-route-status="@ReservationStatuses.Pending"
+               class="btn btn-sm @(status == ReservationStatuses.Pending ? "btn-primary" : "btn-outline-secondary")"
+               style="border-radius:8px;">Onay Bekleyenler</a>
+            <a asp-action="ReservationList" asp-route-status="@ReservationStatuses.Approved"
+               class="btn btn-sm @(status == ReservationStatuses.Approved ? "btn-primary" : "btn-outline-secondary")"
+               style="border-radius:8px;">Onaylananlar</a>
+            <a asp-action="ReservationList" asp-route-status="@ReservationStatuses.Cancelled"
+               class="btn btn-sm @(status == ReservationStatuses.Cancelled ? "btn-primary" : "btn-outline-secondary")"
+               style="border-radius:8px;">İptal Edilenler</a>
+        </div>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-card-header">
+        <div class="title">
+            <i class="bi bi-calendar2-check" style="color:#a0aec0;"></i>
+            Rezervasyon Listesi
+            <span class="record-count">@Model.Count kayıt</span>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-calendar-x"></i>
+            <p>Gösterilecek rezervasyon bulunamadı.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Müşteri</th>
+                        <th>Tur</th>
+                        <th>Kişi</th>
+                        <th>Tur Tarihi</th>
+                        <th>Talep Tarihi</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-label="Müşteri">
+                                <div class="cell-title">@item.Name @item.Surname</div>
+                                <div class="cell-muted mt-1">
+                                    <i class="bi bi-envelope"></i> @item.Email<br />
+                                    <i class="bi bi-telephone"></i> @item.Phone
+                                </div>
+                            </td>
+                            <td data-label="Tur">
+                                <span class="loc-badge"><i class="bi bi-map"></i>@item.TourTitle</span>
+                                @if (ViewBag.CapacityInfo != null && (ViewBag.CapacityInfo as Dictionary<string, string>).ContainsKey(item.TourId))
+                                {
+                                    <div class="cell-muted mt-1"><i class="bi bi-people"></i> @((ViewBag.CapacityInfo as Dictionary<string, string>)[item.TourId]) kişi onaylı</div>
+                                }
+                            </td>
+                            <td data-label="Kişi">
+                                <span class="cap-cell"><i class="bi bi-people"></i>@item.PersonCount</span>
+                            </td>
+                            <td data-label="Tur Tarihi">
+                                <span class="date-cell">@item.ReservationDate.ToString("dd.MM.yyyy")</span>
+                            </td>
+                            <td data-label="Talep Tarihi">
+                                <span class="date-cell">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</span>
+                            </td>
+                            <td data-label="Durum">
+                                @if (item.Status == ReservationStatuses.Approved)
+                                {
+                                    <span class="pill pill-green">@item.Status</span>
+                                }
+                                else if (item.Status == ReservationStatuses.Cancelled)
+                                {
+                                    <span class="pill pill-red">@item.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="pill pill-amber">@item.Status</span>
+                                }
+                            </td>
+                            <td data-label="İşlemler">
+                                <div class="action-group">
+                                    @if (item.Status != ReservationStatuses.Approved)
+                                    {
+                                        <a asp-action="ApproveReservation" asp-route-id="@item.ReservationId" asp-route-status="@status"
+                                           class="btn-action btn-approve" title="Onayla"
+                                           onclick="return confirm('Rezervasyon onaylanacak ve müşteriye e-posta gönderilecek. Onaylıyor musunuz?');">
+                                            <i class="bi bi-check-lg"></i>
+                                        </a>
+                                    }
+                                    @if (item.Status != ReservationStatuses.Cancelled)
+                                    {
+                                        <a asp-action="CancelReservation" asp-route-id="@item.ReservationId" asp-route-status="@status"
+                                           class="btn-action btn-delete" title="İptal Et"
+                                           onclick="return confirm('Rezervasyon iptal edilecek. Emin misiniz?');">
+                                            <i class="bi bi-x-lg"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

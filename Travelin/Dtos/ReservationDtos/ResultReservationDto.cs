@@ -12,5 +12,6 @@
         public int PersonCount { get; set; }
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string TourTitle { get; set; }
     }
 }

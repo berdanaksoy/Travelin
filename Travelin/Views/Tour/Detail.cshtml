@@ -8,6 +8,15 @@
 
 <partial name="_Breadcrumb" />
 
+@if (TempData["ReservationError"] != null)
+{
+    <div class="container mt-3">
+        <div class="alert alert-danger" style="border-radius:10px;">
+            <i class="fa fa-exclamation-triangle"></i> @TempData["ReservationError"]
+        </div>
+    </div>
+}
+
 <section class="trending pt-6 pb-0 bg-lgrey">
     <div class="container">
         <div class="row">

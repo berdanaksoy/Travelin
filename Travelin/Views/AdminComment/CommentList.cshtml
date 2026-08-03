@@ -105,6 +105,15 @@
                                 <div class="cell-muted mt-1">
                                     @(item.CommentDetail?.Length > 70 ? item.CommentDetail.Substring(0, 70) + "…" : item.CommentDetail)
                                 </div>
+                                @if (item.CommentDetail?.Length > 70)
+                                {
+                                    <button type="button" class="btn btn-link p-0 mt-1 read-more-btn"
+                                            style="font-size:.75rem;text-decoration:none;"
+                                            data-name="@item.NameSurname"
+                                            data-detail="@item.CommentDetail">
+                                        Devamını oku
+                                    </button>
+                                }
                             </td>
                             <td data-label="Tarih">
                                 <span class="date-cell">@item.CommentDate.ToString("dd.MM.yyyy")</span>
@@ -149,3 +158,29 @@
         </div>
     }
 </div>
+
+<div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:14px;border:0;">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="commentModalTitle" style="font-family:var(--font-display);font-weight:700;"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p id="commentModalBody" style="line-height:1.7;color:#2d3748;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.read-more-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.getElementById('commentModalTitle').textContent = btn.getAttribute('data-name');
+                document.getElementById('commentModalBody').textContent = btn.getAttribute('data-detail');
+                new bootstrap.Modal(document.getElementById('commentModal')).show();
+            });
+        });
+    </script>
+}
