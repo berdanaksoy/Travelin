@@ -1,4 +1,15 @@
-﻿<header class="main_header_area">
+﻿<style>
+    #langMenu li > a {
+        transition: background-color .15s ease;
+    }
+
+        #langMenu li > a:hover,
+        #langMenu li > a:focus {
+            background-color: #d5d9e0;
+        }
+</style>
+
+<header class="main_header_area">
     <div class="header-content py-1 bg-theme">
         <div class="container d-flex align-items-center justify-content-between">
             <div class="links">
@@ -8,52 +19,95 @@
                     <li><a href="#" class="white"><i class="icon-clock white"></i> Pzrt-Cts: 08.30-18.00</a></li>
                 </ul>
             </div>
-            <div class="links float-right">
-                <ul>
-                    <li><a href="#" class="white"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="white"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="white"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-                </ul>
+            <div class="links float-right d-flex align-items-center">
+                <div class="lang-dropdown" style="position:relative; z-index:2147483647; isolation:isolate;">
+                    <a href="#" class="white" id="langToggle" style="cursor:pointer;">
+                        <i class="fa fa-globe"></i>
+                        @{
+                            var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                            var languageNames = new Dictionary<string, string>
+                {
+                    { "tr", "Türkçe" }, { "en", "English" }, { "de", "Deutsch" },
+                    { "fr", "Français" }, { "es", "Español" }
+                };
+                            var currentName = languageNames.ContainsKey(currentCulture) ? languageNames[currentCulture] : "Dil";
+                        }
+                        @currentName <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul id="langMenu" style="display:none; flex-direction:column; position:fixed; background:#fff; list-style:none; padding:8px 0; margin:0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,.15); min-width:140px; z-index:2147483647; pointer-events:auto;">
+                        <li style="display:block; width:100%; float:none;"><a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="tr" asp-route-returnUrl="@Context.Request.Path" style="display:block; width:100%; padding:8px 16px; color:#2d3748; text-decoration:none; position:relative; z-index:1;">Türkçe</a></li>
+                        <li style="display:block; width:100%; float:none;"><a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en" asp-route-returnUrl="@Context.Request.Path" style="display:block; width:100%; padding:8px 16px; color:#2d3748; text-decoration:none; position:relative; z-index:1;">English</a></li>
+                        <li style="display:block; width:100%; float:none;"><a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="de" asp-route-returnUrl="@Context.Request.Path" style="display:block; width:100%; padding:8px 16px; color:#2d3748; text-decoration:none; position:relative; z-index:1;">Deutsch</a></li>
+                        <li style="display:block; width:100%; float:none;"><a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="fr" asp-route-returnUrl="@Context.Request.Path" style="display:block; width:100%; padding:8px 16px; color:#2d3748; text-decoration:none; position:relative; z-index:1;">Français</a></li>
+                        <li style="display:block; width:100%; float:none;"><a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="es" asp-route-returnUrl="@Context.Request.Path" style="display:block; width:100%; padding:8px 16px; color:#2d3748; text-decoration:none; position:relative; z-index:1;">Español</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Navigation Bar -->
+
     <div class="header_menu" id="header_menu">
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="/travelin/images/logo.png" alt="image">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                            <img src="/travelin/images/logo.png" alt="Travelin">
                         </a>
                     </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav" id="responsive-menu">
-
-                            <li><a href="about.html">Ana Sayfa</a></li>
-                            <li><a href="about.html">Tur Listesi</a></li>
-                            <li><a href="about.html">Tur Rotaları</a></li>
-                            <li><a href="about.html">Vizesiz Turlar</a></li>
-                            <li><a href="about.html">Yurt İçi Turları</a></li>
-
-
+                            <li><a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
+                            <li><a asp-controller="Tour" asp-action="TourList">@Localizer["Tours"]</a></li>
                             <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li>
                         </ul>
-                    </div><!-- /.navbar-collapse -->
-                    <div class="register-login d-flex align-items-center">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-3">
-                            <i class="icon-user"></i> Giriş Yap / Kayıt Ol
-                        </a>
-                        <a href="booking.html" class="nir-btn white">Rezervasyon Yap</a>
                     </div>
 
                     <div id="slicknav-mobile"></div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </nav>
     </div>
-    <!-- Navigation Bar Ends -->
 </header>
+
+<script>
+    (function() {
+        var toggle = document.getElementById('langToggle');
+        var menu = document.getElementById('langMenu');
+        if (!toggle || !menu) return;
+
+        document.body.appendChild(menu);
+
+        function positionMenu() {
+            var rect = toggle.getBoundingClientRect();
+            menu.style.top = (rect.bottom + 6) + 'px';
+            menu.style.right = (window.innerWidth - rect.right) + 'px';
+            menu.style.left = 'auto';
+        }
+
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var isOpen = menu.style.display === 'block';
+            if (isOpen) {
+                menu.style.display = 'none';
+            } else {
+                positionMenu();
+                menu.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (menu.style.display === 'block') positionMenu();
+        });
+        window.addEventListener('scroll', function() {
+            if (menu.style.display === 'block') menu.style.display = 'none';
+        }, true);
+    })();
+</script>

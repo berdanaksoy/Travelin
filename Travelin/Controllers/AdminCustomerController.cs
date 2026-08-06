@@ -4,7 +4,6 @@ using Travelin.Services.ReservationServices;
 using Travelin.Services.TourServices;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
 
 namespace Travelin.Controllers
 {
