@@ -206,6 +206,13 @@
                         <div class="field-hint">Detay sayfasında harita yerine gösterilecek görsel (Gemini ile üretilebilir).</div>
                         <img src="" alt="Önizleme" class="url-preview-thumb" id="locationPreview" />
                     </div>
+
+                    <div class="field-group">
+                        <label asp-for="VideoUrl" class="field-label">Tanıtım Videosu (YouTube Embed URL)</label>
+                        <input asp-for="VideoUrl" type="url" class="form-control"
+                               placeholder="https://www.youtube.com/embed/VIDEO_ID" />
+                        <div class="field-hint">YouTube embed linki. Boş bırakılırsa detay sayfasında video gösterilmez.</div>
+                    </div>
                 </div>
             </div>
 

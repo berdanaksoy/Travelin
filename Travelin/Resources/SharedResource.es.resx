@@ -249,4 +249,121 @@
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="TourVideo" xml:space="preserve">
+    <value>Vídeo del tour</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Descubre tus vacaciones soñadas</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Explora los mejores destinos a buenos precios</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>¿A dónde quieres ir?</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Todas las categorías</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="ExploreCategories" xml:space="preserve">
+    <value>Explora las categorías</value>
+  </data>
+  <data name="CategoriesSubtitle" xml:space="preserve">
+    <value>Descubre categorías según tus intereses</value>
+  </data>
+  <data name="AboutLabel" xml:space="preserve">
+    <value>SOBRE NOSOTROS</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Experiencias de viaje inolvidables</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Con guías expertos y rutas cuidadosamente planificadas, hacemos realidad tus vacaciones soñadas.</value>
+  </data>
+  <data name="AboutFeature1" xml:space="preserve">
+    <value>Guías expertos</value>
+  </data>
+  <data name="AboutFeature2" xml:space="preserve">
+    <value>Transporte seguro</value>
+  </data>
+  <data name="AboutFeature3" xml:space="preserve">
+    <value>Buenos precios</value>
+  </data>
+  <data name="AboutFeature4" xml:space="preserve">
+    <value>Soporte 24/7</value>
+  </data>
+  <data name="ExploreTours" xml:space="preserve">
+    <value>Explorar tours</value>
+  </data>
+  <data name="FeaturedTours" xml:space="preserve">
+    <value>Tours destacados</value>
+  </data>
+  <data name="FeaturedToursSubtitle" xml:space="preserve">
+    <value>Descubre nuestros próximos tours más populares</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Desde</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="ViewAllTours" xml:space="preserve">
+    <value>Ver todos los tours</value>
+  </data>
+  <data name="TourExpired" xml:space="preserve">
+    <value>Caducado</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reseñas</value>
+  </data>
+  <data name="PerPerson" xml:space="preserve">
+    <value> Por persona</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>Personas</value>
+  </data>
+  <data name="StatHappyCustomers" xml:space="preserve">
+    <value>Clientes felices</value>
+  </data>
+  <data name="StatDestinations" xml:space="preserve">
+    <value>Destinos</value>
+  </data>
+  <data name="StatTours" xml:space="preserve">
+    <value>Tours</value>
+  </data>
+  <data name="StatYears" xml:space="preserve">
+    <value>Años de experiencia</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Conócenos</value>
+  </data>
+  <data name="VideoSubtitle" xml:space="preserve">
+    <value>Descubre la experiencia Travelin</value>
+  </data>
+  <data name="TestimonialTitle" xml:space="preserve">
+    <value>Lo que dicen nuestros clientes</value>
+  </data>
+  <data name="TestimonialSubtitle" xml:space="preserve">
+    <value>Experiencias reales, reseñas reales</value>
+  </data>
+  <data name="NoTestimonials" xml:space="preserve">
+    <value>Aún no hay reseñas.</value>
+  </data>
+  <data name="PlayVideo" xml:space="preserve">
+    <value> Reproducir video</value>
+  </data>
+  <data name="VideoLabel" xml:space="preserve">
+    <value>PRESENTACIÓN</value>
+  </data>
+  <data name="VideoHeading" xml:space="preserve">
+    <value>Conozca Travelin</value>
+  </data>
+  <data name="VideoDescription" xml:space="preserve">
+    <value>Fragmentos de nuestros tours y momentos inolvidables te esperan.</value>
+  </data>
 </root>

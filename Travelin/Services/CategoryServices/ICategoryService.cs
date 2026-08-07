@@ -10,5 +10,6 @@ namespace Travelin.Services.CategoryServices
         Task DeleteCategoryAsync(string id);
         Task<GetCategoryByIdDto> GetCategoryByIdAsync(string id);
         Task<List<ResultCategoryDto>> GetActiveCategoriesAsync();
+        Task<List<ResultCategoryDto>> GetRandomActiveCategoriesAsync(int count);
     }
 }

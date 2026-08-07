@@ -75,5 +75,28 @@ namespace Travelin.Services.CommentServices
         {
             await _commentCollection.DeleteManyAsync(c => c.TourId == tourId);
         }
+
+        public async Task<List<ResultCommentDto>> GetTopRatedCommentsAsync(int count)
+        {
+            var values = await _commentCollection
+                .Find(c => c.IsStatus && c.Score == 5)
+                .ToListAsync();
+
+            var random = values.OrderBy(x => Guid.NewGuid()).Take(count).ToList();
+
+            return _mapper.Map<List<ResultCommentDto>>(random);
+        }
+
+        public async Task<(double average, int count)> GetTourRatingAsync(string tourId)
+        {
+            var comments = await _commentCollection
+                .Find(c => c.TourId == tourId && c.IsStatus)
+                .ToListAsync();
+
+            if (comments.Count == 0)
+                return (0, 0);
+
+            return (comments.Average(c => c.Score), comments.Count);
+        }
     }
 }

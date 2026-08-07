@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Travelin.Dtos.TourDtos;
 using Travelin.Entities;
 using Travelin.Settings;
+using Travelin.Helpers;
 
 namespace Travelin.Services.TourServices
 {
@@ -23,6 +24,7 @@ namespace Travelin.Services.TourServices
 
         public async Task CreateTourAsync(CreateTourDto createTourDto)
         {
+            createTourDto.VideoUrl = YouTubeHelper.NormalizeUrl(createTourDto.VideoUrl);
             var values = _mapper.Map<Tour>(createTourDto);
             await _tourCollection.InsertOneAsync(values);
         }
@@ -46,6 +48,7 @@ namespace Travelin.Services.TourServices
 
         public Task UpdateTourAsync(UpdateTourDto updateTourDto)
         {
+            updateTourDto.VideoUrl = YouTubeHelper.NormalizeUrl(updateTourDto.VideoUrl);
             var values = _mapper.Map<Tour>(updateTourDto);
             return _tourCollection.FindOneAndReplaceAsync(t => t.TourId == updateTourDto.TourId, values);
         }
@@ -53,8 +56,8 @@ namespace Travelin.Services.TourServices
         public async Task<List<ResultTourDto>> GetToursByPageAsync(int page, int pageSize)
         {
             var values = await _tourCollection
-                .Find(t => t.IsStatus && t.TourDate >= DateTime.Now)
-                .SortBy(t => t.TourDate)
+                .Find(t => t.IsStatus)
+                .SortByDescending(t => t.TourDate)
                 .Skip((page - 1) * pageSize)
                 .Limit(pageSize)
                 .ToListAsync();
@@ -64,7 +67,7 @@ namespace Travelin.Services.TourServices
 
         public async Task<long> GetTotalTourCountAsync()
         {
-            return await _tourCollection.CountDocumentsAsync(t => t.IsStatus && t.TourDate >= DateTime.Now);
+            return await _tourCollection.CountDocumentsAsync(t => t.IsStatus);
         }
 
         public async Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter)

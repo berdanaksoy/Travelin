@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using Travelin.Dtos.SiteSettingDtos;
 using Travelin.Entities;
 using Travelin.Settings;
+using Travelin.Helpers;
 
 namespace Travelin.Services.SiteSettingServices
 {
@@ -28,6 +29,7 @@ namespace Travelin.Services.SiteSettingServices
 
         public async Task UpdateSiteSettingAsync(UpdateSiteSettingDto updateSiteSettingDto)
         {
+            updateSiteSettingDto.VideoUrl = YouTubeHelper.NormalizeUrl(updateSiteSettingDto.VideoUrl);
             var value = _mapper.Map<SiteSetting>(updateSiteSettingDto);
             await _siteSettingCollection.FindOneAndReplaceAsync(x => x.SiteSettingId == updateSiteSettingDto.SiteSettingId, value);
         }

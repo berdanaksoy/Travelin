@@ -1,16 +1,273 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="banner pt-10 pb-0 overflow-hidden" style="background-image: url(/travelin/images/testimonial.png)">
+    <div class="container">
+        <div class="banner-in">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="banner-content text-lg-start text-center">
+                        <h1 class="mb-3">@Localizer["HeroTitle"]</h1>
+                        <p class="mb-4">@Localizer["HeroSubtitle"]</p>
+
+                        <form asp-controller="Tour" asp-action="TourList" method="get" class="banner-search-form bg-white p-3 rounded box-shadow">
+                            <div class="row g-2 align-items-end">
+                                <div class="col-md-5">
+                                    <label class="form-label mb-1 text-start d-block" style="font-size:.85rem;color:#666;">@Localizer["Search"]</label>
+                                    <input type="text" name="search" class="form-control" placeholder="@Localizer["SearchPlaceholder"]" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label mb-1 text-start d-block" style="font-size:.85rem;color:#666;">@Localizer["Category"]</label>
+                                    <select name="categoryId" class="form-select">
+                                        <option value="">@Localizer["AllCategories"]</option>
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <option value="@category.CategoryId">@category.CategoryName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="nir-btn w-100">
+                                        <i class="fa fa-search"></i> @Localizer["Search"]
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="banner-image">
+                        <img src="/travelin/images/travel.png" alt="Travelin" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="category-showcase py-6" style="background:#f8f9fa;">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2>@Localizer["ExploreCategories"]</h2>
+            <p class="text-muted">@Localizer["CategoriesSubtitle"]</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            @foreach (var category in Model.FeaturedCategories)
+            {
+                <div class="col-lg-2 col-md-4 col-6">
+                    <a asp-controller="Tour" asp-action="TourList" asp-route-categoryId="@category.CategoryId"
+                       class="category-card d-block text-center p-4 bg-white rounded box-shadow text-decoration-none h-100">
+                        @if (!string.IsNullOrWhiteSpace(category.IconUrl))
+                        {
+                            <img src="@category.IconUrl" alt="@category.CategoryName"
+                                 style="width:56px;height:56px;object-fit:contain;margin-bottom:12px;" />
+                        }
+                        else
+                        {
+                            <div style="width:56px;height:56px;margin:0 auto 12px;display:grid;place-items:center;background:#e6f7f4;border-radius:50%;">
+                                <i class="fa fa-map-marked-alt" style="font-size:24px;color:#17a2a2;"></i>
+                            </div>
+                        }
+                        <h5 style="font-size:1rem;color:#2d3748;margin:0;">@category.CategoryName</h5>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="about-summary py-6">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <img src="/travelin/images/illu1.png" alt="@Localizer["AboutTitle"]" class="img-fluid" />
+            </div>
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <span class="text-uppercase" style="color:#17a2a2;font-weight:600;letter-spacing:1px;font-size:.85rem;">
+                        @Localizer["AboutLabel"]
+                    </span>
+                    <h2 class="mt-2 mb-3">@Localizer["AboutTitle"]</h2>
+                    <p class="text-muted mb-4">@Localizer["AboutText"]</p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-check-circle" style="color:#17a2a2;"></i>
+                                <span>@Localizer["AboutFeature1"]</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-check-circle" style="color:#17a2a2;"></i>
+                                <span>@Localizer["AboutFeature2"]</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-check-circle" style="color:#17a2a2;"></i>
+                                <span>@Localizer["AboutFeature3"]</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-check-circle" style="color:#17a2a2;"></i>
+                                <span>@Localizer["AboutFeature4"]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-controller="Tour" asp-action="TourList" class="nir-btn">@Localizer["ExploreTours"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-tours py-6" style="background:#f8f9fa;">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2>@Localizer["FeaturedTours"]</h2>
+            <p class="text-muted">@Localizer["FeaturedToursSubtitle"]</p>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var tour in Model.FeaturedTours)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="tour-card bg-white rounded box-shadow overflow-hidden h-100">
+                        <div class="tour-card-image position-relative" style="height:220px;overflow:hidden;">
+                            @if (!string.IsNullOrWhiteSpace(tour.ImageUrl))
+                            {
+                                <img src="@tour.ImageUrl" alt="@tour.Title" style="width:100%;height:100%;object-fit:cover;" />
+                            }
+                            <span class="position-absolute" style="top:12px;right:12px;background:#17a2a2;color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;">
+                                @tour.DayNight
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex align-items-center gap-1 mb-2" style="color:#718096;font-size:.85rem;">
+                                <i class="fa fa-map-marker-alt" style="color:#17a2a2;"></i>
+                                <a asp-controller="Tour" asp-action="TourList" asp-route-country="@tour.Country"
+                                   class="text-decoration-none" style="color:#718096;">
+                                    @tour.Country / @tour.City
+                                </a>
+                            </div>
+                            <h5 class="mb-2" style="font-size:1.1rem;">
+                                <a asp-controller="Tour" asp-action="Detail" asp-route-id="@tour.TourId"
+                                   class="text-decoration-none" style="color:#2d3748;">
+                                    @tour.Title
+                                </a>
+                            </h5>
+                            <div class="rating mb-2">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="fa fa-star" style="color:@(i <= Math.Round(tour.AverageRating) ? "#f5a623" : "#d0d0d0");"></span>
+                                }
+                                <small class="text-muted ms-1">(@tour.CommentCount)</small>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mt-3 pt-3" style="border-top:1px solid #eee;">
+                                <div>
+                                    <div style="color:#17a2a2;font-weight:700;font-size:1.2rem;">@tour.Price.ToString("N0") ₺</div>
+                                    <span style="color:#718096;font-size:.75rem;">@Localizer["PerPerson"]</span>
+                                </div>
+                                <a asp-controller="Tour" asp-action="Detail" asp-route-id="@tour.TourId" class="nir-btn" style="padding:8px 20px;font-size:.85rem;">
+                                    @Localizer["Details"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-5">
+            <a asp-controller="Tour" asp-action="TourList" class="nir-btn">@Localizer["ViewAllTours"]</a>
+        </div>
+    </div>
+</section>
+
+<section class="counter-strip py-6" style="background:#17a2a2;">
+    <div class="container">
+        <div class="row text-center text-white g-4">
+            <div class="col-lg-3 col-6">
+                <div class="counter-item">
+                    <i class="fa fa-smile" style="font-size:2.5rem;opacity:.85;margin-bottom:12px;"></i>
+                    <h2 class="mb-1" style="font-weight:700;font-size:2.5rem;">500+</h2>
+                    <p class="mb-0" style="opacity:.9;">@Localizer["StatHappyCustomers"]</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="counter-item">
+                    <i class="fa fa-map-marked-alt" style="font-size:2.5rem;opacity:.85;margin-bottom:12px;"></i>
+                    <h2 class="mb-1" style="font-weight:700;font-size:2.5rem;">50+</h2>
+                    <p class="mb-0" style="opacity:.9;">@Localizer["StatDestinations"]</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="counter-item">
+                    <i class="fa fa-suitcase-rolling" style="font-size:2.5rem;opacity:.85;margin-bottom:12px;"></i>
+                    <h2 class="mb-1" style="font-weight:700;font-size:2.5rem;">120+</h2>
+                    <p class="mb-0" style="opacity:.9;">@Localizer["StatTours"]</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="counter-item">
+                    <i class="fa fa-award" style="font-size:2.5rem;opacity:.85;margin-bottom:12px;"></i>
+                    <h2 class="mb-1" style="font-weight:700;font-size:2.5rem;">10+</h2>
+                    <p class="mb-0" style="opacity:.9;">@Localizer["StatYears"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-section py-6">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2>@Localizer["TestimonialTitle"]</h2>
+            <p class="text-muted">@Localizer["TestimonialSubtitle"]</p>
+        </div>
+
+        @if (Model.TopComments != null && Model.TopComments.Any())
+        {
+            <div class="row g-4">
+                @foreach (var comment in Model.TopComments)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card bg-white rounded box-shadow p-4 h-100">
+                            <div class="rating mb-3">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="fa fa-star" style="color:#f5a623;"></span>
+                                }
+                            </div>
+                            <p class="mb-4" style="color:#4a5568;font-style:italic;">
+                                "@comment.CommentDetail"
+                            </p>
+                            <div class="d-flex align-items-center gap-3">
+                                <div style="width:48px;height:48px;border-radius:50%;background:#17a2a2;color:#fff;display:grid;place-items:center;font-weight:700;font-size:1.2rem;">
+                                    @(string.IsNullOrEmpty(comment.NameSurname) ? "?" : comment.NameSurname.Substring(0, 1).ToUpper())
+                                </div>
+                                <div>
+                                    <h6 class="mb-0" style="color:#2d3748;">@comment.NameSurname</h6>
+                                    <small class="text-muted">@comment.Headline</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center text-muted">@Localizer["NoTestimonials"]</p>
+        }
+    </div>
+</section>
+<div class="container">
+    <div style="height:1px; background:linear-gradient(to right, transparent, #cbd5e0, transparent); margin:2rem 0;"></div>
 </div>
-
-<h3>@Localizer["HomePage"]</h3>
-
-<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="tr" asp-route-returnUrl="@Context.Request.Path">TR</a> |
-<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="en" asp-route-returnUrl="@Context.Request.Path">EN</a> |
-<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="de" asp-route-returnUrl="@Context.Request.Path">DE</a> |
-<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="fr" asp-route-returnUrl="@Context.Request.Path">FR</a> |
-<a asp-controller="Language" asp-action="ChangeLanguage" asp-route-culture="es" asp-route-returnUrl="@Context.Request.Path">SP</a>

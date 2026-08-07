@@ -249,4 +249,121 @@
   <data name="Home" xml:space="preserve">
     <value>Ana Sayfa</value>
   </data>
+  <data name="TourVideo" xml:space="preserve">
+    <value>Tur Videosu</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Hayalindeki Tatili Keşfet</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Dünyanın en güzel rotalarını uygun fiyatlarla keşfedin</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Nereye gitmek istersiniz?</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Tüm Kategoriler</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="ExploreCategories" xml:space="preserve">
+    <value> Kategorileri Keşfet</value>
+  </data>
+  <data name="CategoriesSubtitle" xml:space="preserve">
+    <value>İlgi alanına göre tur kategorilerini keşfet</value>
+  </data>
+  <data name="AboutLabel" xml:space="preserve">
+    <value>HAKKIMIZDA</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Unutulmaz Seyahat Deneyimleri</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Alanında uzman rehberlerimiz ve özenle planlanmış rotalarımızla hayalinizdeki tatili gerçeğe dönüştürüyoruz.</value>
+  </data>
+  <data name="AboutFeature1" xml:space="preserve">
+    <value>Uzman Rehberler</value>
+  </data>
+  <data name="AboutFeature2" xml:space="preserve">
+    <value>Güvenli Ulaşım</value>
+  </data>
+  <data name="AboutFeature3" xml:space="preserve">
+    <value>Uygun Fiyatlar</value>
+  </data>
+  <data name="AboutFeature4" xml:space="preserve">
+    <value>7/24 Destek</value>
+  </data>
+  <data name="ExploreTours" xml:space="preserve">
+    <value> Turları Keşfet</value>
+  </data>
+  <data name="FeaturedTours" xml:space="preserve">
+    <value>Öne Çıkan Turlar</value>
+  </data>
+  <data name="FeaturedToursSubtitle" xml:space="preserve">
+    <value>Yaklaşan en popüler turlarımızı keşfedin</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Başlangıç</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaylar</value>
+  </data>
+  <data name="ViewAllTours" xml:space="preserve">
+    <value>Tüm Turları Gör</value>
+  </data>
+  <data name="TourExpired" xml:space="preserve">
+    <value> Tarihi Geçti</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Yorum</value>
+  </data>
+  <data name="PerPerson" xml:space="preserve">
+    <value>Kişi Başı</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>Kişi</value>
+  </data>
+  <data name="StatHappyCustomers" xml:space="preserve">
+    <value>Mutlu Müşteri</value>
+  </data>
+  <data name="StatDestinations" xml:space="preserve">
+    <value>Rota</value>
+  </data>
+  <data name="StatTours" xml:space="preserve">
+    <value>Tur</value>
+  </data>
+  <data name="StatYears" xml:space="preserve">
+    <value> Yıllık Tecrübe</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value> Bizi Yakından Tanıyın</value>
+  </data>
+  <data name="VideoSubtitle" xml:space="preserve">
+    <value>Travelin deneyimini keşfedin</value>
+  </data>
+  <data name="TestimonialTitle" xml:space="preserve">
+    <value> Müşterilerimiz Ne Diyor</value>
+  </data>
+  <data name="TestimonialSubtitle" xml:space="preserve">
+    <value>Gerçek deneyimler, gerçek yorumlar</value>
+  </data>
+  <data name="NoTestimonials" xml:space="preserve">
+    <value> Henüz yorum bulunmuyor.</value>
+  </data>
+  <data name="PlayVideo" xml:space="preserve">
+    <value>Videoyu Oynat</value>
+  </data>
+  <data name="VideoLabel" xml:space="preserve">
+    <value>TANITIM</value>
+  </data>
+  <data name="VideoHeading" xml:space="preserve">
+    <value> Travelin'i Yakından Tanıyın</value>
+  </data>
+  <data name="VideoDescription" xml:space="preserve">
+    <value> Turlarımızdan kesitler ve unutulmaz anlar bu videoda sizi bekliyor.</value>
+  </data>
 </root>

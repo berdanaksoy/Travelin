@@ -15,5 +15,6 @@
         public string LocationImageUrl { get; set; }
         public bool IsStatus { get; set; }
         public string CategoryId { get; set; }
+        public string VideoUrl { get; set; }
     }
 }

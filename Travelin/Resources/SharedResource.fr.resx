@@ -249,4 +249,121 @@
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
   </data>
+  <data name="TourVideo" xml:space="preserve">
+    <value>Vidéo du circuit</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Découvrez vos vacances de rêve</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Explorez les meilleures destinations à prix avantageux</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Où voulez-vous aller ?</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Toutes les catégories</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="ExploreCategories" xml:space="preserve">
+    <value>Explorez les catégories</value>
+  </data>
+  <data name="CategoriesSubtitle" xml:space="preserve">
+    <value>Découvrez les catégories selon vos intérêts</value>
+  </data>
+  <data name="AboutLabel" xml:space="preserve">
+    <value>À PROPOS</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Des expériences de voyage inoubliables</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Avec nos guides experts et nos itinéraires soigneusement planifiés, nous réalisons vos vacances de rêve.</value>
+  </data>
+  <data name="AboutFeature1" xml:space="preserve">
+    <value>Guides experts</value>
+  </data>
+  <data name="AboutFeature2" xml:space="preserve">
+    <value>Transport sécurisé</value>
+  </data>
+  <data name="AboutFeature3" xml:space="preserve">
+    <value>Prix avantageux</value>
+  </data>
+  <data name="AboutFeature4" xml:space="preserve">
+    <value> Assistance 24/7</value>
+  </data>
+  <data name="ExploreTours" xml:space="preserve">
+    <value>Explorer les circuits</value>
+  </data>
+  <data name="FeaturedTours" xml:space="preserve">
+    <value>Circuits en vedette</value>
+  </data>
+  <data name="FeaturedToursSubtitle" xml:space="preserve">
+    <value>Découvrez nos circuits à venir les plus populaires</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>À partir de</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="ViewAllTours" xml:space="preserve">
+    <value>Voir tous les circuits</value>
+  </data>
+  <data name="TourExpired" xml:space="preserve">
+    <value>Expiré</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Avis</value>
+  </data>
+  <data name="PerPerson" xml:space="preserve">
+    <value>Par personne</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>Personnes</value>
+  </data>
+  <data name="StatHappyCustomers" xml:space="preserve">
+    <value>Clients satisfaits</value>
+  </data>
+  <data name="StatDestinations" xml:space="preserve">
+    <value>Destinations</value>
+  </data>
+  <data name="StatTours" xml:space="preserve">
+    <value>Circuits</value>
+  </data>
+  <data name="StatYears" xml:space="preserve">
+    <value>Ans d'expérience</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Faites connaissance</value>
+  </data>
+  <data name="VideoSubtitle" xml:space="preserve">
+    <value>Découvrez l'expérience Travelin</value>
+  </data>
+  <data name="TestimonialTitle" xml:space="preserve">
+    <value>Ce que disent nos clients</value>
+  </data>
+  <data name="TestimonialSubtitle" xml:space="preserve">
+    <value>Expériences réelles, avis réels</value>
+  </data>
+  <data name="NoTestimonials" xml:space="preserve">
+    <value>Aucun avis pour le moment.</value>
+  </data>
+  <data name="PlayVideo" xml:space="preserve">
+    <value>Lire la vidéo</value>
+  </data>
+  <data name="VideoLabel" xml:space="preserve">
+    <value>PRÉSENTATION</value>
+  </data>
+  <data name="VideoHeading" xml:space="preserve">
+    <value>Découvrez Travelin</value>
+  </data>
+  <data name="VideoDescription" xml:space="preserve">
+    <value>Des aperçus de nos circuits et des moments inoubliables vous attendent.</value>
+  </data>
 </root>

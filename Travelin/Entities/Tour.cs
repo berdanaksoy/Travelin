@@ -23,5 +23,6 @@ namespace Travelin.Entities
         public bool IsStatus { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; }
+        public string VideoUrl { get; set; }
     }
 }

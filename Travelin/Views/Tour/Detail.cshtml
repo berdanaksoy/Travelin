@@ -93,6 +93,16 @@
                         </div>
                     }
 
+                    @if (!string.IsNullOrEmpty(Model.VideoUrl))
+                    {
+                        <div class="single-tour-video mb-4">
+                            <h4 class="mb-3">@Localizer["TourVideo"]</h4>
+                            <div class="ratio ratio-16x9 rounded overflow-hidden">
+                                <iframe src="@Model.VideoUrl" title="@Model.Title" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    }
+
                     @await Component.InvokeAsync("CommentList", new { tourId = Model.TourId })
 
                     <partial name="_AddComment" model="Model.TourId" />

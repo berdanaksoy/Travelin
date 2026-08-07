@@ -249,4 +249,121 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="TourVideo" xml:space="preserve">
+    <value>Tour Video</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Discover Your Dream Vacation</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Explore the world's best destinations at great prices</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Where do you want to go?</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ExploreCategories" xml:space="preserve">
+    <value>Explore Categories</value>
+  </data>
+  <data name="CategoriesSubtitle" xml:space="preserve">
+    <value>Discover tour categories by your interests</value>
+  </data>
+  <data name="AboutLabel" xml:space="preserve">
+    <value>ABOUT US</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Unforgettable Travel Experiences</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>With our expert guides and carefully planned routes, we turn your dream vacation into reality.</value>
+  </data>
+  <data name="AboutFeature1" xml:space="preserve">
+    <value>Expert Guides</value>
+  </data>
+  <data name="AboutFeature2" xml:space="preserve">
+    <value> Safe Transport</value>
+  </data>
+  <data name="AboutFeature3" xml:space="preserve">
+    <value>Great Prices</value>
+  </data>
+  <data name="AboutFeature4" xml:space="preserve">
+    <value>24/7 Support</value>
+  </data>
+  <data name="ExploreTours" xml:space="preserve">
+    <value>Explore Tours</value>
+  </data>
+  <data name="FeaturedTours" xml:space="preserve">
+    <value>Featured Tours</value>
+  </data>
+  <data name="FeaturedToursSubtitle" xml:space="preserve">
+    <value>Discover our most popular upcoming tours</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="ViewAllTours" xml:space="preserve">
+    <value>View All Tours</value>
+  </data>
+  <data name="TourExpired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="PerPerson" xml:space="preserve">
+    <value>Per Person</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="StatHappyCustomers" xml:space="preserve">
+    <value>Happy Customers</value>
+  </data>
+  <data name="StatDestinations" xml:space="preserve">
+    <value>Destinations</value>
+  </data>
+  <data name="StatTours" xml:space="preserve">
+    <value>Tours</value>
+  </data>
+  <data name="StatYears" xml:space="preserve">
+    <value>Years Experience</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Get to Know Us</value>
+  </data>
+  <data name="VideoSubtitle" xml:space="preserve">
+    <value>Discover the Travelin experience</value>
+  </data>
+  <data name="TestimonialTitle" xml:space="preserve">
+    <value>What Our Customers Say</value>
+  </data>
+  <data name="TestimonialSubtitle" xml:space="preserve">
+    <value>Real experiences, real reviews</value>
+  </data>
+  <data name="NoTestimonials" xml:space="preserve">
+    <value>No reviews yet.</value>
+  </data>
+  <data name="PlayVideo" xml:space="preserve">
+    <value>Play Video</value>
+  </data>
+  <data name="VideoLabel" xml:space="preserve">
+    <value>INTRODUCTION</value>
+  </data>
+  <data name="VideoHeading" xml:space="preserve">
+    <value>Get to Know Travelin</value>
+  </data>
+  <data name="VideoDescription" xml:space="preserve">
+    <value>Glimpses of our tours and unforgettable moments await you in this video.</value>
+  </data>
 </root>

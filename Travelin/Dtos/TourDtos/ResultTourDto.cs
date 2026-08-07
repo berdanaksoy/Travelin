@@ -16,5 +16,8 @@
         public bool IsStatus { get; set; }
         public string CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public string VideoUrl { get; set; }
+        public double AverageRating { get; set; }
+        public int CommentCount { get; set; }
     }
 }

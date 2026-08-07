@@ -1,25 +1,44 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Travelin.Models;
+using Travelin.Services.CategoryServices;
+using Travelin.Services.CommentServices;
+using Travelin.Services.TourServices;
 
 namespace Travelin.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ITourService _tourService;
+        private readonly ICategoryService _categoryService;
+        private readonly ICommentService _commentService;
+
+        public HomeController(ITourService tourService, ICategoryService categoryService, ICommentService commentService)
         {
-            return View();
+            _tourService = tourService;
+            _categoryService = categoryService;
+            _commentService = commentService;
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var featuredTours = await _tourService.GetToursByPageAsync(1, 6);
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            foreach (var tour in featuredTours)
+            {
+                var rating = await _commentService.GetTourRatingAsync(tour.TourId);
+                tour.AverageRating = rating.average;
+                tour.CommentCount = rating.count;
+            }
+
+            var model = new HomeViewModel
+            {
+                FeaturedTours = featuredTours,
+                Categories = await _categoryService.GetActiveCategoriesAsync(),
+                FeaturedCategories = await _categoryService.GetRandomActiveCategoriesAsync(6),
+                TopComments = await _commentService.GetTopRatedCommentsAsync(6)
+            };
+
+            return View(model);
         }
     }
 }

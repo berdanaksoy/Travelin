@@ -54,5 +54,12 @@ namespace Travelin.Services.CategoryServices
             var values = await _categoryCollection.Find(c => c.IsStatus).ToListAsync();
             return _mapper.Map<List<ResultCategoryDto>>(values);
         }
+
+        public async Task<List<ResultCategoryDto>> GetRandomActiveCategoriesAsync(int count)
+        {
+            var values = await _categoryCollection.Find(c => c.IsStatus).ToListAsync();
+            var random = values.OrderBy(x => Guid.NewGuid()).Take(count).ToList();
+            return _mapper.Map<List<ResultCategoryDto>>(random);
+        }
     }
 }
