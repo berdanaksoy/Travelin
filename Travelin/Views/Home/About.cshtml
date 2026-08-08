@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Hakkımızda";
+    ViewData["BreadcrumbTitle"] = Localizer["AboutUs"].Value;
+    ViewData["BreadcrumbSubtitle"] = Localizer["AboutUsSubtitle"].Value;
+}
+
+<partial name="_Breadcrumb" />
+
+<section class="about-us pt-6 pb-6">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="col-lg-6 ps-lg-4">
+                <div class="about-content text-center text-lg-start">
+                    <h4 class="theme d-inline-block mb-0">@Localizer["AboutLabel"]</h4>
+                    <h2 class="border-b mb-3 pb-2">@Localizer["AboutHeading"]</h2>
+                    <p class="border-b mb-3 pb-3">@Localizer["AboutParagraph1"]</p>
+                    <p class="mb-3">@Localizer["AboutParagraph2"]</p>
+                    <div class="about-listing">
+                        <ul class="d-flex justify-content-between flex-wrap gap-2 list-unstyled">
+                            <li><i class="icon-location-pin theme"></i> @Localizer["AboutFeature1"]</li>
+                            <li><i class="icon-briefcase theme"></i> @Localizer["AboutFeature3"]</li>
+                            <li><i class="icon-folder theme"></i> @Localizer["AboutReliable"]</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4 pe-lg-4">
+                <div class="about-image">
+                    <img src="/travelin/images/travel.png" alt="@Localizer["AboutUs"]" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+
+        <div class="counter-main mt-4">
+            <div class="counter p-4 pb-0 box-shadow bg-white rounded">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="counter-item border-end">
+                            <h2 class="mb-0 theme">10+</h2>
+                            <span>@Localizer["StatYears"]</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="counter-item border-end">
+                            <h2 class="mb-0 theme">120+</h2>
+                            <span>@Localizer["StatTours"]</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="counter-item border-end">
+                            <h2 class="mb-0 theme">500+</h2>
+                            <span>@Localizer["StatHappyCustomers"]</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="counter-item">
+                            <h2 class="mb-0 theme">50+</h2>
+                            <span>@Localizer["StatDestinations"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-us pb-6">
+    <div class="container">
+        <div class="section-title mb-5 mx-auto text-center" style="max-width:600px;">
+            <h4 class="mb-1 theme">@Localizer["WhyUsLabel"]</h4>
+            <h2 class="mb-1">@Localizer["WhyUsHeading"]</h2>
+            <p>@Localizer["WhyUsSubtitle"]</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="why-us-item p-4 border rounded bg-white text-center h-100">
+                    <div class="why-us-icon mb-2"><i class="icon-flag theme" style="font-size:2rem;"></i></div>
+                    <h4>@Localizer["WhyUs1Title"]</h4>
+                    <p class="mb-0">@Localizer["WhyUs1Text"]</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="why-us-item p-4 border rounded bg-white text-center h-100">
+                    <div class="why-us-icon mb-2"><i class="icon-briefcase theme" style="font-size:2rem;"></i></div>
+                    <h4>@Localizer["WhyUs2Title"]</h4>
+                    <p class="mb-0">@Localizer["WhyUs2Text"]</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="why-us-item p-4 border rounded bg-white text-center h-100">
+                    <div class="why-us-icon mb-2"><i class="icon-directions theme" style="font-size:2rem;"></i></div>
+                    <h4>@Localizer["WhyUs3Title"]</h4>
+                    <p class="mb-0">@Localizer["WhyUs3Text"]</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="why-us-item p-4 border rounded bg-white text-center h-100">
+                    <div class="why-us-icon mb-2"><i class="icon-compass theme" style="font-size:2rem;"></i></div>
+                    <h4>@Localizer["WhyUs4Title"]</h4>
+                    <p class="mb-0">@Localizer["WhyUs4Text"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

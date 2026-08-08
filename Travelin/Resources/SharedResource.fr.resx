@@ -127,7 +127,7 @@
     <value>À propos</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+    <value>Contactez-nous</value>
   </data>
   <data name="BookNow" xml:space="preserve">
     <value>Réserver</value>
@@ -410,5 +410,104 @@
   </data>
   <data name="SortTitle" xml:space="preserve">
     <value> Nom: A-Z</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value> À propos</value>
+  </data>
+  <data name="AboutUsSubtitle" xml:space="preserve">
+    <value>Apprenez à nous connaître</value>
+  </data>
+  <data name="AboutHeading" xml:space="preserve">
+    <value>Nous parcourons le monde avec vous</value>
+  </data>
+  <data name="AboutParagraph1" xml:space="preserve">
+    <value>Chez Travelin, le voyage n'est pas un service mais une passion. Forts de années d'expérience, nous proposons des circuits soignés pour tous les budgets.</value>
+  </data>
+  <data name="AboutParagraph2" xml:space="preserve">
+    <value>Notre objectif est de vous aider à collectionner des souvenirs inoubliables. Nous sommes à vos côtés avec des guides experts.</value>
+  </data>
+  <data name="AboutReliable" xml:space="preserve">
+    <value>Forfaits fiables</value>
+  </data>
+  <data name="WhyUsLabel" xml:space="preserve">
+    <value>Pourquoi nous</value>
+  </data>
+  <data name="WhyUsHeading" xml:space="preserve">
+    <value>Trouvez la perfection</value>
+  </data>
+  <data name="WhyUsSubtitle" xml:space="preserve">
+    <value>Les valeurs qui nous distinguent</value>
+  </data>
+  <data name="WhyUs1Title" xml:space="preserve">
+    <value>Guidage expert</value>
+  </data>
+  <data name="WhyUs1Text" xml:space="preserve">
+    <value>Un voyage sûr et agréable avec des guides expérimentés.</value>
+  </data>
+  <data name="WhyUs2Title" xml:space="preserve">
+    <value>Prix justes</value>
+  </data>
+  <data name="WhyUs2Text" xml:space="preserve">
+    <value>Des prix transparents pour tous les budgets.</value>
+  </data>
+  <data name="WhyUs3Title" xml:space="preserve">
+    <value>Destinations variées</value>
+  </data>
+  <data name="WhyUs3Text" xml:space="preserve">
+    <value>Des itinéraires soigneusement sélectionnés.</value>
+  </data>
+  <data name="WhyUs4Title" xml:space="preserve">
+    <value>Service de confiance</value>
+  </data>
+  <data name="WhyUs4Text" xml:space="preserve">
+    <value>Un service 100% axé sur le client.</value>
+  </data>
+  <data name="QuickAccess" xml:space="preserve">
+    <value>Accès rapide</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Catégories</value>
+  </data>
+  <data name="Newsletter" xml:space="preserve">
+    <value>Abonnez-vous</value>
+  </data>
+  <data name="NewsletterText" xml:space="preserve">
+    <value>Soyez le premier informé des offres et nouveaux circuits.</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value> Votre e-mail</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>S'abonner</value>
+  </data>
+  <data name="WeSupport" xml:space="preserve">
+    <value> Nous acceptons</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Tous droits réservés.</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="ContactSubtitle" xml:space="preserve">
+    <value> Nous sommes là pour vous</value>
+  </data>
+  <data name="ContactInfoTitle" xml:space="preserve">
+    <value>Coordonnées</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Envoyez-nous un message</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>Votre message</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoyer</value>
   </data>
 </root>

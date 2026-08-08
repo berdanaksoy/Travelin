@@ -1,0 +1,93 @@
+﻿@model Travelin.Dtos.ContactDtos.ContactMessageDto
+
+@{
+    ViewData["Title"] = "Bize Ulaşın";
+    ViewData["BreadcrumbTitle"] = Localizer["Contact"].Value;
+    ViewData["BreadcrumbSubtitle"] = Localizer["ContactSubtitle"].Value;
+}
+
+<partial name="_Breadcrumb" />
+
+<section class="contact-main pt-6 pb-6">
+    <div class="container">
+        @if (TempData["ContactSuccess"] != null)
+        {
+            <div class="alert alert-success" id="contactAlert">@TempData["ContactSuccess"]</div>
+        }
+        @if (TempData["ContactError"] != null)
+        {
+            <div class="alert alert-danger" id="contactAlert">@TempData["ContactError"]</div>
+        }
+
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="contact-info bg-white rounded box-shadow p-4 h-100">
+                    <h3 class="mb-4">@Localizer["ContactInfoTitle"]</h3>
+                    <div class="d-flex align-items-start gap-3 mb-4">
+                        <i class="fa fa-map-marker-alt theme" style="font-size:1.4rem;"></i>
+                        <div>
+                            <h6 class="mb-1">@Localizer["Address"]</h6>
+                            <p class="text-muted mb-0">@ViewBag.Address</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3 mb-4">
+                        <i class="fa fa-phone theme" style="font-size:1.4rem;"></i>
+                        <div>
+                            <h6 class="mb-1">@Localizer["Phone"]</h6>
+                            <p class="text-muted mb-0">@ViewBag.Phone</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <i class="fa fa-envelope theme" style="font-size:1.4rem;"></i>
+                        <div>
+                            <h6 class="mb-1">@Localizer["Email"]</h6>
+                            <p class="text-muted mb-0">@ViewBag.Email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="contact-form bg-white rounded box-shadow p-4">
+                    <h3 class="mb-4">@Localizer["SendMessage"]</h3>
+                    <form asp-action="Contact" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input asp-for="Name" class="form-control" placeholder="@Localizer["Name"]" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input asp-for="Surname" class="form-control" placeholder="@Localizer["Surname"]" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input asp-for="Email" type="email" class="form-control" placeholder="@Localizer["Email"]" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input asp-for="Phone" class="form-control" placeholder="@Localizer["Phone"]" />
+                            </div>
+                            <div class="col-12 mb-3">
+                                <textarea asp-for="Message" class="form-control" rows="5" placeholder="@Localizer["YourMessage"]" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="nir-btn"><i class="fa fa-paper-plane"></i> @Localizer["Send"]</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (TempData["ContactSuccess"] != null || TempData["ContactError"] != null)
+{
+    <script>
+        setTimeout(function() {
+            var alert = document.getElementById('contactAlert');
+            if (alert) {
+                alert.style.transition = 'opacity 0.5s';
+                alert.style.opacity = '0';
+                setTimeout(function() { alert.style.display = 'none'; }, 500);
+            }
+        }, 4000);
+    </script>
+}

@@ -411,4 +411,103 @@
   <data name="SortTitle" xml:space="preserve">
     <value>Name: A-Z</value>
   </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="AboutUsSubtitle" xml:space="preserve">
+    <value>Get to know us better</value>
+  </data>
+  <data name="AboutHeading" xml:space="preserve">
+    <value>We travel the world with you</value>
+  </data>
+  <data name="AboutParagraph1" xml:space="preserve">
+    <value>At Travelin, we see travel not as a service but as a passion. With years of experience, we offer carefully planned tours for every budget and taste.</value>
+  </data>
+  <data name="AboutParagraph2" xml:space="preserve">
+    <value>Our goal is to help you collect unforgettable memories everywhere you go. We're by your side with expert guides and reliable service.</value>
+  </data>
+  <data name="AboutReliable" xml:space="preserve">
+    <value>Reliable Tour Packages</value>
+  </data>
+  <data name="WhyUsLabel" xml:space="preserve">
+    <value>Why Us</value>
+  </data>
+  <data name="WhyUsHeading" xml:space="preserve">
+    <value>Find Travel Perfection</value>
+  </data>
+  <data name="WhyUsSubtitle" xml:space="preserve">
+    <value>The values that set us apart</value>
+  </data>
+  <data name="WhyUs1Title" xml:space="preserve">
+    <value>Expert Guidance</value>
+  </data>
+  <data name="WhyUs1Text" xml:space="preserve">
+    <value>Safe and enjoyable travel with experienced guides.</value>
+  </data>
+  <data name="WhyUs2Title" xml:space="preserve">
+    <value>Fair Prices</value>
+  </data>
+  <data name="WhyUs2Text" xml:space="preserve">
+    <value>Transparent, competitive pricing for every budget.</value>
+  </data>
+  <data name="WhyUs3Title" xml:space="preserve">
+    <value>Diverse Destinations</value>
+  </data>
+  <data name="WhyUs3Text" xml:space="preserve">
+    <value>Carefully selected routes across the world.</value>
+  </data>
+  <data name="WhyUs4Title" xml:space="preserve">
+    <value>Trusted Service</value>
+  </data>
+  <data name="WhyUs4Text" xml:space="preserve">
+    <value>Reassuring, 100% customer-focused service throughout.</value>
+  </data>
+  <data name="QuickAccess" xml:space="preserve">
+    <value>Quick Access</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Newsletter" xml:space="preserve">
+    <value>Subscribe to Newsletter</value>
+  </data>
+  <data name="NewsletterText" xml:space="preserve">
+    <value>Be the first to hear about deals, new routes, and special offers.</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value>Your Email</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="WeSupport" xml:space="preserve">
+    <value>We Support</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>All Rights Reserved</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="ContactSubtitle" xml:space="preserve">
+    <value>We're here for your questions</value>
+  </data>
+  <data name="ContactInfoTitle" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Send Us a Message</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>Your Message</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

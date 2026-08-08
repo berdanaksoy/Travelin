@@ -127,7 +127,7 @@
     <value>Hakkımızda</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>İletişim</value>
+    <value>Bize Ulaşın</value>
   </data>
   <data name="BookNow" xml:space="preserve">
     <value>Rezervasyon Yap</value>
@@ -410,5 +410,104 @@
   </data>
   <data name="SortTitle" xml:space="preserve">
     <value> İsim: A-Z</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="AboutUsSubtitle" xml:space="preserve">
+    <value>Bizi daha yakından tanıyın</value>
+  </data>
+  <data name="AboutHeading" xml:space="preserve">
+    <value> Dünyanın her yerine sizinle geziyoruz</value>
+  </data>
+  <data name="AboutParagraph1" xml:space="preserve">
+    <value>Travelin olarak, seyahati bir hizmet değil bir tutku olarak görüyoruz. Yılların deneyimiyle, her bütçeye ve zevke uygun, özenle planlanmış turlar sunuyoruz.</value>
+  </data>
+  <data name="AboutParagraph2" xml:space="preserve">
+    <value>Amacımız, gittiğiniz her yerde unutulmaz anılar biriktirmenizi sağlamak. Uzman rehberlerimiz ve güvenilir hizmet anlayışımızla yanınızdayız.</value>
+  </data>
+  <data name="AboutReliable" xml:space="preserve">
+    <value>Güvenilir Tur Paketleri</value>
+  </data>
+  <data name="WhyUsLabel" xml:space="preserve">
+    <value>Neden Biz</value>
+  </data>
+  <data name="WhyUsHeading" xml:space="preserve">
+    <value>Seyahatte Mükemmelliği Bulun</value>
+  </data>
+  <data name="WhyUsSubtitle" xml:space="preserve">
+    <value>Bizi farklı kılan değerlerimiz</value>
+  </data>
+  <data name="WhyUs1Title" xml:space="preserve">
+    <value>Uzman Rehberlik</value>
+  </data>
+  <data name="WhyUs1Text" xml:space="preserve">
+    <value>Alanında deneyimli rehberlerle güvenli ve keyifli bir seyahat.</value>
+  </data>
+  <data name="WhyUs2Title" xml:space="preserve">
+    <value>Uygun Fiyatlar</value>
+  </data>
+  <data name="WhyUs2Text" xml:space="preserve">
+    <value>Her bütçeye uygun, şeffaf ve rekabetçi fiyatlandırma.</value>
+  </data>
+  <data name="WhyUs3Title" xml:space="preserve">
+    <value>Zengin Rota Seçenekleri</value>
+  </data>
+  <data name="WhyUs3Text" xml:space="preserve">
+    <value>Dünyanın dört bir yanında özenle seçilmiş rotalar.</value>
+  </data>
+  <data name="WhyUs4Title" xml:space="preserve">
+    <value>Güvenilir Hizmet</value>
+  </data>
+  <data name="WhyUs4Text" xml:space="preserve">
+    <value>Baştan sona güven veren, %100 müşteri odaklı hizmet.</value>
+  </data>
+  <data name="QuickAccess" xml:space="preserve">
+    <value>Hızlı Erişim</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="Newsletter" xml:space="preserve">
+    <value> Bültenimize Abone Olun</value>
+  </data>
+  <data name="NewsletterText" xml:space="preserve">
+    <value> Kampanyalar, yeni tur rotaları ve özel indirimlerden ilk siz haberdar olun.</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value>E-posta Adresiniz</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value> Abone Ol</value>
+  </data>
+  <data name="WeSupport" xml:space="preserve">
+    <value>Destekliyoruz</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Tüm hakları saklıdır.</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="ContactSubtitle" xml:space="preserve">
+    <value>Sorularınız için buradayız</value>
+  </data>
+  <data name="ContactInfoTitle" xml:space="preserve">
+    <value>İletişim Bilgileri</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Bize Mesaj Gönderin</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Soyad</value>
+  </data>
+  <data name="YourMessage" xml:space="preserve">
+    <value>Mesajınız</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gönder</value>
   </data>
 </root>

@@ -43,6 +43,7 @@ namespace Travelin.Mapping
 
             CreateMap<SiteSetting, ResultSiteSettingDto>().ReverseMap();
             CreateMap<SiteSetting, UpdateSiteSettingDto>().ReverseMap();
+            CreateMap<ResultSiteSettingDto, UpdateSiteSettingDto>();
         }
     }
 }

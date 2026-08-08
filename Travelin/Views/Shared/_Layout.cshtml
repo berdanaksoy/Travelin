@@ -23,7 +23,7 @@
 
     @await Component.InvokeAsync("SiteVideo")
 
-    <partial name="_Footer" />
+    @await Component.InvokeAsync("Footer")
 
     <div id="back-to-top">
         <a href="#"></a>
@@ -31,9 +31,9 @@
 
     <div id="search1">
         <button type="button" class="close">×</button>
-        <form>
-            <input type="search" value="" placeholder="type keyword(s) here" />
-            <button type="submit" class="btn btn-primary">Search</button>
+        <form asp-controller="Tour" asp-action="TourList" method="get">
+            <input type="search" name="search" value="" placeholder="@Localizer["SearchPlaceholder"]" />
+            <button type="submit" class="btn btn-primary">@Localizer["Search"]</button>
         </form>
     </div>
 

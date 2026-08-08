@@ -1,0 +1,114 @@
+﻿@model Travelin.Dtos.SiteSettingDtos.ResultSiteSettingDto
+
+<footer class="pt-20 pb-4" style="background-image: url(/travelin/images/background_pattern.png);">
+    <div class="section-shape top-0" style="background-image: url(/travelin/images/shape8.png);"></div>
+    <div class="footer-upper pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 pe-4">
+                    <div class="footer-about">
+                        <img src="/travelin/images/logo-white.png" alt="Travelin">
+                        <p class="mt-3 mb-3 white">
+                            Hayalinizdeki seyahati gerçeğe dönüştürmek için yola çıktık. Kültür turlarından doğa kaçamaklarına, yurt içi ve yurt dışı rotalarda unutulmaz deneyimler sunuyoruz. Alanında uzman rehberlerimiz, güvenli ulaşım ve özenle planlanmış programlarımızla her detayı sizin için düşünüyoruz.
+                        </p>
+                        <ul>
+                            @if (Model != null && !string.IsNullOrWhiteSpace(Model.Phone))
+                            {
+                                <li class="white"><strong>@Localizer["Phone"]:</strong> @Model.Phone</li>
+                            }
+                            @if (Model != null && !string.IsNullOrWhiteSpace(Model.Address))
+                            {
+                                <li class="white"><strong>@Localizer["Address"]:</strong> @Model.Address</li>
+                            }
+                            @if (Model != null && !string.IsNullOrWhiteSpace(Model.Email))
+                            {
+                                <li class="white"><strong>@Localizer["Email"]:</strong> @Model.Email</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-links">
+                        <h3 class="white">@Localizer["QuickAccess"]</h3>
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
+                            <li><a asp-controller="Tour" asp-action="TourList">@Localizer["Tours"]</a></li>
+                            <li><a asp-controller="Home" asp-action="About">@Localizer["AboutUs"]</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-links">
+                        <h3 class="white">@Localizer["Categories"]</h3>
+                        <ul>
+                            <li><a asp-controller="Tour" asp-action="TourList">@Localizer["Tours"]</a></li>
+                            <li><a asp-controller="Home" asp-action="About">@Localizer["AboutUs"]</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-links">
+                        <h3 class="white">@Localizer["Newsletter"]</h3>
+                        <div class="newsletter-form">
+                            <p class="mb-3">@Localizer["NewsletterText"]</p>
+                            <form action="#" method="get" class="border-0 d-flex align-items-center">
+                                <input type="text" placeholder="@Localizer["YourEmail"]">
+                                <button class="nir-btn ms-2" type="submit">@Localizer["Subscribe"]</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-payment">
+        <div class="container">
+            <div class="row footer-pay align-items-center justify-content-between text-lg-start text-center">
+                <div class="col-lg-8 footer-payment-nav mb-4">
+                    <ul>
+                        <li class="me-2">@Localizer["WeSupport"]:</li>
+                        <li class="me-2"><i class="fab fa-cc-mastercard fs-4"></i></li>
+                        <li class="me-2"><i class="fab fa-cc-paypal fs-4"></i></li>
+                        <li class="me-2"><i class="fab fa-cc-stripe fs-4"></i></li>
+                        <li class="me-2"><i class="fab fa-cc-visa fs-4"></i></li>
+                        <li class="me-2"><i class="fab fa-cc-discover fs-4"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
+                <div class="copyright-text">
+                    <p class="m-0 white">@DateTime.Now.Year Travelin. @Localizer["AllRightsReserved"]</p>
+                </div>
+                <div class="social-links">
+                    <ul>
+                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.FacebookUrl))
+                        {
+                            <li><a href="@Model.FacebookUrl" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                        }
+                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.TwitterUrl))
+                        {
+                            <li><a href="@Model.TwitterUrl" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        }
+                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.InstagramUrl))
+                        {
+                            <li><a href="@Model.InstagramUrl" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        }
+                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.LinkedinUrl))
+                        {
+                            <li><a href="@Model.LinkedinUrl" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="particles-js"></div>
+</footer>
