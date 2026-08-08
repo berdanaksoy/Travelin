@@ -11,7 +11,7 @@ namespace Travelin.Services.TourServices
         Task<GetTourByIdDto> GetTourByIdAsync(string id);
         Task<List<ResultTourDto>> GetToursByPageAsync(int page, int pageSize);
         Task<long> GetTotalTourCountAsync();
-        Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter);
+        Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter, bool onlyActive = false);
         Task<List<string>> GetDistinctCountriesAsync();
     }
 }

@@ -366,4 +366,49 @@
   <data name="VideoDescription" xml:space="preserve">
     <value> Turlarımızdan kesitler ve unutulmaz anlar bu videoda sizi bekliyor.</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrele</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Ülke</value>
+  </data>
+  <data name="AllCountries" xml:space="preserve">
+    <value>Tüm Ülkeler</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>Başlangıç</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>Bitiş</value>
+  </data>
+  <data name="ApplyFilter" xml:space="preserve">
+    <value>Filtrele</value>
+  </data>
+  <data name="ClearFilter" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="ResultsFound" xml:space="preserve">
+    <value>sonuç bulundu</value>
+  </data>
+  <data name="ListView" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="GridView" xml:space="preserve">
+    <value>Izgara</value>
+  </data>
+  <data name="SortNewest" xml:space="preserve">
+    <value>En Yeni</value>
+  </data>
+  <data name="SortOldest" xml:space="preserve">
+    <value> En Eski</value>
+  </data>
+  <data name="SortPriceAsc" xml:space="preserve">
+    <value>Fiyat: Artan</value>
+  </data>
+  <data name="SortPriceDesc" xml:space="preserve">
+    <value>Fiyat: Azalan</value>
+  </data>
+  <data name="SortTitle" xml:space="preserve">
+    <value> İsim: A-Z</value>
+  </data>
 </root>

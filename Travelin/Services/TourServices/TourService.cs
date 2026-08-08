@@ -70,16 +70,20 @@ namespace Travelin.Services.TourServices
             return await _tourCollection.CountDocumentsAsync(t => t.IsStatus);
         }
 
-        public async Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter)
+        public async Task<TourListResultDto> GetFilteredToursAsync(TourFilterDto filter, bool onlyActive = false)
         {
             var builder = Builders<Tour>.Filter;
             var conditions = new List<FilterDefinition<Tour>>();
+
+            if (onlyActive)
+                conditions.Add(builder.Eq(t => t.IsStatus, true));
 
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
                 var searchFilter = builder.Or(
                     builder.Regex(t => t.Title, new BsonRegularExpression(filter.Search, "i")),
-                    builder.Regex(t => t.City, new BsonRegularExpression(filter.Search, "i"))
+                    builder.Regex(t => t.City, new BsonRegularExpression(filter.Search, "i")),
+                    builder.Regex(t => t.Country, new BsonRegularExpression(filter.Search, "i"))
                 );
                 conditions.Add(searchFilter);
             }

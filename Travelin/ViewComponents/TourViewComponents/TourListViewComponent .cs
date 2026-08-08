@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Travelin.Dtos.TourDtos;
 using Travelin.Services.CommentServices;
 using Travelin.Services.TourServices;
 
@@ -15,26 +16,24 @@ namespace Travelin.ViewComponents.TourViewComponents
             _commentService = commentService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int page = 1)
+        public async Task<IViewComponentResult> InvokeAsync(TourFilterDto filter, string viewName = "Default")
         {
-            int pageSize = 3;
+            var result = await _tourService.GetFilteredToursAsync(filter, onlyActive: true);
 
-            var totalCount = await _tourService.GetTotalTourCountAsync();
-            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
-
-            var pagedValues = await _tourService.GetToursByPageAsync(page, pageSize);
-
-            foreach (var tour in pagedValues)
+            foreach (var tour in result.Tours)
             {
                 var rating = await _commentService.GetTourRatingAsync(tour.TourId);
                 tour.AverageRating = rating.average;
                 tour.CommentCount = rating.count;
             }
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = filter.Page;
+            ViewBag.TotalPages = (int)Math.Ceiling(result.TotalCount / (double)filter.PageSize);
+            ViewBag.TotalCount = result.TotalCount;
+            ViewBag.Filter = filter;
+            ViewBag.ViewMode = viewName == "Grid" ? "grid" : "list";
 
-            return View(pagedValues);
+            return View(viewName, result.Tours);
         }
     }
 }

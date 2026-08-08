@@ -1,101 +1,56 @@
 ﻿@model List<ResultTourDto>
 
-<section class="trending pt-6 pb-0 bg-lgrey">
-    <div class="container">
-        <div class="list-results d-flex align-items-center justify-content-between">
-            <div class="list-results-sort">
-                <p class="m-0">Showing 1-5 of 80 results</p>
-            </div>
-            <div class="click-menu d-flex align-items-center justify-content-between">
-                <div class="change-list f-active me-2"><a href="tour-list.html"><i class="fa fa-bars rounded"></i></a></div>
-                <div class="change-grid me-2"><a href="tour-grid.html"><i class="fa fa-th rounded"></i></a></div>
-                <div class="sortby d-flex align-items-center justify-content-between ml-2">
-                    <select class="niceSelect">
-                        <option value="1">Sort By</option>
-                        <option value="2">Average rating</option>
-                        <option value="3">Price: low to high</option>
-                        <option value="4">Price: high to low</option>
-                    </select>
+<div class="destination-list">
+    @foreach (var item in Model)
+    {
+        <div class="trend-full bg-white rounded box-shadow overflow-hidden p-4 mb-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-3">
+                    <div class="trend-item2 rounded position-relative">
+                        <a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId" style="background-image: url(@item.ImageUrl);"></a>
+                        <div class="color-overlay"></div>
+                        @if (item.TourDate < DateTime.Now)
+                        {
+                            <span class="position-absolute" style="top:12px;left:12px;background:#e53e3e;color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;z-index:2;">
+                                @Localizer["TourExpired"]
+                            </span>
+                        }
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="destination-list">
-
-            @foreach (var item in Model)
-            {
-                <div class="trend-full bg-white rounded box-shadow overflow-hidden p-4 mb-4">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-3">
-                            <div class="trend-item2 rounded position-relative">
-                                <a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId" style="background-image: url(@item.ImageUrl);"></a>
-                                <div class="color-overlay"></div>
-                                @if (item.TourDate < DateTime.Now)
-                                {
-                                    <span class="position-absolute" style="top:12px;left:12px;background:#e53e3e;color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;z-index:2;">
-                                        @Localizer["TourExpired"]
-                                    </span>
-                                }
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-6">
-                            <div class="trend-content position-relative text-md-start text-center">
-                                <small>@item.DayNight</small>
-                                <h3 class="mb-1"><a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId">@item.Title</a></h3>
-                                <h6 class="theme mb-2">
-                                    <a asp-controller="Tour" asp-action="TourList" asp-route-country="@item.Country"
-                                       class="theme text-decoration-none">
-                                        <i class="icon-location-pin"></i> @item.Country
-                                    </a>
-                                </h6>
-                                <p class="mt-3 mb-2">@item.Description</p>
-                                <div class="d-flex gap-3 flex-wrap" style="font-size:.85rem;color:#718096;">
-                                    <span><i class="fa fa-users theme"></i> @item.Capacity @Localizer["Person"]</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <div class="trend-content text-md-end text-center">
-                                <div class="rating">
-                                    @for (int i = 1; i <= 5; i++)
-                                    {
-                                        <span class="fa fa-star" style="color:@(i <= Math.Round(item.AverageRating) ? "#f5a623" : "#d0d0d0");"></span>
-                                    }
-                                </div>
-                                <small>@item.CommentCount @Localizer["Reviews"]</small>
-                                <div class="trend-price my-2">
-                                    <h3 class="mb-0">@item.Price.ToString("N0") ₺</h3>
-                                    <small>@Localizer["PerPerson"]</small>
-                                </div>
-                                <a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId" class="nir-btn">@Localizer["ViewDetail"]</a>
-                            </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="trend-content position-relative text-md-start text-center">
+                        <small>@item.DayNight</small>
+                        <h3 class="mb-1"><a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId">@item.Title</a></h3>
+                        <h6 class="theme mb-2">
+                            <a asp-controller="Tour" asp-action="TourList" asp-route-country="@item.Country" class="theme text-decoration-none">
+                                <i class="icon-location-pin"></i> @item.Country
+                            </a>
+                        </h6>
+                        <p class="mt-3 mb-2">@item.Description</p>
+                        <div class="d-flex gap-3 flex-wrap" style="font-size:.85rem;color:#718096;">
+                            <span><i class="fa fa-users theme"></i> @item.Capacity @Localizer["Person"]</span>
                         </div>
                     </div>
                 </div>
-            }
-
-            <div class="text-center mt-4">
-                @if (ViewBag.CurrentPage > 1)
-                {
-                    <a href="?page=@(ViewBag.CurrentPage - 1)" class="nir-btn me-2">
-                        <i class="fa fa-long-arrow-alt-left"></i> @Localizer["Previous"]
-                    </a>
-                }
-
-                @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                {
-                    <a href="?page=@i" class="nir-btn me-1 @(i == ViewBag.CurrentPage ? "active" : "")">
-                        @i
-                    </a>
-                }
-
-                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-                {
-                    <a href="?page=@(ViewBag.CurrentPage + 1)" class="nir-btn ms-2">
-                        @Localizer["Next"] <i class="fa fa-long-arrow-alt-right"></i>
-                    </a>
-                }
+                <div class="col-lg-3 col-md-3">
+                    <div class="trend-content text-md-end text-center">
+                        <div class="rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="fa fa-star" style="color:@(i <= Math.Round(item.AverageRating) ? "#f5a623" : "#d0d0d0");"></span>
+                            }
+                        </div>
+                        <small>@item.CommentCount @Localizer["Reviews"]</small>
+                        <div class="trend-price my-2">
+                            <h3 class="mb-0">@item.Price.ToString("N0") ₺</h3>
+                            <small>@Localizer["PerPerson"]</small>
+                        </div>
+                        <a asp-controller="Tour" asp-action="Detail" asp-route-id="@item.TourId" class="nir-btn">@Localizer["ViewDetail"]</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    }
+
+    <partial name="_TourPagination" />
+</div>

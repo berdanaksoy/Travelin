@@ -366,4 +366,49 @@
   <data name="VideoDescription" xml:space="preserve">
     <value>Einblicke in unsere Touren und unvergessliche Momente erwarten Sie.</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="AllCountries" xml:space="preserve">
+    <value>Alle Länder</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>Bis</value>
+  </data>
+  <data name="ApplyFilter" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="ClearFilter" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="ResultsFound" xml:space="preserve">
+    <value>Ergebnisse</value>
+  </data>
+  <data name="ListView" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="GridView" xml:space="preserve">
+    <value>Raster</value>
+  </data>
+  <data name="SortNewest" xml:space="preserve">
+    <value>Neueste</value>
+  </data>
+  <data name="SortOldest" xml:space="preserve">
+    <value>Älteste</value>
+  </data>
+  <data name="SortPriceAsc" xml:space="preserve">
+    <value>Preis aufsteigend</value>
+  </data>
+  <data name="SortPriceDesc" xml:space="preserve">
+    <value>Preis absteigend</value>
+  </data>
+  <data name="SortTitle" xml:space="preserve">
+    <value>Name: A-Z</value>
+  </data>
 </root>

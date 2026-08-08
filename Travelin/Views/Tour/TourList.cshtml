@@ -1,13 +1,152 @@
-﻿@{
+﻿@model TourFilterDto
+@using Travelin.Dtos.CategoryDtos
+
+@{
     ViewData["Title"] = "Tur Listesi";
     ViewData["BreadcrumbTitle"] = Localizer["Tours"].Value;
     ViewData["BreadcrumbSubtitle"] = Localizer["CurrentTours"].Value;
 
-    int currentPage = 1;
-    int.TryParse(Context.Request.Query["page"], out currentPage);
-    if (currentPage < 1) currentPage = 1;
+    var countries = ViewBag.Countries as List<string>;
+    var categories = ViewBag.Categories as List<ResultCategoryDto>;
+    var currentView = Context.Request.Query["view"].ToString();
+    if (string.IsNullOrEmpty(currentView)) currentView = "list";
+    bool isGrid = currentView == "grid";
 }
+
+<style>
+    .view-toggle {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: inline-grid;
+        place-items: center;
+        background: #f1f5f9;
+        color: #64748b;
+        text-decoration: none;
+        transition: all .2s;
+    }
+
+        .view-toggle.active {
+            background: #17a2a2;
+            color: #fff;
+        }
+
+        .view-toggle:hover {
+            background: #17a2a2;
+            color: #fff;
+        }
+</style>
 
 <partial name="_Breadcrumb" />
 
-@await Component.InvokeAsync("TourList", new { page = currentPage })
+<section class="trending pt-6 pb-6 bg-lgrey">
+    <div class="container">
+        <div class="row">
+            @if (isGrid)
+            {
+                <div class="col-lg-4 pe-lg-4 mb-4">
+                    <div class="filter-sidebar bg-white rounded box-shadow p-4">
+                        <h5 class="mb-3"><i class="fa fa-filter theme"></i> @Localizer["Filter"]</h5>
+                        <form method="get" asp-action="TourList">
+                            <input type="hidden" name="view" value="grid" />
+                            <input type="hidden" name="sortBy" value="@Model.SortBy" />
+
+                            <div class="mb-3">
+                                <label class="form-label">@Localizer["Search"]</label>
+                                <input type="text" name="search" value="@Model.Search" class="form-control" placeholder="@Localizer["SearchPlaceholder"]" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">@Localizer["Category"]</label>
+                                <select name="categoryId" class="form-select">
+                                    <option value="">@Localizer["AllCategories"]</option>
+                                    @if (categories != null)
+                                    {
+                                        foreach (var cat in categories)
+                                        {
+                                            <option value="@cat.CategoryId" selected="@(Model.CategoryId == cat.CategoryId)">@cat.CategoryName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">@Localizer["Country"]</label>
+                                <select name="country" class="form-select">
+                                    <option value="">@Localizer["AllCountries"]</option>
+                                    @if (countries != null)
+                                    {
+                                        foreach (var c in countries)
+                                        {
+                                            <option value="@c" selected="@(Model.Country == c)">@c</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <label class="form-label">@Localizer["FromDate"]</label>
+                                    <input type="date" name="fromDate" value="@(Model.FromDate?.ToString("yyyy-MM-dd"))" class="form-control" />
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label">@Localizer["ToDate"]</label>
+                                    <input type="date" name="toDate" value="@(Model.ToDate?.ToString("yyyy-MM-dd"))" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="nir-btn"><i class="fa fa-search"></i> @Localizer["ApplyFilter"]</button>
+                                <a asp-action="TourList" asp-route-view="grid" class="btn btn-outline-secondary">@Localizer["ClearFilter"]</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+
+            <div class="@(isGrid ? "col-lg-8" : "col-lg-12")">
+                <div class="list-results d-flex align-items-center justify-content-between bg-white rounded box-shadow p-3 mb-4 flex-wrap gap-2">
+                    <p class="m-0">@ViewBag.TotalCount @Localizer["ResultsFound"]</p>
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="@BuildUrl(Model, "list")" class="view-toggle @(!isGrid ? "active" : "")" title="@Localizer["ListView"]"><i class="fa fa-bars"></i></a>
+                        <a href="@BuildUrl(Model, "grid")" class="view-toggle @(isGrid ? "active" : "")" title="@Localizer["GridView"]"><i class="fa fa-th"></i></a>
+                        <form method="get" asp-action="TourList" class="ms-2" id="sortForm">
+                            <input type="hidden" name="search" value="@Model.Search" />
+                            <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+                            <input type="hidden" name="country" value="@Model.Country" />
+                            <input type="hidden" name="fromDate" value="@(Model.FromDate?.ToString("yyyy-MM-dd"))" />
+                            <input type="hidden" name="toDate" value="@(Model.ToDate?.ToString("yyyy-MM-dd"))" />
+                            <input type="hidden" name="view" value="@currentView" />
+                            <select name="sortBy" class="form-select form-select-sm" onchange="document.getElementById('sortForm').submit()">
+                                <option value="">@Localizer["SortNewest"]</option>
+                                <option value="oldest" selected="@(Model.SortBy == "oldest")">@Localizer["SortOldest"]</option>
+                                <option value="priceAsc" selected="@(Model.SortBy == "priceAsc")">@Localizer["SortPriceAsc"]</option>
+                                <option value="priceDesc" selected="@(Model.SortBy == "priceDesc")">@Localizer["SortPriceDesc"]</option>
+                                <option value="titleAsc" selected="@(Model.SortBy == "titleAsc")">@Localizer["SortTitle"]</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+
+                @if (isGrid)
+                {
+                    @await Component.InvokeAsync("TourList", new { filter = Model, viewName = "Grid" })
+                }
+                else
+                {
+                    @await Component.InvokeAsync("TourList", new { filter = Model, viewName = "Default" })
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@functions {
+    string BuildUrl(TourFilterDto f, string view)
+    {
+        var q = $"?view={view}";
+        if (!string.IsNullOrEmpty(f.Search)) q += $"&search={f.Search}";
+        if (!string.IsNullOrEmpty(f.CategoryId)) q += $"&categoryId={f.CategoryId}";
+        if (!string.IsNullOrEmpty(f.Country)) q += $"&country={f.Country}";
+        if (f.FromDate.HasValue) q += $"&fromDate={f.FromDate:yyyy-MM-dd}";
+        if (f.ToDate.HasValue) q += $"&toDate={f.ToDate:yyyy-MM-dd}";
+        if (!string.IsNullOrEmpty(f.SortBy)) q += $"&sortBy={f.SortBy}";
+        return "/Tour/TourList" + q;
+    }
+}
