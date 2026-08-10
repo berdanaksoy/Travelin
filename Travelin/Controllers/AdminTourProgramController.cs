@@ -59,11 +59,21 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProgram(CreateTourProgramDto createTourProgramDto)
         {
-            var existing = await _tourProgramService.GetTourProgramsByTourIdAsync(createTourProgramDto.TourId);
-
-            if (existing.Any(p => p.DayNumber == createTourProgramDto.DayNumber))
+            if (!ModelState.IsValid)
             {
-                TempData["ProgramError"] = createTourProgramDto.DayNumber + ". gün zaten tanımlı.";
+                var errors = string.Join(" ", ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage));
+                TempData["ProgramError"] = errors;
+                return RedirectToAction("ManageProgram", new { id = createTourProgramDto.TourId });
+            }
+
+            var existing = await _tourProgramService.GetTourProgramsByTourIdAsync(createTourProgramDto.TourId);
+            int expectedDay = existing.Count + 1;
+
+            if (createTourProgramDto.DayNumber != expectedDay)
+            {
+                TempData["ProgramError"] = $"Sıradaki gün {expectedDay} olmalıdır. Günler sırayla eklenmelidir.";
                 return RedirectToAction("ManageProgram", new { id = createTourProgramDto.TourId });
             }
 
@@ -74,8 +84,16 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateProgram(UpdateTourProgramDto updateTourProgramDto)
         {
-            var existing = await _tourProgramService.GetTourProgramsByTourIdAsync(updateTourProgramDto.TourId);
+            if (!ModelState.IsValid)
+            {
+                var errors = string.Join(" ", ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage));
+                TempData["ProgramError"] = errors;
+                return RedirectToAction("ManageProgram", new { id = updateTourProgramDto.TourId });
+            }
 
+            var existing = await _tourProgramService.GetTourProgramsByTourIdAsync(updateTourProgramDto.TourId);
             if (existing.Any(p => p.DayNumber == updateTourProgramDto.DayNumber
                                && p.TourProgramId != updateTourProgramDto.TourProgramId))
             {

@@ -16,6 +16,22 @@
         </div>
     </div>
 }
+@if (TempData["CommentSuccess"] != null)
+{
+    <div class="container mt-3">
+        <div class="alert alert-success" style="border-radius:10px;">
+            <i class="fa fa-check-circle"></i> @TempData["CommentSuccess"]
+        </div>
+    </div>
+}
+@if (TempData["CommentError"] != null)
+{
+    <div class="container mt-3">
+        <div class="alert alert-danger" style="border-radius:10px;">
+            <i class="fa fa-exclamation-triangle"></i> @TempData["CommentError"]
+        </div>
+    </div>
+}
 
 <section class="trending pt-6 pb-0 bg-lgrey">
     <div class="container">
@@ -105,7 +121,7 @@
 
                     @await Component.InvokeAsync("CommentList", new { tourId = Model.TourId })
 
-                    <partial name="_AddComment" model="Model.TourId" />
+                    <partial name="_AddComment" model="new Travelin.Dtos.CommentDtos.CreateCommentDto { TourId = Model.TourId }" />
 
                 </div>
             </div>
@@ -149,9 +165,13 @@
             </div>
         </div>
     </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var el = document.getElementById('reservationSuccessModal');
             if (el) new bootstrap.Modal(el).show();
         });

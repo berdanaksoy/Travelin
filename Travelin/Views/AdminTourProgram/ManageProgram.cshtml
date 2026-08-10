@@ -102,6 +102,11 @@
                 </div>
             </div>
             <div class="section-body">
+                <div class="alert alert-info" style="border-radius:10px;font-size:.85rem;">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Bu tur <strong>@tour.DayNight</strong> olarak planlanmıştır.
+                </div>
+
                 <form method="post" asp-action="CreateProgram" id="programForm">
                     @if (TempData["ProgramError"] != null)
                     {
@@ -115,18 +120,18 @@
                     <div class="field-group">
                         <label class="field-label">Gün Numarası <span class="required">*</span></label>
                         <input type="number" name="DayNumber" min="1" max="30" value="@(Model.Count + 1)"
-                               class="form-control" id="dayNumberInput" />
+                               class="form-control" id="dayNumberInput" readonly />
                     </div>
 
                     <div class="field-group">
                         <label class="field-label">Başlık <span class="required">*</span></label>
-                        <input type="text" name="Title" class="form-control" id="titleInput"
+                        <input type="text" name="Title" class="form-control" id="titleInput" maxlength="90"
                                placeholder="Örn: Gün 1 – Barcelona'nın İkonik Yapıları" />
                     </div>
 
                     <div class="field-group">
                         <label class="field-label">Açıklama <span class="required">*</span></label>
-                        <textarea name="Description" rows="5" class="form-control" id="descInput"
+                        <textarea name="Description" rows="5" class="form-control" id="descInput" maxlength="500"
                                   placeholder="O günün detaylı programı..."></textarea>
                     </div>
 
@@ -170,6 +175,7 @@
         function resetForm() {
             form.reset();
             programIdInput.value = '';
+            document.getElementById('dayNumberInput').value = @(Model.Count + 1);
             form.action = '/AdminTourProgram/CreateProgram';
             formTitle.textContent = 'Yeni Gün Ekle';
             submitBtn.innerHTML = '<i class="bi bi-plus-circle-fill"></i> Günü Ekle';

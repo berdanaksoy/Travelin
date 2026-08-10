@@ -65,14 +65,23 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> Contact(ContactMessageDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                var settings = await _siteSettingService.GetSiteSettingAsync();
+                ViewBag.Address = settings?.Address;
+                ViewBag.Phone = settings?.Phone;
+                ViewBag.Email = settings?.Email;
+                return View(dto);
+            }
+
             try
             {
                 await _emailService.SendContactMessageAsync(dto);
                 TempData["ContactSuccess"] = "Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.";
             }
-            catch
+            catch (Exception ex)
             {
-                TempData["ContactError"] = "Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.";
+                TempData["ContactError"] = "Mesaj gönderilirken bir hata oluştu.";
             }
             return RedirectToAction("Contact");
         }

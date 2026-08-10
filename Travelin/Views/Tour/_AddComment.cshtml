@@ -1,40 +1,45 @@
-﻿@model string
+﻿@model Travelin.Dtos.CommentDtos.CreateCommentDto
 
 <div class="single-add-review mb-4">
     <h4>@Localizer["WriteReview"]</h4>
     <form method="post" asp-controller="Comment" asp-action="CreateComment">
-        <input type="hidden" name="TourId" value="@Model" />
+        <input type="hidden" asp-for="TourId" />
 
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-2">
-                    <input type="text" name="NameSurname" placeholder="@Localizer["NameSurname"]" required />
+                    <input asp-for="NameSurname" class="form-control" placeholder="@Localizer["NameSurname"]" />
+                    <span asp-validation-for="NameSurname" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-2">
-                    <input type="email" name="Email" placeholder="@Localizer["Email"]" required />
+                    <input asp-for="Email" type="email" class="form-control" placeholder="@Localizer["Email"]" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-2">
-                    <input type="text" name="Headline" placeholder="@Localizer["Headline"]" required />
+                    <input asp-for="Headline" class="form-control" placeholder="@Localizer["Headline"]" />
+                    <span asp-validation-for="Headline" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-2">
-                    <select name="Score" class="form-control">
+                    <select asp-for="Score" class="form-control">
                         <option value="5">5 ★</option>
                         <option value="4">4 ★</option>
                         <option value="3">3 ★</option>
                         <option value="2">2 ★</option>
                         <option value="1">1 ★</option>
                     </select>
+                    <span asp-validation-for="Score" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group mb-2">
-                    <textarea name="CommentDetail" placeholder="@Localizer["YourComment"]" required></textarea>
+                    <textarea asp-for="CommentDetail" class="form-control" placeholder="@Localizer["YourComment"]"></textarea>
+                    <span asp-validation-for="CommentDetail" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">

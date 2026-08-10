@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using Travelin;
 using Travelin.Services.CategoryServices;
 using Travelin.Services.CommentServices;
 using Travelin.Services.EmailServices;
@@ -37,7 +38,11 @@ builder.Services.AddScoped<IDatabaseSettings>(sp =>
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddViewLocalization()
-    .AddDataAnnotationsLocalization();
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(SharedResource));
+    });
 
 var app = builder.Build();
 

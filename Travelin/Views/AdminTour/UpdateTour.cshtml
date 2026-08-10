@@ -1,19 +1,19 @@
 ﻿@model UpdateTourDto
 
 @{
-    ViewData["Title"] = "Yeni Tur Ekle";
+    ViewData["Title"] = "Tur Düzenle";
     ViewData["ActiveMenu"] = "tours";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="page-header">
     <div>
-        <h1 class="page-title">Yeni Tur Ekle</h1>
+        <h1 class="page-title">Tur Düzenle</h1>
         <nav aria-label="breadcrumb" class="mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Admin</li>
                 <li class="breadcrumb-item"><a asp-action="TourList">Turlar</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Yeni Tur</li>
+                <li class="breadcrumb-item active" aria-current="page">Tur Düzenle</li>
             </ol>
         </nav>
     </div>
@@ -51,6 +51,7 @@
                         <input asp-for="Title" class="form-control" maxlength="120"
                                placeholder="Örn: Barcelona Kültür ve Deniz Turu" id="titleInput" />
                         <div class="char-counter" id="titleCounter">0 / 120</div>
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     <div class="field-group">
@@ -60,6 +61,7 @@
                         <textarea asp-for="Description" class="form-control" maxlength="1000" rows="5"
                                   placeholder="Tur hakkında detaylı açıklama..." id="descInput"></textarea>
                         <div class="char-counter" id="descCounter">0 / 1000</div>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="field-group">
@@ -73,6 +75,7 @@
                                 <option value="@category.CategoryId">@category.CategoryName</option>
                             }
                         </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -93,6 +96,7 @@
                                     Ülke <span class="required">*</span>
                                 </label>
                                 <input asp-for="Country" class="form-control" placeholder="Örn: İspanya" id="countryInput" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -101,6 +105,7 @@
                                     Şehir <span class="required">*</span>
                                 </label>
                                 <input asp-for="City" class="form-control" placeholder="Örn: Barcelona" id="cityInput" />
+                                <span asp-validation-for="City" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -125,6 +130,7 @@
                                 <input asp-for="TourDate" type="date" class="form-control" id="dateInput"
                                        min="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                 <div class="field-hint">Bugünden önceki tarih seçilemez.</div>
+                                <span asp-validation-for="TourDate" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -133,8 +139,8 @@
                                 <label asp-for="Price" class="field-label">
                                     Kişi Başı Fiyat (₺) <span class="required">*</span>
                                 </label>
-                                <input asp-for="Price" type="number" step="0.01" min="0"
-                                       class="form-control" placeholder="0,00" id="priceInput" />
+                                <input asp-for="Price" type="number" step="0.01" min="0.01" class="form-control" placeholder="0,00" id="priceInput" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -152,6 +158,7 @@
                                         <i class="bi bi-plus"></i>
                                     </button>
                                 </div>
+                                <span asp-validation-for="Capacity" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -172,6 +179,8 @@
                                 </div>
                                 <input asp-for="DayNight" type="hidden" id="dayNightHidden" />
                                 <div class="field-hint">Önizleme: <strong id="durationText">3 Gün / 2 Gece</strong></div>
+                                <span asp-validation-for="DayNight" class="text-danger"></span>
+                                <span id="durationError" class="text-danger" style="display:none;">Tur en az 1 gün olmalıdır.</span>
                             </div>
                         </div>
                     </div>
@@ -194,6 +203,7 @@
                         <input asp-for="ImageUrl" type="url" class="form-control"
                                placeholder="https://ornek.com/gorsel.jpg" id="imageUrlInput" />
                         <div class="field-hint">Tur listesinde ve detay sayfasında görünecek fotoğraf.</div>
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
                         <img src="" alt="Önizleme" class="url-preview-thumb" id="imagePreview" />
                     </div>
 
@@ -204,14 +214,16 @@
                         <input asp-for="LocationImageUrl" type="url" class="form-control"
                                placeholder="https://ornek.com/harita.jpg" id="locationUrlInput" />
                         <div class="field-hint">Detay sayfasında harita yerine gösterilecek görsel (Gemini ile üretilebilir).</div>
+                        <span asp-validation-for="LocationImageUrl" class="text-danger"></span>
                         <img src="" alt="Önizleme" class="url-preview-thumb" id="locationPreview" />
                     </div>
 
                     <div class="field-group">
-                        <label asp-for="VideoUrl" class="field-label">Tanıtım Videosu (YouTube Embed URL)</label>
+                        <label asp-for="VideoUrl" class="field-label">Tanıtım Videosu</label>
                         <input asp-for="VideoUrl" type="url" class="form-control"
-                               placeholder="https://www.youtube.com/embed/VIDEO_ID" />
-                        <div class="field-hint">YouTube embed linki. Boş bırakılırsa detay sayfasında video gösterilmez.</div>
+                               placeholder="Herhangi bir YouTube linki" />
+                        <div class="field-hint">Herhangi bir YouTube linki</div>
+                        <span asp-validation-for="VideoUrl" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -298,7 +310,35 @@
 </form>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
     <script>
+        document.getElementById('tourForm').addEventListener('submit', function(e) {
+            var days = parseInt(document.getElementById('dayCount').value) || 0;
+            var errorEl = document.getElementById('durationError');
+            if (days < 1) {
+                e.preventDefault();
+                errorEl.style.display = 'block';
+                document.getElementById('dayCount').focus();
+            } else {
+                errorEl.style.display = 'none';
+            }
+        });
+
+        document.getElementById('dayCount').addEventListener('blur', function() {
+            var val = parseInt(this.value);
+            if (this.value === '' || isNaN(val) || val < 1) this.value = 1;
+            else if (val > 30) this.value = 30;
+            updateDuration();
+        });
+
+        document.getElementById('nightCount').addEventListener('blur', function() {
+            var val = parseInt(this.value);
+            if (this.value === '' || isNaN(val) || val < 0) this.value = 0;
+            else if (val > 30) this.value = 30;
+            updateDuration();
+        });
+
         var parts = '@Model.DayNight'.match(/\d+/g);
         if (parts) {
             document.getElementById('dayCount').value = parts[0] || 3;

@@ -56,13 +56,17 @@ namespace Travelin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateReservation(CreateReservationDto createReservationDto)
+        public async Task<IActionResult> CreateReservation(CreateReservationViewModel model)
         {
-            await _reservationService.CreateReservationAsync(createReservationDto);
+            if (!ModelState.IsValid)
+            {
+                model.Tour = await _tourService.GetTourByIdAsync(model.Reservation.TourId);
+                return View(model);
+            }
 
+            await _reservationService.CreateReservationAsync(model.Reservation);
             TempData["ReservationSuccess"] = true;
-
-            return RedirectToAction("Detail", "Tour", new { id = createReservationDto.TourId });
+            return RedirectToAction("Detail", "Tour", new { id = model.Reservation.TourId });
         }
     }
 }

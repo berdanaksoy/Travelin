@@ -510,4 +510,61 @@
   <data name="Send" xml:space="preserve">
     <value>Gönder</value>
   </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Ad alanı zorunludur.</value>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>Ad en fazla 50 karakter olabilir.</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value> Soyad alanı zorunludur.</value>
+  </data>
+  <data name="SurnameLength" xml:space="preserve">
+    <value>Soyad en fazla 50 karakter olabilir.</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>E-posta alanı zorunludur.</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Geçerli bir e-posta adresi giriniz.</value>
+  </data>
+  <data name="PhoneInvalid" xml:space="preserve">
+    <value>Geçerli bir telefon numarası giriniz.</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>Mesaj alanı zorunludur.</value>
+  </data>
+  <data name="MessageLength" xml:space="preserve">
+    <value>Mesaj 10 ile 1000 karakter arasında olmalıdır.</value>
+  </data>
+  <data name="PhoneRequired" xml:space="preserve">
+    <value>Telefon alanı zorunludur.</value>
+  </data>
+  <data name="PersonCountRange" xml:space="preserve">
+    <value>Kişi sayısı 1 ile 10 arasında olmalıdır.</value>
+  </data>
+  <data name="PersonCountRequired" xml:space="preserve">
+    <value>Kişi sayısı zorunludur.</value>
+  </data>
+  <data name="HeadlineRequired" xml:space="preserve">
+    <value>Başlık zorunludur.</value>
+  </data>
+  <data name="HeadlineLength" xml:space="preserve">
+    <value>Başlık en fazla 100 karakter olabilir.</value>
+  </data>
+  <data name="CommentRequired" xml:space="preserve">
+    <value>Yorum zorunludur.</value>
+  </data>
+  <data name="CommentLength" xml:space="preserve">
+    <value>Yorum 5 ile 1000 karakter arasında olmalıdır.</value>
+  </data>
+  <data name="ScoreRange" xml:space="preserve">
+    <value>Puan 1 ile 5 arasında olmalıdır.</value>
+  </data>
+  <data name="NameSurnameRequired" xml:space="preserve">
+    <value>Ad soyad zorunludur.</value>
+  </data>
+  <data name="NameSurnameLength" xml:space="preserve">
+    <value>Ad soyad en fazla 80 karakter olabilir.</value>
+  </data>
 </root>

@@ -510,4 +510,61 @@
   <data name="Send" xml:space="preserve">
     <value>Enviar</value>
   </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>El nombre es obligatorio.</value>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>El nombre no puede superar 50 caracteres.</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value>El apellido es obligatorio.</value>
+  </data>
+  <data name="SurnameLength" xml:space="preserve">
+    <value>El apellido no puede superar 50 caracteres.</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>El correo es obligatorio.</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Introduce un correo válido.</value>
+  </data>
+  <data name="PhoneInvalid" xml:space="preserve">
+    <value>Introduce un número válido.</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>El mensaje es obligatorio.</value>
+  </data>
+  <data name="MessageLength" xml:space="preserve">
+    <value>El mensaje debe tener entre 10 y 1000 caracteres.</value>
+  </data>
+  <data name="PhoneRequired" xml:space="preserve">
+    <value>El teléfono es obligatorio.</value>
+  </data>
+  <data name="PersonCountRange" xml:space="preserve">
+    <value>El número de personas debe estar entre 1 y 10.</value>
+  </data>
+  <data name="PersonCountRequired" xml:space="preserve">
+    <value>El número de personas es obligatorio.</value>
+  </data>
+  <data name="HeadlineRequired" xml:space="preserve">
+    <value>El título es obligatorio.</value>
+  </data>
+  <data name="HeadlineLength" xml:space="preserve">
+    <value>El título máx. 100 caracteres.</value>
+  </data>
+  <data name="CommentRequired" xml:space="preserve">
+    <value>El comentario es obligatorio.</value>
+  </data>
+  <data name="CommentLength" xml:space="preserve">
+    <value>El comentario entre 5 y 1000 caracteres.</value>
+  </data>
+  <data name="ScoreRange" xml:space="preserve">
+    <value>La puntuación entre 1 y 5.</value>
+  </data>
+  <data name="NameSurnameRequired" xml:space="preserve">
+    <value>El nombre es obligatorio.</value>
+  </data>
+  <data name="NameSurnameLength" xml:space="preserve">
+    <value>El nombre máx. 80 caracteres.</value>
+  </data>
 </root>

@@ -16,11 +16,18 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateComment(CreateCommentDto createCommentDto)
         {
+            if (!ModelState.IsValid)
+            {
+                TempData["CommentError"] = "Lütfen yorum formundaki alanları kontrol edin.";
+                return RedirectToAction("Detail", "Tour", new { id = createCommentDto.TourId });
+            }
+
             createCommentDto.CommentDate = DateTime.Now;
             createCommentDto.IsStatus = false;
 
             await _commentService.CreateCommentAsync(createCommentDto);
 
+            TempData["CommentSuccess"] = "Yorumunuz alındı, onaylandıktan sonra yayınlanacaktır.";
             return RedirectToAction("Detail", "Tour", new { id = createCommentDto.TourId });
         }
     }

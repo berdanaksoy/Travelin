@@ -53,19 +53,24 @@
                     <form asp-action="Contact" method="post">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <input asp-for="Name" class="form-control" placeholder="@Localizer["Name"]" required />
+                                <input asp-for="Name" class="form-control" placeholder="@Localizer["Name"]" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input asp-for="Surname" class="form-control" placeholder="@Localizer["Surname"]" required />
+                                <input asp-for="Surname" class="form-control" placeholder="@Localizer["Surname"]" />
+                                <span asp-validation-for="Surname" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input asp-for="Email" type="email" class="form-control" placeholder="@Localizer["Email"]" required />
+                                <input asp-for="Email" type="email" class="form-control" placeholder="@Localizer["Email"]" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <input asp-for="Phone" class="form-control" placeholder="@Localizer["Phone"]" />
+                                <input asp-for="Phone" type="text" class="form-control" placeholder="@Localizer["Phone"]" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
                             </div>
                             <div class="col-12 mb-3">
-                                <textarea asp-for="Message" class="form-control" rows="5" placeholder="@Localizer["YourMessage"]" required></textarea>
+                                <textarea asp-for="Message" class="form-control" rows="5" placeholder="@Localizer["YourMessage"]"></textarea>
+                                <span asp-validation-for="Message" class="text-danger"></span>
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="nir-btn"><i class="fa fa-paper-plane"></i> @Localizer["Send"]</button>
@@ -90,4 +95,8 @@
             }
         }, 4000);
     </script>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

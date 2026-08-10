@@ -31,6 +31,9 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
         {
+            if (!ModelState.IsValid)
+                return View(createCategoryDto);
+
             await _categoryService.CreateCategoryAsync(createCategoryDto);
             return RedirectToAction("CategoryList");
         }
@@ -50,6 +53,9 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
+            if (!ModelState.IsValid)
+                return View(updateCategoryDto);
+
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
             return RedirectToAction("CategoryList");
         }

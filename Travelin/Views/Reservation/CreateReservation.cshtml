@@ -23,42 +23,49 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label>@Localizer["FirstName"]</label>
-                                    <input type="text" name="Name" placeholder="@Localizer["FirstName"]" required />
+                                    <input asp-for="Reservation.Name" class="form-control" placeholder="@Localizer["FirstName"]" />
+                                    <span asp-validation-for="Reservation.Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label>@Localizer["LastName"]</label>
-                                    <input type="text" name="Surname" placeholder="@Localizer["LastName"]" required />
+                                    <input asp-for="Reservation.Surname" class="form-control" placeholder="@Localizer["LastName"]" />
+                                    <span asp-validation-for="Reservation.Surname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label>@Localizer["Email"]</label>
-                                    <input type="email" name="Email" placeholder="@Localizer["Email"]" required />
+                                    <input asp-for="Reservation.Email" type="email" class="form-control" placeholder="@Localizer["Email"]" />
+                                    <span asp-validation-for="Reservation.Email" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label>@Localizer["Phone"]</label>
-                                    <input type="text" name="Phone" placeholder="@Localizer["Phone"]" required />
+                                    <input asp-for="Reservation.Phone" type="text" class="form-control" placeholder="@Localizer["Phone"]" />
+                                    <span asp-validation-for="Reservation.Phone" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label>@Localizer["PersonCount"]</label>
-                                    <input type="number" name="PersonCount" id="personCount"
-                                           value="1" min="1" max="@Model.Tour.Capacity" required />
-                                    <small class="d-block mt-1">@Localizer["MaxPeople"]: @Model.Tour.Capacity</small>
+                                    <input asp-for="Reservation.PersonCount" type="number" id="personCount" class="form-control" />
+                                    <span asp-validation-for="Reservation.PersonCount" class="text-danger"></span>
+                                    <small class="d-block mt-1">@Localizer["MaxPeople"]: 10</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label>@Localizer["TourDate"]</label>
-                                    <input type="text" value="@Model.Tour.TourDate.ToString("dd MMMM yyyy")" readonly />
+                                    <input type="text" value="@Model.Tour.TourDate.ToString("dd MMMM yyyy")" class="form-control" readonly />
                                 </div>
                             </div>
                         </div>
+
+                        <input type="hidden" asp-for="Reservation.TourId" />
+                        <input type="hidden" asp-for="Reservation.ReservationDate" />
 
                         <div class="border-t pt-3 mt-2">
                             <button type="submit" class="nir-btn w-100">@Localizer["CompleteReservation"]</button>

@@ -74,8 +74,13 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTour(CreateTourDto createTourDto)
         {
-            await _tourService.CreateTourAsync(createTourDto);
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _categoryService.GetActiveCategoriesAsync();
+                return View(createTourDto);
+            }
 
+            await _tourService.CreateTourAsync(createTourDto);
             return RedirectToAction("TourList");
         }
 
@@ -116,8 +121,13 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateTour(UpdateTourDto updateTourDto)
         {
-            await _tourService.UpdateTourAsync(updateTourDto);
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = await _categoryService.GetActiveCategoriesAsync();
+                return View(updateTourDto);
+            }
 
+            await _tourService.UpdateTourAsync(updateTourDto);
             return RedirectToAction("TourList");
         }
     }

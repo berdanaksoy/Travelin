@@ -510,4 +510,61 @@
   <data name="Send" xml:space="preserve">
     <value>Senden</value>
   </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name ist erforderlich.</value>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>Name darf höchstens 50 Zeichen lang sein.</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value>Nachname ist erforderlich.</value>
+  </data>
+  <data name="SurnameLength" xml:space="preserve">
+    <value>Nachname darf höchstens 50 Zeichen lang sein.</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>E-Mail ist erforderlich.</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Geben Sie eine gültige E-Mail ein.</value>
+  </data>
+  <data name="PhoneInvalid" xml:space="preserve">
+    <value>Geben Sie eine gültige Telefonnummer ein.</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>Nachricht ist erforderlich.</value>
+  </data>
+  <data name="MessageLength" xml:space="preserve">
+    <value>Nachricht muss 10 bis 1000 Zeichen lang sein.</value>
+  </data>
+  <data name="PhoneRequired" xml:space="preserve">
+    <value>Telefon ist erforderlich.</value>
+  </data>
+  <data name="PersonCountRange" xml:space="preserve">
+    <value>Personenzahl muss zwischen 1 und 10 liegen.</value>
+  </data>
+  <data name="PersonCountRequired" xml:space="preserve">
+    <value>Personenzahl ist erforderlich.</value>
+  </data>
+  <data name="HeadlineRequired" xml:space="preserve">
+    <value>Titel ist erforderlich.</value>
+  </data>
+  <data name="HeadlineLength" xml:space="preserve">
+    <value>Titel max. 100 Zeichen.</value>
+  </data>
+  <data name="CommentRequired" xml:space="preserve">
+    <value>Kommentar ist erforderlich.</value>
+  </data>
+  <data name="CommentLength" xml:space="preserve">
+    <value>Kommentar 5 bis 1000 Zeichen.</value>
+  </data>
+  <data name="ScoreRange" xml:space="preserve">
+    <value>Bewertung 1 bis 5.</value>
+  </data>
+  <data name="NameSurnameRequired" xml:space="preserve">
+    <value>Name ist erforderlich.</value>
+  </data>
+  <data name="NameSurnameLength" xml:space="preserve">
+    <value>Name max. 80 Zeichen.</value>
+  </data>
 </root>
