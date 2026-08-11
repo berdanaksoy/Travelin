@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Travelin;
+using Travelin.Seed;
 using Travelin.Services.CategoryServices;
 using Travelin.Services.CommentServices;
 using Travelin.Services.EmailServices;
@@ -20,6 +21,7 @@ builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<ITourProgramService, TourProgramService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<ISiteSettingService, SiteSettingService>();
+builder.Services.AddScoped<DataSeeder>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -76,5 +78,11 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    await seeder.SeedAsync();
+}
 
 app.Run();
