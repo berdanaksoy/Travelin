@@ -78,6 +78,7 @@ namespace Travelin.Controllers
             }
 
             await _tourProgramService.CreateTourProgramAsync(createTourProgramDto);
+            TempData["Success"] = "Program günü başarıyla eklendi.";
             return RedirectToAction("ManageProgram", new { id = createTourProgramDto.TourId });
         }
 
@@ -102,12 +103,14 @@ namespace Travelin.Controllers
             }
 
             await _tourProgramService.UpdateTourProgramAsync(updateTourProgramDto);
+            TempData["Success"] = "Program günü başarıyla güncellendi.";
             return RedirectToAction("ManageProgram", new { id = updateTourProgramDto.TourId });
         }
 
         public async Task<IActionResult> DeleteProgram(string id, string tourId)
         {
             await _tourProgramService.DeleteTourProgramAsync(id);
+            TempData["Success"] = "Program günü başarıyla silindi.";
             return RedirectToAction("ManageProgram", new { id = tourId });
         }
     }

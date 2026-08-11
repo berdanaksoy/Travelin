@@ -30,39 +30,6 @@
     </div>
 }
 
-@if (TempData["ReservationError"] != null)
-{
-    <div id="errorToast" style="position:fixed; top:20px; right:20px; z-index:9999; max-width:400px;">
-        <div class="alert alert-danger d-flex align-items-center gap-2 shadow" style="border-radius:10px;font-size:.875rem;">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            <span>@TempData["ReservationError"]</span>
-        </div>
-    </div>
-
-    <script>
-        setTimeout(function() {
-            var t = document.getElementById('errorToast');
-            if (t) t.style.display = 'none';
-        }, 5000);
-    </script>
-}
-
-@if (TempData["ReservationSuccess"] != null)
-{
-    <div id="successToast" style="position:fixed; top:20px; right:20px; z-index:9999; max-width:400px;">
-        <div class="alert alert-success d-flex align-items-center gap-2 shadow" style="border-radius:10px;font-size:.875rem;">
-            <i class="bi bi-check-circle-fill"></i>
-            <span>@TempData["ReservationSuccess"]</span>
-        </div>
-    </div>
-    <script>
-            setTimeout(function () {
-            var t = document.getElementById('successToast');
-            if (t) t.style.display = 'none';
-        }, 5000);
-    </script>
-}
-
 <div class="form-section">
     <div class="section-body py-3">
         <div class="d-flex gap-2 flex-wrap">
@@ -158,19 +125,29 @@
                                 <div class="action-group">
                                     @if (item.Status != ReservationStatuses.Approved)
                                     {
-                                        <a asp-action="ApproveReservation" asp-route-id="@item.ReservationId" asp-route-status="@status"
-                                           class="btn-action btn-approve" title="Onayla"
-                                           onclick="return confirm('Rezervasyon onaylanacak ve müşteriye e-posta gönderilecek. Onaylıyor musunuz?');">
+                                        <button type="button" class="btn-action btn-approve js-status-btn" title="Onayla"
+                                                data-action="approve"
+                                                data-url="@Url.Action("ApproveReservation", new { id = item.ReservationId, status = status })"
+                                                data-title="Rezervasyonu Onayla"
+                                                data-body="Bu rezervasyon onaylanacak ve müşteriye bilgilendirme e-postası gönderilecek."
+                                                data-heading="@item.Name @item.Surname"
+                                                data-subtext="@item.TourTitle"
+                                                data-detail="@item.PersonCount kişi · @item.ReservationDate.ToString("dd.MM.yyyy")">
                                             <i class="bi bi-check-lg"></i>
-                                        </a>
+                                        </button>
                                     }
                                     @if (item.Status != ReservationStatuses.Cancelled)
                                     {
-                                        <a asp-action="CancelReservation" asp-route-id="@item.ReservationId" asp-route-status="@status"
-                                           class="btn-action btn-delete" title="İptal Et"
-                                           onclick="return confirm('Rezervasyon iptal edilecek. Emin misiniz?');">
+                                        <button type="button" class="btn-action btn-delete js-status-btn" title="İptal Et"
+                                                data-action="cancel"
+                                                data-url="@Url.Action("CancelReservation", new { id = item.ReservationId, status = status })"
+                                                data-title="Rezervasyonu İptal Et"
+                                                data-body="Bu rezervasyon iptal edilecek ve müşteriye bilgilendirme e-postası gönderilecek."
+                                                data-heading="@item.Name @item.Surname"
+                                                data-subtext="@item.TourTitle"
+                                                data-detail="@item.PersonCount kişi · @item.ReservationDate.ToString("dd.MM.yyyy")">
                                             <i class="bi bi-x-lg"></i>
-                                        </a>
+                                        </button>
                                     }
                                 </div>
                             </td>

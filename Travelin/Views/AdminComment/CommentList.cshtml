@@ -132,23 +132,36 @@
                                 <div class="action-group">
                                     @if (!item.IsStatus)
                                     {
-                                        <a asp-action="ApproveComment" asp-route-id="@item.CommentId" asp-route-status="@status"
-                                           class="btn-action btn-approve" title="Onayla">
+                                        <button type="button" class="btn-action btn-approve js-status-btn" title="Onayla"
+                                                data-action="approve"
+                                                data-url="@Url.Action("ApproveComment", new { id = item.CommentId, status = status })"
+                                                data-title="Yorumu Onayla"
+                                                data-body="Bu yorum onaylanacak ve sitede yayınlanacak."
+                                                data-heading="@item.NameSurname"
+                                                data-subtext="@item.TourTitle"
+                                                data-detail="@item.Headline">
                                             <i class="bi bi-check-lg"></i>
-                                        </a>
+                                        </button>
                                     }
                                     else
                                     {
-                                        <a asp-action="RejectComment" asp-route-id="@item.CommentId" asp-route-status="@status"
-                                           class="btn-action btn-edit" title="Onayı Kaldır">
+                                        <button type="button" class="btn-action btn-edit js-status-btn" title="Onayı Kaldır"
+                                                data-action="cancel"
+                                                data-url="@Url.Action("RejectComment", new { id = item.CommentId, status = status })"
+                                                data-title="Onayı Kaldır"
+                                                data-body="Bu yorumun onayı kaldırılacak ve sitede görünmeyecek."
+                                                data-heading="@item.NameSurname"
+                                                data-subtext="@item.TourTitle"
+                                                data-detail="@item.Headline">
                                             <i class="bi bi-x-lg"></i>
-                                        </a>
+                                        </button>
                                     }
-                                    <a asp-action="DeleteComment" asp-route-id="@item.CommentId" asp-route-status="@status"
-                                       class="btn-action btn-delete" title="Sil"
-                                       onclick="return confirm('Bu yorum kalıcı olarak silinecek. Emin misiniz?');">
+                                    <button type="button" class="btn-action btn-delete js-delete-btn" title="Sil"
+                                            data-url="@Url.Action("DeleteComment", new { id = item.CommentId, status = status })"
+                                            data-title="Yorum Silinecek"
+                                            data-body="@item.NameSurname adlı kullanıcının yorumu kalıcı olarak silinecek. Emin misiniz?">
                                         <i class="bi bi-trash3"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </td>
                         </tr>

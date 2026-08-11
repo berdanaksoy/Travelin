@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using Travelin.Dtos.ContactDtos;
 using Travelin.Models;
 using Travelin.Services.CategoryServices;
@@ -24,6 +25,12 @@ namespace Travelin.Controllers
             _commentService = commentService;
             _emailService = emailService;
             _siteSettingService = siteSettingService;
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public async Task<IActionResult> Index()

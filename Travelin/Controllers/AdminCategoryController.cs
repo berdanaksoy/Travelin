@@ -35,6 +35,7 @@ namespace Travelin.Controllers
                 return View(createCategoryDto);
 
             await _categoryService.CreateCategoryAsync(createCategoryDto);
+            TempData["Success"] = "Kategori başarıyla eklendi.";
             return RedirectToAction("CategoryList");
         }
 
@@ -57,12 +58,14 @@ namespace Travelin.Controllers
                 return View(updateCategoryDto);
 
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
+            TempData["Success"] = "Kategori başarıyla güncellendi.";
             return RedirectToAction("CategoryList");
         }
 
         public async Task<IActionResult> DeleteCategory(string id)
         {
             await _categoryService.DeleteCategoryAsync(id);
+            TempData["Success"] = "Kategori başarıyla silindi.";
             return RedirectToAction("CategoryList");
         }
     }

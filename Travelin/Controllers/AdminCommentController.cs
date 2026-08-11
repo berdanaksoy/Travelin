@@ -41,18 +41,21 @@ namespace Travelin.Controllers
         public async Task<IActionResult> ApproveComment(string id, string status)
         {
             await _commentService.ChangeCommentStatusAsync(id, true);
+            TempData["Success"] = "Yorum onaylandı ve yayınlandı.";
             return RedirectToAction("CommentList", new { status });
         }
 
         public async Task<IActionResult> RejectComment(string id, string status)
         {
             await _commentService.ChangeCommentStatusAsync(id, false);
+            TempData["Success"] = "Yorumun onayı kaldırıldı.";
             return RedirectToAction("CommentList", new { status });
         }
 
         public async Task<IActionResult> DeleteComment(string id, string status)
         {
             await _commentService.DeleteCommentAsync(id);
+            TempData["Success"] = "Yorum kalıcı olarak silindi.";
             return RedirectToAction("CommentList", new { status });
         }
     }

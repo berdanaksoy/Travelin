@@ -59,7 +59,7 @@ namespace Travelin.Controllers
 
             if (approvedCount + reservation.PersonCount > tour.Capacity)
             {
-                TempData["ReservationError"] = $"Kapasite aşılıyor. Onaylı: {approvedCount}/{tour.Capacity}, bu talep: {reservation.PersonCount} kişi.";
+                TempData["Error"] = $"Kapasite aşılıyor. Onaylı: {approvedCount}/{tour.Capacity}, bu talep: {reservation.PersonCount} kişi.";
                 return RedirectToAction("ReservationList", new { status });
             }
 
@@ -74,12 +74,11 @@ namespace Travelin.Controllers
                     reservation.ReservationDate,
                     reservation.PersonCount
                 );
-
-                TempData["ReservationSuccess"] = "Rezervasyon onaylandı ve müşteriye e-posta gönderildi.";
+                TempData["Success"] = "Rezervasyon onaylandı ve müşteriye e-posta gönderildi.";
             }
             catch
             {
-                TempData["ReservationSuccess"] = "Rezervasyon onaylandı ancak e-posta gönderilemedi.";
+                TempData["Error"] = "Rezervasyon onaylandı ancak e-posta gönderilemedi. Müşteriye kendiniz ulaşmanız gerekebilir.";
             }
 
             return RedirectToAction("ReservationList", new { status });
@@ -100,11 +99,11 @@ namespace Travelin.Controllers
                     tour.Title,
                     reservation.ReservationDate
                 );
-                TempData["ReservationSuccess"] = "Rezervasyon iptal edildi ve müşteriye e-posta gönderildi.";
+                TempData["Success"] = "Rezervasyon iptal edildi ve müşteriye e-posta gönderildi.";
             }
             catch
             {
-                TempData["ReservationSuccess"] = "Rezervasyon iptal edildi ancak e-posta gönderilemedi.";
+                TempData["Error"] = "Rezervasyon iptal edildi ancak e-posta gönderilemedi. Müşteriye kendiniz ulaşmanız gerekebilir.";
             }
 
             return RedirectToAction("ReservationList", new { status });

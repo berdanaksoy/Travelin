@@ -114,8 +114,10 @@ namespace Travelin.Services.TourServices
                 _ => Builders<Tour>.Sort.Descending(t => t.TourDate)
             };
 
+            var collation = new Collation("tr", strength: CollationStrength.Secondary);
+
             var values = await _tourCollection
-                .Find(finalFilter)
+                .Find(finalFilter, new FindOptions { Collation = collation })
                 .Sort(sortDefinition)
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Limit(filter.PageSize)

@@ -59,7 +59,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
     <PackageReference Include="MongoDB.Bson" Version="3.6.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.6.0" />
-    <PackageReference Include="MongoDB.Driver.Core" Version="2.30.0" />
     <PackageReference Include="QuestPDF" Version="2026.7.1" />
   </ItemGroup>
 

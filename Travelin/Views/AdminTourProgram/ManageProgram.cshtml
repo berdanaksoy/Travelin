@@ -76,11 +76,12 @@
                                                     onclick="editProgram('@item.TourProgramId', @item.DayNumber, '@item.Title', '@item.Description')">
                                                 <i class="bi bi-pencil"></i>
                                             </button>
-                                            <a asp-action="DeleteProgram" asp-route-id="@item.TourProgramId" asp-route-tourId="@tour.TourId"
-                                               class="btn-action btn-delete" title="Sil"
-                                               onclick="return confirm('Bu program günü silinecek. Emin misiniz?');">
+                                            <button type="button" class="btn-action btn-delete js-delete-btn" title="Sil"
+                                                    data-url="@Url.Action("DeleteProgram", new { id = item.TourProgramId, tourId = tour.TourId })"
+                                                    data-title="Program Günü Silinecek"
+                                                    data-body="@(item.DayNumber). gün (@item.Title) silinecek. Emin misiniz?">
                                                 <i class="bi bi-trash3"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -110,7 +111,7 @@
                 <form method="post" asp-action="CreateProgram" id="programForm">
                     @if (TempData["ProgramError"] != null)
                     {
-                        <div class="alert alert-danger" style="border-radius:10px;font-size:.875rem;">
+                        <div class="alert alert-danger" id="programError" style="border-radius:10px;font-size:.875rem;">
                             <i class="bi bi-exclamation-triangle me-2"></i>@TempData["ProgramError"]
                         </div>
                     }
@@ -180,6 +181,15 @@
             formTitle.textContent = 'Yeni Gün Ekle';
             submitBtn.innerHTML = '<i class="bi bi-plus-circle-fill"></i> Günü Ekle';
             cancelBtn.style.display = 'none';
+        }
+
+        var programError = document.getElementById('programError');
+        if (programError) {
+            setTimeout(function () {
+                programError.style.transition = 'opacity 0.5s';
+                programError.style.opacity = '0';
+                setTimeout(function () { programError.style.display = 'none'; }, 500);
+            }, 5000);
         }
     </script>
 }

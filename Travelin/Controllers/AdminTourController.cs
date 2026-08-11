@@ -81,19 +81,19 @@ namespace Travelin.Controllers
             }
 
             await _tourService.CreateTourAsync(createTourDto);
+            TempData["Success"] = "Tur başarıyla eklendi.";
             return RedirectToAction("TourList");
         }
 
         public async Task<IActionResult> DeleteTour(string id)
         {
             var reservations = await _reservationService.GetReservationsByTourIdAsync(id);
-
             bool hasActive = reservations.Any(r =>
                 r.Status == ReservationStatuses.Pending || r.Status == ReservationStatuses.Approved);
 
             if (hasActive)
             {
-                TempData["TourDeleteError"] = "Bu tura ait aktif rezervasyonlar var. Önce onları iptal edin.";
+                TempData["Error"] = "Bu tura ait aktif rezervasyonlar var. Önce onları iptal edin.";
                 return RedirectToAction("TourList");
             }
 
@@ -101,6 +101,7 @@ namespace Travelin.Controllers
             await _tourProgramService.DeleteTourProgramsByTourIdAsync(id);
             await _tourService.DeleteTourAsync(id);
 
+            TempData["Success"] = "Tur ve ilişkili tüm veriler (yorumlar, program) başarıyla silindi.";
             return RedirectToAction("TourList");
         }
 
@@ -128,6 +129,7 @@ namespace Travelin.Controllers
             }
 
             await _tourService.UpdateTourAsync(updateTourDto);
+            TempData["Success"] = "Tur başarıyla güncellendi.";
             return RedirectToAction("TourList");
         }
     }
