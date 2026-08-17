@@ -7,6 +7,8 @@
 
     string status = ViewBag.Status as string;
     int pendingCount = ViewBag.PendingCount;
+    var filter = ViewBag.Filter as Travelin.Dtos.CommentDtos.CommentFilterDto;
+    var tours = ViewBag.Tours as List<Travelin.Dtos.TourDtos.ResultTourDto>;
 }
 
 <div class="page-header">
@@ -31,23 +33,52 @@
 
 <div class="form-section">
     <div class="section-body py-3">
-        <div class="d-flex gap-2 flex-wrap">
+        <div class="d-flex gap-2 flex-wrap mb-3">
             <a asp-action="CommentList"
                class="btn btn-sm @(string.IsNullOrEmpty(status) ? "btn-primary" : "btn-outline-secondary")"
-               style="border-radius:8px;">
-                Tümü
-            </a>
+               style="border-radius:8px;">Tümü</a>
             <a asp-action="CommentList" asp-route-status="pending"
                class="btn btn-sm @(status == "pending" ? "btn-primary" : "btn-outline-secondary")"
-               style="border-radius:8px;">
-                Onay Bekleyenler
-            </a>
+               style="border-radius:8px;">Onay Bekleyenler</a>
             <a asp-action="CommentList" asp-route-status="approved"
                class="btn btn-sm @(status == "approved" ? "btn-primary" : "btn-outline-secondary")"
-               style="border-radius:8px;">
-                Onaylananlar
-            </a>
+               style="border-radius:8px;">Onaylananlar</a>
         </div>
+
+        <form asp-action="CommentList" method="get" class="row g-2">
+            <input type="hidden" name="status" value="@status" />
+
+            <div class="col-md-6">
+                <select name="tourId" class="form-control form-control-sm" style="border-radius:8px;">
+                    <option value="">Tüm Turlar</option>
+                    @if (tours != null)
+                    {
+                        @foreach (var t in tours)
+                        {
+                            <option value="@t.TourId" selected="@(filter?.TourId == t.TourId)">@t.Title</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select name="sortBy" class="form-control form-control-sm" style="border-radius:8px;">
+                    <option value="" selected="@(string.IsNullOrEmpty(filter?.SortBy))">En Yeni</option>
+                    <option value="oldest" selected="@(filter?.SortBy == "oldest")">En Eski</option>
+                    <option value="scoreDesc" selected="@(filter?.SortBy == "scoreDesc")">Puan (Yüksek→Düşük)</option>
+                    <option value="scoreAsc" selected="@(filter?.SortBy == "scoreAsc")">Puan (Düşük→Yüksek)</option>
+                </select>
+            </div>
+
+            <div class="col-md-3 d-flex gap-1">
+                <button type="submit" class="btn btn-primary btn-sm flex-fill d-flex align-items-center justify-content-center" style="border-radius:8px;" title="Filtrele">
+                    <i class="bi bi-funnel"></i>
+                </button>
+                <a asp-action="CommentList" asp-route-status="@status" class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center" style="border-radius:8px;min-width:38px;" title="Temizle">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -56,7 +87,7 @@
         <div class="title">
             <i class="bi bi-star" style="color:#a0aec0;"></i>
             Yorum Listesi
-            <span class="record-count">@Model.Count yorum</span>
+            <span class="record-count">@ViewBag.TotalCount yorum</span>
         </div>
     </div>
 
@@ -134,7 +165,7 @@
                                     {
                                         <button type="button" class="btn-action btn-approve js-status-btn" title="Onayla"
                                                 data-action="approve"
-                                                data-url="@Url.Action("ApproveComment", new { id = item.CommentId, status = status })"
+                                                data-url="@Url.Action("ApproveComment", new { id = item.CommentId, status = status, tourId = filter?.TourId, sortBy = filter?.SortBy, page = filter?.Page })"
                                                 data-title="Yorumu Onayla"
                                                 data-body="Bu yorum onaylanacak ve sitede yayınlanacak."
                                                 data-heading="@item.NameSurname"
@@ -147,7 +178,7 @@
                                     {
                                         <button type="button" class="btn-action btn-edit js-status-btn" title="Onayı Kaldır"
                                                 data-action="cancel"
-                                                data-url="@Url.Action("RejectComment", new { id = item.CommentId, status = status })"
+                                                data-url="@Url.Action("RejectComment", new { id = item.CommentId, status = status, tourId = filter?.TourId, sortBy = filter?.SortBy, page = filter?.Page })"
                                                 data-title="Onayı Kaldır"
                                                 data-body="Bu yorumun onayı kaldırılacak ve sitede görünmeyecek."
                                                 data-heading="@item.NameSurname"
@@ -157,7 +188,7 @@
                                         </button>
                                     }
                                     <button type="button" class="btn-action btn-delete js-delete-btn" title="Sil"
-                                            data-url="@Url.Action("DeleteComment", new { id = item.CommentId, status = status })"
+                                            data-url="@Url.Action("DeleteComment", new { id = item.CommentId, status = status, tourId = filter?.TourId, sortBy = filter?.SortBy, page = filter?.Page })"
                                             data-title="Yorum Silinecek"
                                             data-body="@item.NameSurname adlı kullanıcının yorumu kalıcı olarak silinecek. Emin misiniz?">
                                         <i class="bi bi-trash3"></i>
@@ -171,6 +202,8 @@
         </div>
     }
 </div>
+
+<partial name="_AdminPagination" />
 
 <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

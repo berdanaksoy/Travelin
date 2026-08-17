@@ -98,5 +98,44 @@ namespace Travelin.Services.CommentServices
 
             return (comments.Average(c => c.Score), comments.Count);
         }
+
+        public async Task<CommentListResultDto> GetFilteredCommentsAsync(CommentFilterDto filter)
+        {
+            var builder = Builders<Comment>.Filter;
+            var conditions = new List<FilterDefinition<Comment>>();
+
+            if (filter.Status == "pending")
+                conditions.Add(builder.Eq(c => c.IsStatus, false));
+            else if (filter.Status == "approved")
+                conditions.Add(builder.Eq(c => c.IsStatus, true));
+
+            if (!string.IsNullOrWhiteSpace(filter.TourId))
+                conditions.Add(builder.Eq(c => c.TourId, filter.TourId));
+
+            var finalFilter = conditions.Any() ? builder.And(conditions) : builder.Empty;
+
+            var totalCount = await _commentCollection.CountDocumentsAsync(finalFilter);
+
+            var sortDefinition = filter.SortBy switch
+            {
+                "oldest" => Builders<Comment>.Sort.Ascending(c => c.CommentDate),
+                "scoreDesc" => Builders<Comment>.Sort.Descending(c => c.Score),
+                "scoreAsc" => Builders<Comment>.Sort.Ascending(c => c.Score),
+                _ => Builders<Comment>.Sort.Descending(c => c.CommentDate)
+            };
+
+            var values = await _commentCollection
+                .Find(finalFilter)
+                .Sort(sortDefinition)
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Limit(filter.PageSize)
+                .ToListAsync();
+
+            return new CommentListResultDto
+            {
+                Comments = _mapper.Map<List<ResultCommentDto>>(values),
+                TotalCount = totalCount
+            };
+        }
     }
 }

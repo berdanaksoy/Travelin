@@ -29,7 +29,7 @@ namespace Travelin.Controllers
                 Search = search,
                 SortBy = sortBy,
                 Page = page < 1 ? 1 : page,
-                PageSize = 15
+                PageSize = 10
             };
 
             var result = await _reservationService.GetFilteredReservationsAsync(filter);

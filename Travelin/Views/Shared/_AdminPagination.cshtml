@@ -4,7 +4,7 @@
     string baseUrl = ViewBag.PaginationBaseUrl as string ?? "";
     var extraParams = ViewBag.PaginationParams as Dictionary<string, string> ?? new Dictionary<string, string>();
 
-    int windowSize = 2;
+    int windowSize = 1;
     int startPage = Math.Max(1, currentPage - windowSize);
     int endPage = Math.Min(totalPages, currentPage + windowSize);
 

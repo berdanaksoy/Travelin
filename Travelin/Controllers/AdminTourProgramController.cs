@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Travelin.Dtos.TourDtos;
 using Travelin.Dtos.TourProgramDtos;
 using Travelin.Services.TourProgramServices;
 using Travelin.Services.TourServices;
@@ -16,18 +17,17 @@ namespace Travelin.Controllers
             _tourService = tourService;
         }
 
-        public async Task<IActionResult> ProgramTourList(string search)
+        public async Task<IActionResult> ProgramTourList(string search, int page = 1)
         {
-            var tours = await _tourService.GetAllTourAsync();
-
-            if (!string.IsNullOrWhiteSpace(search))
+            var filter = new TourFilterDto
             {
-                tours = tours.Where(t =>
-                    (t.Title != null && t.Title.ToLower().Contains(search.ToLower())) ||
-                    (t.City != null && t.City.ToLower().Contains(search.ToLower())) ||
-                    (t.Country != null && t.Country.ToLower().Contains(search.ToLower()))
-                ).ToList();
-            }
+                Search = search,
+                Page = page < 1 ? 1 : page,
+                PageSize = 10
+            };
+
+            var result = await _tourService.GetFilteredToursAsync(filter);
+            var tours = result.Tours;
 
             var programCounts = new Dictionary<string, int>();
             foreach (var tour in tours)
@@ -38,6 +38,17 @@ namespace Travelin.Controllers
 
             ViewBag.ProgramCounts = programCounts;
             ViewBag.Search = search;
+            ViewBag.Filter = filter;
+            ViewBag.CurrentPage = filter.Page;
+            ViewBag.TotalPages = (int)Math.Ceiling(result.TotalCount / (double)filter.PageSize);
+            ViewBag.TotalCount = result.TotalCount;
+
+            ViewBag.PaginationBaseUrl = Url.Action("ProgramTourList", "AdminTourProgram");
+            ViewBag.PaginationParams = new Dictionary<string, string>
+    {
+        { "search", search }
+    };
+
             return View(tours);
         }
 

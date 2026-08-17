@@ -15,5 +15,6 @@ namespace Travelin.Services.CommentServices
         Task DeleteCommentsByTourIdAsync(string tourId);
         Task<List<ResultCommentDto>> GetTopRatedCommentsAsync(int count);
         Task<(double average, int count)> GetTourRatingAsync(string tourId);
+        Task<CommentListResultDto> GetFilteredCommentsAsync(CommentFilterDto filter);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Travelin.Dtos.CommentDtos;
 using Travelin.Services.CommentServices;
 using Travelin.Services.TourServices;
 
@@ -15,14 +16,19 @@ namespace Travelin.Controllers
             _tourService = tourService;
         }
 
-        public async Task<IActionResult> CommentList(string status)
+        public async Task<IActionResult> CommentList(string status, string tourId, string sortBy, int page = 1)
         {
-            var comments = await _commentService.GetAllCommentsAsync();
+            var filter = new CommentFilterDto
+            {
+                Status = status,
+                TourId = tourId,
+                SortBy = sortBy,
+                Page = page < 1 ? 1 : page,
+                PageSize = 10
+            };
 
-            if (status == "pending")
-                comments = comments.Where(c => !c.IsStatus).ToList();
-            else if (status == "approved")
-                comments = comments.Where(c => c.IsStatus).ToList();
+            var result = await _commentService.GetFilteredCommentsAsync(filter);
+            var comments = result.Comments;
 
             var tours = await _tourService.GetAllTourAsync();
 
@@ -32,31 +38,44 @@ namespace Travelin.Controllers
                 comment.TourTitle = tour?.Title ?? "-";
             }
 
+            ViewBag.Tours = tours;
             ViewBag.Status = status;
             ViewBag.PendingCount = (await _commentService.GetAllCommentsAsync()).Count(c => !c.IsStatus);
+            ViewBag.Filter = filter;
+            ViewBag.CurrentPage = filter.Page;
+            ViewBag.TotalPages = (int)Math.Ceiling(result.TotalCount / (double)filter.PageSize);
+            ViewBag.TotalCount = result.TotalCount;
 
-            return View(comments.OrderByDescending(c => c.CommentDate).ToList());
+            ViewBag.PaginationBaseUrl = Url.Action("CommentList", "AdminComment");
+            ViewBag.PaginationParams = new Dictionary<string, string>
+                {
+                    { "status", status },
+                    { "tourId", tourId },
+                    { "sortBy", sortBy }
+                };
+
+            return View(comments);
         }
 
-        public async Task<IActionResult> ApproveComment(string id, string status)
+        public async Task<IActionResult> ApproveComment(string id, string status, string tourId, string sortBy, int page = 1)
         {
             await _commentService.ChangeCommentStatusAsync(id, true);
             TempData["Success"] = "Yorum onaylandı ve yayınlandı.";
-            return RedirectToAction("CommentList", new { status });
+            return RedirectToAction("CommentList", new { status, tourId, sortBy, page });
         }
 
-        public async Task<IActionResult> RejectComment(string id, string status)
+        public async Task<IActionResult> RejectComment(string id, string status, string tourId, string sortBy, int page = 1)
         {
             await _commentService.ChangeCommentStatusAsync(id, false);
             TempData["Success"] = "Yorumun onayı kaldırıldı.";
-            return RedirectToAction("CommentList", new { status });
+            return RedirectToAction("CommentList", new { status, tourId, sortBy, page });
         }
 
-        public async Task<IActionResult> DeleteComment(string id, string status)
+        public async Task<IActionResult> DeleteComment(string id, string status, string tourId, string sortBy, int page = 1)
         {
             await _commentService.DeleteCommentAsync(id);
             TempData["Success"] = "Yorum kalıcı olarak silindi.";
-            return RedirectToAction("CommentList", new { status });
+            return RedirectToAction("CommentList", new { status, tourId, sortBy, page });
         }
     }
 }

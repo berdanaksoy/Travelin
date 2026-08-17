@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
     var counts = ViewBag.ProgramCounts as Dictionary<string, int>;
+    var filter = ViewBag.Filter as Travelin.Dtos.TourDtos.TourFilterDto;
 }
 
 <div class="page-header">
@@ -30,10 +31,10 @@
                            placeholder="Tur adı, şehir veya ülke..." />
                 </div>
                 <div class="col-md-2 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary flex-fill" style="border-radius:8px;">
+                    <button type="submit" class="btn btn-primary flex-fill ..." title="Ara">
                         <i class="bi bi-search"></i>
                     </button>
-                    <a asp-action="ProgramTourList" class="btn btn-outline-secondary" style="border-radius:8px;">
+                    <a asp-action="ProgramTourList" class="btn btn-outline-secondary ..." title="Temizle">
                         <i class="bi bi-x-lg"></i>
                     </a>
                 </div>
@@ -47,7 +48,7 @@
         <div class="title">
             <i class="bi bi-list-check" style="color:#a0aec0;"></i>
             Program Yönetimi
-            <span class="record-count">@Model.Count tur</span>
+            <span class="record-count">@ViewBag.TotalCount tur</span>
         </div>
     </div>
 
@@ -121,3 +122,5 @@
         </div>
     }
 </div>
+
+<partial name="_AdminPagination" />
