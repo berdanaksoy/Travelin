@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Travelin.Dtos.TourDtos;
 using Travelin.Services.CategoryServices;
+using Travelin.Services.ReservationServices;
 using Travelin.Services.TourServices;
 
 namespace Travelin.Controllers
@@ -9,11 +10,13 @@ namespace Travelin.Controllers
     {
         private readonly ITourService _tourService;
         private readonly ICategoryService _categoryService;
+        private readonly IReservationService _reservationService;
 
-        public TourController(ITourService tourService, ICategoryService categoryService)
+        public TourController(ITourService tourService, ICategoryService categoryService, IReservationService reservationService)
         {
             _tourService = tourService;
             _categoryService = categoryService;
+            _reservationService = reservationService;
         }
 
         public async Task<IActionResult> TourList(string search, string country, string categoryId,
@@ -49,6 +52,10 @@ namespace Travelin.Controllers
 
             if (value == null)
                 return RedirectToAction("TourList");
+
+            var approvedCount = await _reservationService.GetApprovedPersonCountByTourIdAsync(id);
+            ViewBag.IsFull = approvedCount >= value.Capacity;
+            ViewBag.IsPast = value.TourDate.Date < DateTime.Now.Date;
 
             return View(value);
         }

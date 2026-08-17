@@ -8,6 +8,8 @@
 
     string status = ViewBag.Status as string;
     int pendingCount = ViewBag.PendingCount;
+    var filter = ViewBag.Filter as Travelin.Dtos.ReservationDtos.ReservationFilterDto;
+    var tours = ViewBag.Tours as List<Travelin.Dtos.TourDtos.ResultTourDto>;
 }
 
 <div class="page-header">
@@ -32,7 +34,7 @@
 
 <div class="form-section">
     <div class="section-body py-3">
-        <div class="d-flex gap-2 flex-wrap">
+        <div class="d-flex gap-2 flex-wrap mb-3">
             <a asp-action="ReservationList"
                class="btn btn-sm @(string.IsNullOrEmpty(status) ? "btn-primary" : "btn-outline-secondary")"
                style="border-radius:8px;">Tümü</a>
@@ -46,6 +48,46 @@
                class="btn btn-sm @(status == ReservationStatuses.Cancelled ? "btn-primary" : "btn-outline-secondary")"
                style="border-radius:8px;">İptal Edilenler</a>
         </div>
+
+        <form asp-action="ReservationList" method="get" class="row g-2">
+            <input type="hidden" name="status" value="@status" />
+
+            <div class="col-md-4">
+                <input type="text" name="search" value="@filter?.Search" class="form-control form-control-sm"
+                       placeholder="İsim veya e-posta ara..." style="border-radius:8px;" />
+            </div>
+
+            <div class="col-md-4">
+                <select name="tourId" class="form-control form-control-sm" style="border-radius:8px;">
+                    <option value="">Tüm Turlar</option>
+                    @if (tours != null)
+                    {
+                        @foreach (var t in tours)
+                        {
+                            <option value="@t.TourId" selected="@(filter?.TourId == t.TourId)">@t.Title</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <select name="sortBy" class="form-control form-control-sm" style="border-radius:8px;">
+                    <option value="" selected="@(string.IsNullOrEmpty(filter?.SortBy))">En Yeni</option>
+                    <option value="oldest" selected="@(filter?.SortBy == "oldest")">En Eski</option>
+                    <option value="personDesc" selected="@(filter?.SortBy == "personDesc")">Kişi (Çok→Az)</option>
+                    <option value="personAsc" selected="@(filter?.SortBy == "personAsc")">Kişi (Az→Çok)</option>
+                </select>
+            </div>
+
+            <div class="col-md-2 d-flex gap-1">
+                <button type="submit" class="btn btn-primary btn-sm flex-fill d-flex align-items-center justify-content-center" style="border-radius:8px;height:100%;" title="Filtrele">
+                    <i class="bi bi-funnel"></i>
+                </button>
+                <a asp-action="ReservationList" asp-route-status="@status" class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center" style="border-radius:8px;height:100%;min-width:38px;">
+                    <i class="bi bi-x-lg" title="Temizle"></i>
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -54,7 +96,7 @@
         <div class="title">
             <i class="bi bi-calendar2-check" style="color:#a0aec0;"></i>
             Rezervasyon Listesi
-            <span class="record-count">@Model.Count kayıt</span>
+            <span class="record-count">@ViewBag.TotalCount kayıt</span>
         </div>
     </div>
 
@@ -127,7 +169,7 @@
                                     {
                                         <button type="button" class="btn-action btn-approve js-status-btn" title="Onayla"
                                                 data-action="approve"
-                                                data-url="@Url.Action("ApproveReservation", new { id = item.ReservationId, status = status })"
+                                                data-url="@Url.Action("ApproveReservation", new { id = item.ReservationId, status = status, tourId = filter?.TourId, search = filter?.Search, sortBy = filter?.SortBy, page = filter?.Page })"
                                                 data-title="Rezervasyonu Onayla"
                                                 data-body="Bu rezervasyon onaylanacak ve müşteriye bilgilendirme e-postası gönderilecek."
                                                 data-heading="@item.Name @item.Surname"
@@ -140,7 +182,7 @@
                                     {
                                         <button type="button" class="btn-action btn-delete js-status-btn" title="İptal Et"
                                                 data-action="cancel"
-                                                data-url="@Url.Action("CancelReservation", new { id = item.ReservationId, status = status })"
+                                                data-url="@Url.Action("CancelReservation", new { id = item.ReservationId, status = status, tourId = filter?.TourId, search = filter?.Search, sortBy = filter?.SortBy, page = filter?.Page })"
                                                 data-title="Rezervasyonu İptal Et"
                                                 data-body="Bu rezervasyon iptal edilecek ve müşteriye bilgilendirme e-postası gönderilecek."
                                                 data-heading="@item.Name @item.Surname"
@@ -158,3 +200,5 @@
         </div>
     }
 </div>
+
+<partial name="_AdminPagination" />

@@ -129,8 +129,8 @@ namespace Travelin.Seed
                 Phone = "05551234567",
                 Email = "berdan0227@gmail.com",
                 Address = "Türkiye",
-                FacebookUrl = "https://github.com/berdanaksoy",
-                TwitterUrl = "https://x.com/twberdanaksoy",
+                GitHubUrl = "https://github.com/berdanaksoy",
+                XUrl = "https://x.com/twberdanaksoy",
                 InstagramUrl = "https://www.instagram.com/berdanaksoy/",
                 LinkedinUrl = "https://www.linkedin.com/in/berdanaksoy/?locale=en"
             };

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Travelin.Dtos.ReservationDtos;
 using Travelin.Entities;
 using Travelin.Services.EmailServices;
 using Travelin.Services.ReservationServices;
@@ -19,12 +20,20 @@ namespace Travelin.Controllers
             _emailService = emailService;
         }
 
-        public async Task<IActionResult> ReservationList(string status)
+        public async Task<IActionResult> ReservationList(string status, string tourId, string search, string sortBy, int page = 1)
         {
-            var reservations = await _reservationService.GetAllReservationAsync();
+            var filter = new ReservationFilterDto
+            {
+                Status = status,
+                TourId = tourId,
+                Search = search,
+                SortBy = sortBy,
+                Page = page < 1 ? 1 : page,
+                PageSize = 15
+            };
 
-            if (!string.IsNullOrEmpty(status))
-                reservations = reservations.Where(r => r.Status == status).ToList();
+            var result = await _reservationService.GetFilteredReservationsAsync(filter);
+            var reservations = result.Reservations;
 
             var tours = await _tourService.GetAllTourAsync();
             var capacityInfo = new Dictionary<string, string>();
@@ -42,15 +51,30 @@ namespace Travelin.Controllers
             }
 
             ViewBag.CapacityInfo = capacityInfo;
+            ViewBag.Tours = tours;
 
             var allReservations = await _reservationService.GetAllReservationAsync();
             ViewBag.PendingCount = allReservations.Count(r => r.Status == ReservationStatuses.Pending);
+
             ViewBag.Status = status;
+            ViewBag.Filter = filter;
+            ViewBag.CurrentPage = filter.Page;
+            ViewBag.TotalPages = (int)Math.Ceiling(result.TotalCount / (double)filter.PageSize);
+            ViewBag.TotalCount = result.TotalCount;
+
+            ViewBag.PaginationBaseUrl = Url.Action("ReservationList", "AdminReservation");
+            ViewBag.PaginationParams = new Dictionary<string, string>
+                {
+                    { "status", status },
+                    { "tourId", tourId },
+                    { "search", search },
+                    { "sortBy", sortBy }
+                };
 
             return View(reservations);
         }
 
-        public async Task<IActionResult> ApproveReservation(string id, string status)
+        public async Task<IActionResult> ApproveReservation(string id, string status, string tourId, string search, string sortBy, int page = 1)
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
             var tour = await _tourService.GetTourByIdAsync(reservation.TourId);
@@ -60,7 +84,7 @@ namespace Travelin.Controllers
             if (approvedCount + reservation.PersonCount > tour.Capacity)
             {
                 TempData["Error"] = $"Kapasite aşılıyor. Onaylı: {approvedCount}/{tour.Capacity}, bu talep: {reservation.PersonCount} kişi.";
-                return RedirectToAction("ReservationList", new { status });
+                return RedirectToAction("ReservationList", new { status, tourId, search, sortBy, page });
             }
 
             await _reservationService.ChangeReservationStatusAsync(id, ReservationStatuses.Approved);
@@ -81,10 +105,10 @@ namespace Travelin.Controllers
                 TempData["Error"] = "Rezervasyon onaylandı ancak e-posta gönderilemedi. Müşteriye kendiniz ulaşmanız gerekebilir.";
             }
 
-            return RedirectToAction("ReservationList", new { status });
+            return RedirectToAction("ReservationList", new { status, tourId, search, sortBy, page });
         }
 
-        public async Task<IActionResult> CancelReservation(string id, string status)
+        public async Task<IActionResult> CancelReservation(string id, string status, string tourId, string search, string sortBy, int page = 1)
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
             var tour = await _tourService.GetTourByIdAsync(reservation.TourId);
@@ -106,7 +130,7 @@ namespace Travelin.Controllers
                 TempData["Error"] = "Rezervasyon iptal edildi ancak e-posta gönderilemedi. Müşteriye kendiniz ulaşmanız gerekebilir.";
             }
 
-            return RedirectToAction("ReservationList", new { status });
+            return RedirectToAction("ReservationList", new { status, tourId, search, sortBy, page });
         }
     }
 }

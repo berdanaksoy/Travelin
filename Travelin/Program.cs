@@ -21,6 +21,7 @@ builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<ITourProgramService, TourProgramService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<ISiteSettingService, SiteSettingService>();
+
 builder.Services.AddScoped<DataSeeder>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));

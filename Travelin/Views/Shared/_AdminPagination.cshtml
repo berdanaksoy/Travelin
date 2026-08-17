@@ -1,0 +1,66 @@
+﻿@{
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+    string baseUrl = ViewBag.PaginationBaseUrl as string ?? "";
+    var extraParams = ViewBag.PaginationParams as Dictionary<string, string> ?? new Dictionary<string, string>();
+
+    int windowSize = 2;
+    int startPage = Math.Max(1, currentPage - windowSize);
+    int endPage = Math.Min(totalPages, currentPage + windowSize);
+
+    string PageUrl(int p)
+    {
+        var q = $"?page={p}";
+        foreach (var kv in extraParams)
+        {
+            if (!string.IsNullOrEmpty(kv.Value))
+                q += $"&{kv.Key}={Uri.EscapeDataString(kv.Value)}";
+        }
+        return baseUrl + q;
+    }
+}
+
+@if (totalPages > 1)
+{
+    <div class="pagination-wrapper d-flex align-items-center justify-content-between p-3 border-top">
+        <span style="font-size:.8rem;color:#718096;">
+            Sayfa @currentPage / @totalPages
+        </span>
+        <nav aria-label="Sayfalama">
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@PageUrl(currentPage - 1)"><i class="bi bi-chevron-left"></i></a>
+                </li>
+
+                @if (startPage > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="@PageUrl(1)">1</a></li>
+                    @if (startPage > 2)
+                    {
+                        <li class="page-item disabled"><span class="page-link">…</span></li>
+                    }
+                }
+
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@PageUrl(i)">@i</a>
+                    </li>
+                }
+
+                @if (endPage < totalPages)
+                {
+                    @if (endPage < totalPages - 1)
+                    {
+                        <li class="page-item disabled"><span class="page-link">…</span></li>
+                    }
+                    <li class="page-item"><a class="page-link" href="@PageUrl(totalPages)">@totalPages</a></li>
+                }
+
+                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                    <a class="page-link" href="@PageUrl(currentPage + 1)"><i class="bi bi-chevron-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}

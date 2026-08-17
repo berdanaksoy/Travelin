@@ -61,6 +61,17 @@ namespace Travelin.Controllers
             ViewBag.Filter = filter;
             ViewBag.Countries = await _tourService.GetDistinctCountriesAsync();
 
+            ViewBag.PaginationBaseUrl = Url.Action("TourList", "AdminTour");
+            ViewBag.PaginationParams = new Dictionary<string, string>
+                {
+                    { "search", filter.Search },
+                    { "country", filter.Country },
+                    { "categoryId", filter.CategoryId },
+                    { "fromDate", filter.FromDate?.ToString("yyyy-MM-dd") },
+                    { "toDate", filter.ToDate?.ToString("yyyy-MM-dd") },
+                    { "sortBy", filter.SortBy }
+                };
+
             return View(result.Tours);
         }
 

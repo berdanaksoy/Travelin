@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="col-4 col-md-2 d-flex gap-2 align-items-end">
-                    <button type="submit" class="btn btn-primary flex-fill" style="border-radius:8px;">
+                    <button type="submit" class="btn btn-primary flex-fill" style="border-radius:8px;" title="Filtrele">
                         <i class="bi bi-funnel"></i>
                     </button>
                     <a asp-action="TourList" class="btn btn-outline-secondary" style="border-radius:8px;" title="Temizle">
@@ -194,7 +194,7 @@
                                        class="btn-action btn-edit" title="Düzenle">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <button type="button" class="btn-action btn-delete js-delete-btn"
+                                    <button type="button" class="btn-action btn-delete js-delete-btn" title="Sil"
                                             data-url="@Url.Action("DeleteTour", new { id = item.TourId })"
                                             data-title="Tur Silinecek"
                                             data-body="'@item.Title' turu ve ilişkili tüm veriler (yorumlar, program) silinecek. Emin misiniz?">
@@ -208,69 +208,6 @@
             </table>
         </div>
 
-        @if (totalPages > 1)
-        {
-            <div class="pagination-wrapper d-flex align-items-center justify-content-between p-3 border-top">
-                <span style="font-size:.8rem;color:#718096;">
-                    Sayfa @currentPage / @totalPages
-                </span>
-                <nav aria-label="Sayfalama">
-                    <ul class="pagination pagination-sm mb-0">
-                        <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                            <a class="page-link"
-                               asp-action="TourList"
-                               asp-route-search="@filter?.Search"
-                               asp-route-country="@filter?.Country"
-                               asp-route-fromDate="@(filter?.FromDate?.ToString("yyyy-MM-dd"))"
-                               asp-route-toDate="@(filter?.ToDate?.ToString("yyyy-MM-dd"))"
-                               asp-route-sortBy="@filter?.SortBy"
-                               asp-route-categoryId="@filter?.CategoryId"
-                               asp-route-page="@(currentPage - 1)">
-                                <i class="bi bi-chevron-left"></i>
-                            </a>
-                        </li>
-
-                        @if (startPage > 1)
-                        {
-                            <li class="page-item disabled"><span class="page-link">…</span></li>
-                        }
-
-                        @for (int i = startPage; i <= endPage; i++)
-                        {
-                            <li class="page-item @(i == currentPage ? "active" : "")">
-                                <a class="page-link"
-                                   asp-action="TourList"
-                                   asp-route-search="@filter?.Search"
-                                   asp-route-country="@filter?.Country"
-                                   asp-route-fromDate="@(filter?.FromDate?.ToString("yyyy-MM-dd"))"
-                                   asp-route-toDate="@(filter?.ToDate?.ToString("yyyy-MM-dd"))"
-                                   asp-route-sortBy="@filter?.SortBy"
-                                   asp-route-categoryId="@filter?.CategoryId"
-                                   asp-route-page="@i">@i</a>
-                            </li>
-                        }
-
-                        @if (endPage < totalPages)
-                        {
-                            <li class="page-item disabled"><span class="page-link">…</span></li>
-                        }
-
-                        <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
-                            <a class="page-link"
-                               asp-action="TourList"
-                               asp-route-search="@filter?.Search"
-                               asp-route-country="@filter?.Country"
-                               asp-route-fromDate="@(filter?.FromDate?.ToString("yyyy-MM-dd"))"
-                               asp-route-toDate="@(filter?.ToDate?.ToString("yyyy-MM-dd"))"
-                               asp-route-sortBy="@filter?.SortBy"
-                               asp-route-categoryId="@filter?.CategoryId"
-                               asp-route-page="@(currentPage + 1)">
-                                <i class="bi bi-chevron-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        }
+        <partial name="_AdminPagination" />
     }
 </div>

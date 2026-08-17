@@ -19,5 +19,6 @@
         public string VideoUrl { get; set; }
         public double AverageRating { get; set; }
         public int CommentCount { get; set; }
+        public bool IsFull { get; set; }
     }
 }

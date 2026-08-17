@@ -15,6 +15,12 @@
                                 @Localizer["TourExpired"]
                             </span>
                         }
+                        else if (item.IsFull)
+                        {
+                            <span class="position-absolute" style="top:12px;left:12px;background:#e53e3e;color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;z-index:2;">
+                                @Localizer["TourFull"]
+                            </span>
+                        }
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6">

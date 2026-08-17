@@ -89,13 +89,13 @@
                 </div>
                 <div class="social-links">
                     <ul>
-                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.FacebookUrl))
+                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.GitHubUrl))
                         {
-                            <li><a href="@Model.FacebookUrl" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="@Model.GitHubUrl" target="_blank"><i class="fab fa-github"></i></a></li>
                         }
-                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.TwitterUrl))
+                        @if (Model != null && !string.IsNullOrWhiteSpace(Model.XUrl))
                         {
-                            <li><a href="@Model.TwitterUrl" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="@Model.XUrl" target="_blank"><i class="fab fa-twitter"></i></a></li>
                         }
                         @if (Model != null && !string.IsNullOrWhiteSpace(Model.InstagramUrl))
                         {

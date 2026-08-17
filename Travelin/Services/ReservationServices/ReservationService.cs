@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Travelin.Dtos.ReservationDtos;
 using Travelin.Entities;
@@ -87,6 +88,53 @@ namespace Travelin.Services.ReservationServices
                 .ToListAsync();
 
             return _mapper.Map<List<ResultReservationDto>>(values);
+        }
+
+        public async Task<ReservationListResultDto> GetFilteredReservationsAsync(ReservationFilterDto filter)
+        {
+            var builder = Builders<Reservation>.Filter;
+            var conditions = new List<FilterDefinition<Reservation>>();
+
+            if (!string.IsNullOrWhiteSpace(filter.Status))
+                conditions.Add(builder.Eq(r => r.Status, filter.Status));
+
+            if (!string.IsNullOrWhiteSpace(filter.TourId))
+                conditions.Add(builder.Eq(r => r.TourId, filter.TourId));
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                var searchFilter = builder.Or(
+                    builder.Regex(r => r.Name, new BsonRegularExpression(filter.Search, "i")),
+                    builder.Regex(r => r.Surname, new BsonRegularExpression(filter.Search, "i")),
+                    builder.Regex(r => r.Email, new BsonRegularExpression(filter.Search, "i"))
+                );
+                conditions.Add(searchFilter);
+            }
+
+            var finalFilter = conditions.Any() ? builder.And(conditions) : builder.Empty;
+
+            var totalCount = await _reservationCollection.CountDocumentsAsync(finalFilter);
+
+            var sortDefinition = filter.SortBy switch
+            {
+                "oldest" => Builders<Reservation>.Sort.Ascending(r => r.CreatedDate),
+                "personDesc" => Builders<Reservation>.Sort.Descending(r => r.PersonCount),
+                "personAsc" => Builders<Reservation>.Sort.Ascending(r => r.PersonCount),
+                _ => Builders<Reservation>.Sort.Descending(r => r.CreatedDate)
+            };
+
+            var values = await _reservationCollection
+                .Find(finalFilter)
+                .Sort(sortDefinition)
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Limit(filter.PageSize)
+                .ToListAsync();
+
+            return new ReservationListResultDto
+            {
+                Reservations = _mapper.Map<List<ResultReservationDto>>(values),
+                TotalCount = totalCount
+            };
         }
     }
 }

@@ -567,4 +567,13 @@
   <data name="NameSurnameLength" xml:space="preserve">
     <value>El nombre máx. 80 caracteres.</value>
   </data>
+  <data name="TourFull" xml:space="preserve">
+    <value>Completo</value>
+  </data>
+  <data name="TourExpiredError" xml:space="preserve">
+    <value>Este tour ha finalizado y no se puede reservar.</value>
+  </data>
+  <data name="TourFullError" xml:space="preserve">
+    <value>Este tour está completo.</value>
+  </data>
 </root>

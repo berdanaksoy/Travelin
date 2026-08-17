@@ -114,7 +114,22 @@
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <a asp-controller="Reservation" asp-action="CreateReservation" asp-route-id="@Model.TourId" class="nir-btn w-100">@Localizer["BookNow"]</a>
+                                    @if (ViewBag.IsPast == true)
+                                    {
+                                        <button type="button" class="nir-btn w-100" disabled style="opacity:.6;cursor:not-allowed;">
+                                            @Localizer["TourExpired"]
+                                        </button>
+                                    }
+                                    else if (ViewBag.IsFull == true)
+                                    {
+                                        <button type="button" class="nir-btn w-100" disabled style="opacity:.6;cursor:not-allowed;">
+                                            @Localizer["TourFull"]
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Reservation" asp-action="CreateReservation" asp-route-id="@Model.TourId" class="nir-btn w-100">@Localizer["BookNow"]</a>
+                                    }
                                 </div>
                             </div>
                         </div>
