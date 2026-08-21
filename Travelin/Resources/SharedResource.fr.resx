@@ -576,4 +576,13 @@
   <data name="TourFullError" xml:space="preserve">
     <value>Ce tour est complet.</value>
   </data>
+  <data name="TestimonialLabel" xml:space="preserve">
+    <value>Témoignages</value>
+  </data>
+  <data name="TestimonialHeading" xml:space="preserve">
+    <value>Ce que disent nos clients</value>
+  </data>
+  <data name="FooterAbout" xml:space="preserve">
+    <value> Nous nous sommes lancés pour transformer le voyage de vos rêves en réalité. Des circuits culturels aux escapades nature, nous offrons des expériences inoubliables sur des itinéraires nationaux et internationaux. Avec nos guides experts, un transport sûr et des programmes soigneusement planifiés, nous pensons à chaque détail pour vous.</value>
+  </data>
 </root>

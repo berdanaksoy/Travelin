@@ -576,4 +576,13 @@
   <data name="TourFullError" xml:space="preserve">
     <value>Diese Tour ist ausgebucht.</value>
   </data>
+  <data name="TestimonialLabel" xml:space="preserve">
+    <value>Bewertungen</value>
+  </data>
+  <data name="TestimonialHeading" xml:space="preserve">
+    <value>Was unsere Kunden sagen</value>
+  </data>
+  <data name="FooterAbout" xml:space="preserve">
+    <value>Wir haben es uns zur Aufgabe gemacht, Ihre Traumreise Wirklichkeit werden zu lassen. Von Kulturreisen bis zu Naturausflügen bieten wir unvergessliche Erlebnisse auf nationalen und internationalen Routen. Mit unseren erfahrenen Reiseleitern, sicherem Transport und sorgfältig geplanten Programmen denken wir für Sie an jedes Detail.</value>
+  </data>
 </root>

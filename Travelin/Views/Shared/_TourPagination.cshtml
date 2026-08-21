@@ -9,19 +9,19 @@
     int endPage = Math.Min(totalPages, currentPage + windowSize);
 
     string PageUrl(int p)
+{
+    var q = $"?page={p}&view={Uri.EscapeDataString(view)}";
+    if (filter != null)
     {
-        var q = $"?page={p}&view={view}";
-        if (filter != null)
-        {
-            if (!string.IsNullOrEmpty(filter.Search)) q += $"&search={filter.Search}";
-            if (!string.IsNullOrEmpty(filter.CategoryId)) q += $"&categoryId={filter.CategoryId}";
-            if (!string.IsNullOrEmpty(filter.Country)) q += $"&country={filter.Country}";
-            if (filter.FromDate.HasValue) q += $"&fromDate={filter.FromDate:yyyy-MM-dd}";
-            if (filter.ToDate.HasValue) q += $"&toDate={filter.ToDate:yyyy-MM-dd}";
-            if (!string.IsNullOrEmpty(filter.SortBy)) q += $"&sortBy={filter.SortBy}";
-        }
-        return "/Tour/TourList" + q;
+        if (!string.IsNullOrEmpty(filter.Search)) q += $"&search={Uri.EscapeDataString(filter.Search)}";
+        if (!string.IsNullOrEmpty(filter.CategoryId)) q += $"&categoryId={Uri.EscapeDataString(filter.CategoryId)}";
+        if (!string.IsNullOrEmpty(filter.Country)) q += $"&country={Uri.EscapeDataString(filter.Country)}";
+        if (filter.FromDate.HasValue) q += $"&fromDate={filter.FromDate:yyyy-MM-dd}";
+        if (filter.ToDate.HasValue) q += $"&toDate={filter.ToDate:yyyy-MM-dd}";
+        if (!string.IsNullOrEmpty(filter.SortBy)) q += $"&sortBy={Uri.EscapeDataString(filter.SortBy)}";
     }
+    return "/Tour/TourList" + q;
+}
 }
 
 @if (totalPages > 1)

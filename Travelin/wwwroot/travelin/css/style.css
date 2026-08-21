@@ -1356,15 +1356,22 @@ input#submit:hover {
   text-transform: capitalize;
   border: none;
 }
-.accrodion-grp .accrodion .accrodion-title h5:before {
-  content: "\f107";
-  font-family: "FontAwesome";
-  color: #222222;
-  font-size: 20px;
-  position: absolute;
-  top: 50%;
-  right: 0px;
-  transform: translateY(-50%);
+.accrodion-grp .accrodion .accrodion-title {
+    position: relative;
+}
+
+    .accrodion-grp .accrodion .accrodion-title .accordion-arrow {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #222;
+        transition: transform 0.3s ease;
+    }
+
+.accrodion-grp .accrodion.active .accrodion-title .accordion-arrow {
+    transform: translateY(-50%) rotate(180deg);
 }
 .accrodion-grp .accrodion .accrodion-content {
   padding-top: 10px;

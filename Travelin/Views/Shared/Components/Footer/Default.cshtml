@@ -5,11 +5,11 @@
     <div class="footer-upper pb-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 pe-4">
+                <div class="col-lg-5 col-md-6 col-sm-12 mb-4 pe-4">
                     <div class="footer-about">
                         <img src="/travelin/images/logo-white.png" alt="Travelin">
                         <p class="mt-3 mb-3 white">
-                            Hayalinizdeki seyahati gerçeğe dönüştürmek için yola çıktık. Kültür turlarından doğa kaçamaklarına, yurt içi ve yurt dışı rotalarda unutulmaz deneyimler sunuyoruz. Alanında uzman rehberlerimiz, güvenli ulaşım ve özenle planlanmış programlarımızla her detayı sizin için düşünüyoruz.
+                            @Localizer["FooterAbout"]
                         </p>
                         <ul>
                             @if (Model != null && !string.IsNullOrWhiteSpace(Model.Phone))
@@ -27,7 +27,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
                         <h3 class="white">@Localizer["QuickAccess"]</h3>
                         <ul>
@@ -38,26 +38,21 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
                         <h3 class="white">@Localizer["Categories"]</h3>
                         <ul>
-                            <li><a asp-controller="Tour" asp-action="TourList">@Localizer["Tours"]</a></li>
-                            <li><a asp-controller="Home" asp-action="About">@Localizer["AboutUs"]</a></li>
-                            <li><a asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
+                            @{
+                                var footerCategories = ViewBag.Categories as List<Travelin.Dtos.CategoryDtos.ResultCategoryDto>;
+                            }
+                            @if (footerCategories != null)
+                            {
+                                @foreach (var cat in footerCategories.Take(5))
+                                {
+                                    <li><a asp-controller="Tour" asp-action="TourList" asp-route-categoryId="@cat.CategoryId">@cat.CategoryName</a></li>
+                                }
+                            }
                         </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="footer-links">
-                        <h3 class="white">@Localizer["Newsletter"]</h3>
-                        <div class="newsletter-form">
-                            <p class="mb-3">@Localizer["NewsletterText"]</p>
-                            <form action="#" method="get" class="border-0 d-flex align-items-center">
-                                <input type="text" placeholder="@Localizer["YourEmail"]">
-                                <button class="nir-btn ms-2" type="submit">@Localizer["Subscribe"]</button>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

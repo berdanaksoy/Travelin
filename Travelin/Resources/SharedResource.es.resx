@@ -576,4 +576,13 @@
   <data name="TourFullError" xml:space="preserve">
     <value>Este tour está completo.</value>
   </data>
+  <data name="TestimonialLabel" xml:space="preserve">
+    <value>Testimonios</value>
+  </data>
+  <data name="TestimonialHeading" xml:space="preserve">
+    <value>Lo que dicen nuestros clientes</value>
+  </data>
+  <data name="FooterAbout" xml:space="preserve">
+    <value>Nos propusimos convertir el viaje de tus sueños en realidad. Desde tours culturales hasta escapadas a la naturaleza, ofrecemos experiencias inolvidables en rutas nacionales e internacionales. Con nuestros guías expertos, transporte seguro y programas cuidadosamente planificados, pensamos en cada detalle para ti.</value>
+  </data>
 </root>

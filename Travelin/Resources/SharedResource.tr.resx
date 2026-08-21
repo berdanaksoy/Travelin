@@ -576,4 +576,13 @@
   <data name="TourFullError" xml:space="preserve">
     <value> Bu tur için kontenjan dolmuştur.</value>
   </data>
+  <data name="TestimonialLabel" xml:space="preserve">
+    <value>Yorumlar</value>
+  </data>
+  <data name="TestimonialHeading" xml:space="preserve">
+    <value>Müşterilerimiz Ne Diyor?</value>
+  </data>
+  <data name="FooterAbout" xml:space="preserve">
+    <value>Hayalinizdeki seyahati gerçeğe dönüştürmek için yola çıktık. Kültür turlarından doğa kaçamaklarına, yurt içi ve yurt dışı rotalarda unutulmaz deneyimler sunuyoruz. Alanında uzman rehberlerimiz, güvenli ulaşım ve özenle planlanmış programlarımızla her detayı sizin için düşünüyoruz.</value>
+  </data>
 </root>

@@ -72,8 +72,11 @@
                                     </td>
                                     <td data-label="İşlemler">
                                         <div class="action-group">
-                                            <button type="button" class="btn-action btn-edit" title="Düzenle"
-                                                    onclick="editProgram('@item.TourProgramId', @item.DayNumber, '@item.Title', '@item.Description')">
+                                            <button type="button" class="btn-action btn-edit js-edit-btn" title="Düzenle"
+                                                    data-id="@item.TourProgramId"
+                                                    data-day="@item.DayNumber"
+                                                    data-title="@item.Title"
+                                                    data-desc="@item.Description">
                                                 <i class="bi bi-pencil"></i>
                                             </button>
                                             <button type="button" class="btn-action btn-delete js-delete-btn" title="Sil"
@@ -159,19 +162,26 @@
         var cancelBtn = document.getElementById('cancelEditBtn');
         var programIdInput = document.getElementById('programIdInput');
 
-        function editProgram(id, dayNumber, title, description) {
-            programIdInput.value = id;
-            document.getElementById('dayNumberInput').value = dayNumber;
-            document.getElementById('titleInput').value = title;
-            document.getElementById('descInput').value = description;
+        document.querySelectorAll('.js-edit-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var id = btn.getAttribute('data-id');
+                var day = btn.getAttribute('data-day');
+                var title = btn.getAttribute('data-title');
+                var desc = btn.getAttribute('data-desc');
 
-            form.action = '/AdminTourProgram/UpdateProgram';
-            formTitle.textContent = 'Günü Düzenle';
-            submitBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Güncelle';
-            cancelBtn.style.display = 'block';
+                programIdInput.value = id;
+                document.getElementById('dayNumberInput').value = day;
+                document.getElementById('titleInput').value = title;
+                document.getElementById('descInput').value = desc;
 
-            form.scrollIntoView({ behavior: 'smooth' });
-        }
+                form.action = '/AdminTourProgram/UpdateProgram';
+                formTitle.textContent = 'Günü Düzenle';
+                submitBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Güncelle';
+                cancelBtn.style.display = 'block';
+
+                form.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
 
         function resetForm() {
             form.reset();

@@ -11,10 +11,11 @@
         {
             <div class="accrodion @(item.DayNumber == 1 ? "active" : "")">
                 <div class="accrodion-title rounded">
-                    <h5 class="mb-0">
-                        <span>@Localizer["Day"] @item.DayNumber</span> - @item.Title
-                    </h5>
-                </div>
+    <h5 class="mb-0">
+        <span>@Localizer["Day"] @item.DayNumber</span> - @item.Title
+        <i class="fa fa-angle-down accordion-arrow"></i>
+    </h5>
+</div>
                 <div class="accrodion-content" style="display: @(item.DayNumber == 1 ? "block" : "none");">
                     <div class="inner">
                         <p>@item.Description</p>

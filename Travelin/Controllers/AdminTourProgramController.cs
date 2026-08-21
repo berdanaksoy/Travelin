@@ -45,9 +45,9 @@ namespace Travelin.Controllers
 
             ViewBag.PaginationBaseUrl = Url.Action("ProgramTourList", "AdminTourProgram");
             ViewBag.PaginationParams = new Dictionary<string, string>
-    {
-        { "search", search }
-    };
+                {
+                    { "search", search }
+                };
 
             return View(tours);
         }

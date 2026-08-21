@@ -576,4 +576,13 @@
   <data name="TourFullError" xml:space="preserve">
     <value>This tour is fully booked.</value>
   </data>
+  <data name="TestimonialLabel" xml:space="preserve">
+    <value>Testimonials</value>
+  </data>
+  <data name="TestimonialHeading" xml:space="preserve">
+    <value>What Our Clients Say</value>
+  </data>
+  <data name="FooterAbout" xml:space="preserve">
+    <value>We set out to turn your dream journey into reality. From cultural tours to nature escapes, we offer unforgettable experiences on domestic and international routes. With our expert guides, safe transport and carefully planned programs, we think of every detail for you.</value>
+  </data>
 </root>

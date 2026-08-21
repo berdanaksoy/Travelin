@@ -85,6 +85,11 @@ namespace Travelin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTour(CreateTourDto createTourDto)
         {
+            if (createTourDto.TourDate.Date < DateTime.Now.Date)
+            {
+                ModelState.AddModelError("TourDate", "Tur tarihi bugünden önce olamaz.");
+            }
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _categoryService.GetActiveCategoriesAsync();

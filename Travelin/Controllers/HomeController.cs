@@ -55,8 +55,10 @@ namespace Travelin.Controllers
             return View(model);
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
+            var comments = await _commentService.GetTopRatedCommentsAsync(6);
+            ViewBag.Testimonials = comments;
             return View();
         }
 
